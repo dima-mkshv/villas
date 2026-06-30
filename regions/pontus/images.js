@@ -1,8 +1,10 @@
 // VILLAE ROMANAE — PONTUS site photos. Freely-licensed images from Wikimedia Commons,
 // keyed by site id. URL is built at render time via Special:FilePath (see pontus.js).
 // Each entry: { file, credit, license, page, caption:{ru,en} }.
-// 28 of 34 sites have a free image; the 6 obscure sites (kepoi, patraeus, tyramba,
-// apatouron, mamay-kale, raevskoe) have no suitable free photo on Commons yet.
+// All 35 sites now have an image: 28 are direct site photos; 7 obscure sites with no
+// direct free photo on Commons (patraeus, kepoi, tyramba, apatouron, mamay-kale,
+// raevskoe, beregovoy-4) use a captioned surrogate — the locality, a neighbouring
+// excavated site, or a fitting Bosporan museum artifact.
 "use strict";
 
 const PONTUS_IMAGES = {
@@ -33,7 +35,15 @@ const PONTUS_IMAGES = {
   kerkinitis: { file: "Городище Керкінітіда. Євпаторія.jpg", credit: "Мандрівниця", license: "CC BY-SA 4.0", page: "https://commons.wikimedia.org/wiki/File:Городище_Керкінітіда._Євпаторія.jpg", caption: { ru: "Городище Керкинитида, Евпатория", en: "Kerkinitis settlement, Yevpatoria" } },
   "kalos-limen": { file: "Калос Лимен - внутри крепости.jpg", credit: "Wikimedia Commons", license: "CC0", page: "https://commons.wikimedia.org/wiki/File:Калос_Лимен_-_внутри_крепости.jpg", caption: { ru: "Внутри крепости Калос-Лимен, Черноморское", en: "Inside the Kalos Limen fortress" } },
   "neapolis-scythica": { file: "Simferopol, Scythian Neapolis, 2016.06.17 (05) (29689226505).jpg", credit: "Vahe Martirosyan", license: "CC BY-SA 2.0", page: "https://commons.wikimedia.org/wiki/File:Simferopol,_Scythian_Neapolis,_2016.06.17_(05)_(29689226505).jpg", caption: { ru: "Неаполь Скифский с высоты, Симферополь", en: "Scythian Neapolis from above, Simferopol" } },
-  charax: { file: "Charax1.JPG", credit: "Cambronn", license: "CC BY-SA 3.0", page: "https://commons.wikimedia.org/wiki/File:Charax1.JPG", caption: { ru: "Остатки римской крепости Харакс, мыс Ай-Тодор", en: "Remains of the Roman fort Charax, Cape Ai-Todor" } }
+  charax: { file: "Charax1.JPG", credit: "Cambronn", license: "CC BY-SA 3.0", page: "https://commons.wikimedia.org/wiki/File:Charax1.JPG", caption: { ru: "Остатки римской крепости Харакс, мыс Ай-Тодор", en: "Remains of the Roman fort Charax, Cape Ai-Todor" } },
+  // — surrogate images: these obscure sites have no direct free photo on Commons; using a locality, neighbouring site, or a fitting Bosporan museum artifact (captioned honestly)
+  patraeus: { file: "Музей Горгиппия. Экспонат. (47).jpg", credit: "MikSed", license: "CC BY 4.0", page: "https://commons.wikimedia.org/wiki/File:Музей_Горгиппия._Экспонат._(47).jpg", caption: { ru: "Экспозиция о городах Азиатского Боспора (включая Патрей), Анапский музей «Горгиппия» — фото самих раскопок Патрея в свободном доступе нет.", en: "Exhibit on the towns of the Asian Bosporus (incl. Patraeus), Gorgippia Museum, Anapa — no free photo of the Patraeus dig itself." } },
+  kepoi: { file: "Phanagoria excavations (2008).JPG", credit: "kmorozov", license: "CC BY-SA 3.0", page: "https://commons.wikimedia.org/wiki/File:Phanagoria_excavations_(2008).JPG", caption: { ru: "Раскопки Фанагории (≈3 км от Кеп) — ближайший исследованный город на том же берегу Таманского залива.", en: "Excavations at Phanagoria (~3 km from Kepoi) — the nearest excavated city on the same Taman Bay shore." } },
+  tyramba: { file: "Вид на пляж за ст. Голубицкая Азовское море - panoramio.jpg", credit: "Nikolay Sizonenko", license: "CC BY 3.0", page: "https://commons.wikimedia.org/wiki/File:Вид_на_пляж_за_ст._Голубицкая_Азовское_море_-_panoramio.jpg", caption: { ru: "Азовский берег Тамани у ст. Голубицкая — та же приморская полоса, где стояла Тирамба (близ ст. Пересыпь).", en: "Azov shore of Taman near Golubitskaya — the same coastal strip where Tyramba stood (near Peresyp)." } },
+  apatouron: { file: "2023-08-18. Горгиппия DSC 4679.jpg", credit: "Andrey Butko", license: "CC BY-SA 4.0", page: "https://commons.wikimedia.org/wiki/File:2023-08-18._Горгиппия_DSC_4679.jpg", caption: { ru: "Терракота сидящей богини (тип Афродиты Урании), Боспор, музей «Горгиппия» — место святилища Апатур пока не найдено.", en: "Terracotta of a seated goddess (Aphrodite Ourania type), Bosporus, Gorgippia Museum — the Apaturon sanctuary is still unlocated." } },
+  "mamay-kale": { file: "Mamai1010086.JPG", credit: "Hardsign", license: "CC BY-SA 3.0", page: "https://commons.wikimedia.org/wiki/File:Mamai1010086.JPG", caption: { ru: "Река Мамайка, Сочи — в её устье и стоит городище Мамай-Кале (Мохора).", en: "The Mamayka river, Sochi — the Mamay-Kale (Mokhora) site sits at its mouth." } },
+  raevskoe: { file: "Gorgippia.JPG", credit: "Artem Topchiy (Art-top)", license: "CC BY 3.0", page: "https://commons.wikimedia.org/wiki/File:Gorgippia.JPG", caption: { ru: "Раскопки Горгиппии (Анапа) — ближайший задокументированный боспорский памятник к Раевскому городищу (Ногай-Кале).", en: "Excavations at Gorgippia (Anapa) — the nearest documented Bosporan site to the Raevskoe fort (Nogai-Kale)." } },
+  "beregovoy-4": { file: "2023-08-18. Горгиппия DSC 4920.jpg", credit: "Andrey Butko", license: "CC BY-SA 4.0", page: "https://commons.wikimedia.org/wiki/File:2023-08-18._Горгиппия_DSC_4920.jpg", caption: { ru: "Терракота Персефоны (Коры), Боспор, музей «Горгиппия» — вотивы такого типа приносили в святилища Деметры и Коры, как «Береговой-4».", en: "Terracotta of Persephone (Kore), Bosporus, Gorgippia Museum — the votive type offered at Demeter & Kore sanctuaries like Beregovoy-4." } }
 };
 
 const PONTUS_IMAGE_URL = (file, w) => "https://commons.wikimedia.org/wiki/Special:FilePath/" + encodeURIComponent(file) + "?width=" + (w || 800);
