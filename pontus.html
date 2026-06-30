@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Карта объектов — VILLAE ROMANAE</title>
-  <meta name="description" content="Археологические объекты Израиля, открытые для посещения, с фильтром по эпохам">
+  <title>Причерноморье — VILLAE ROMANAE</title>
+  <meta name="description" content="Греческие колонии и города Боспорского царства Северного Причерноморья — карта объектов с фильтром по эпохам и доступу">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏛️</text></svg>">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,14 +15,13 @@
         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
   <link rel="stylesheet" href="styles.css?v=12">
 </head>
-<body class="map-page" data-page="sites">
+<body class="map-page" data-page="psites" data-region="pontus">
   <header class="site-nav">
-    <a class="nav-logo" href="index.html">🏛️ <span>VILLAE&nbsp;ROMANAE</span></a>
+    <a class="nav-logo" href="pontus.html">🏛️ <span>VILLAE&nbsp;ROMANAE</span></a>
     <button class="nav-burger" id="nav-burger" aria-label="Menu" aria-haspopup="true">☰</button>
     <nav class="nav-tabs">
-      <a href="index.html" data-nav="villas" data-i18n-nav="villas"></a>
-      <a href="timeline.html" data-nav="timeline" data-i18n-nav="timeline"></a>
-      <a href="sites.html" data-nav="sites" data-i18n-nav="sites"></a>
+      <a href="pontus.html" data-nav="psites" data-i18n-nav="psites"></a>
+      <a href="pontus-timeline.html" data-nav="ptimeline" data-i18n-nav="ptimeline"></a>
     </nav>
     <button class="nav-about" data-i18n-nav="about"></button>
     <div class="nav-lang lang-switch" role="group" aria-label="Language">
@@ -39,15 +38,16 @@
 
       <section class="sb-controls">
         <input id="search" type="search" autocomplete="off">
-        <label class="chk wb-chk">
-          <input type="checkbox" id="f-wb" checked>
-          <span class="chk-mark wb-mark">✓</span>
-          <span data-i18n="westBank"></span>
+        <div class="filter-label" data-i18n="accessLabel"></div>
+        <label class="chk acc-chk">
+          <input type="checkbox" id="f-tour" checked>
+          <span class="chk-mark acc-mark-tour">✓</span>
+          <span data-i18n="tourFilter"></span>
         </label>
-        <label class="chk wb-chk">
-          <input type="checkbox" id="f-unesco">
-          <span class="chk-mark unesco-mark">★</span>
-          <span data-i18n="unescoFilter"></span>
+        <label class="chk acc-chk">
+          <input type="checkbox" id="f-closed" checked>
+          <span class="chk-mark acc-mark-closed">✓</span>
+          <span data-i18n="closedFilter"></span>
         </label>
       </section>
 
@@ -77,9 +77,9 @@
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
           integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-  <script src="periods.js?v=12"></script>
-  <script src="sites-data.js?v=12"></script>
+  <script src="regions/pontus/periods.js?v=12"></script>
+  <script src="regions/pontus/sites-data.js?v=12"></script>
   <script src="nav.js?v=12"></script>
-  <script src="sites.js?v=12"></script>
+  <script src="pontus.js?v=12"></script>
 </body>
 </html>

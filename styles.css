@@ -1174,3 +1174,88 @@ body[data-page="timeline"] { height: auto; min-height: 100%; overflow-y: auto; }
 .popup-access::before { content: "📍"; }
 
 .badge.b-unesco { background: #e7dcc0; color: #6a531c; }
+
+/* ═══════════════ Multi-region engine: switcher, Pontus markers & popups ═══════════════ */
+
+/* region switcher in the (dark) header */
+.nav-region {
+  display: flex;
+  margin-left: 4px;
+  border: 1px solid rgba(201,162,39,.35);
+  border-radius: 999px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.region-btn {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 7px 12px; background: transparent; border: 0;
+  color: var(--text-dim); font: inherit; font-size: 13.5px; font-weight: 600;
+  cursor: pointer; white-space: nowrap;
+}
+.region-btn:hover { color: var(--text); background: rgba(255,255,255,.05); }
+.region-btn.active { background: var(--gold); color: #1a1408; }
+.region-emoji { font-size: 14px; }
+
+/* burger-menu region rows (mobile) */
+.nm-regions { display: flex; gap: 6px; padding: 4px 6px; }
+.nm-region {
+  flex: 1; display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  padding: 9px 8px; background: var(--bg-card); border: 1px solid rgba(255,255,255,.08);
+  border-radius: 8px; color: var(--text-dim); font: inherit; font-size: 14px; font-weight: 600; cursor: pointer;
+}
+.nm-region.active { background: var(--gold); color: #1a1408; border-color: var(--gold); }
+
+/* access filter checkbox marks (dark sidebar) */
+.acc-chk { font-size: 12.5px; color: var(--text-dim); }
+.chk input:checked + .acc-mark-tour { background: #4a9b57; border-color: #4a9b57; }
+.chk input:checked + .acc-mark-closed { background: #9b2d6f; border-color: #9b2d6f; }
+
+/* Pontus markers — divIcon, color by era (--c), shape by type */
+.pmk-wrap { background: transparent; border: 0; }
+.pmk {
+  display: block; width: 15px; height: 15px; box-sizing: border-box;
+  background: var(--c,#888); border: 2px solid #fff; box-shadow: 0 1px 4px rgba(0,0,0,.5);
+}
+.pmk-circle { border-radius: 50%; }
+.pmk-square { border-radius: 2px; }
+.pmk-diamond { transform: rotate(45deg); border-radius: 2px; }
+.pmk-tri {
+  width: 0; height: 0; border: 0; background: transparent;
+  border-left: 9px solid transparent; border-right: 9px solid transparent;
+  border-bottom: 16px solid var(--c,#888);
+  filter: drop-shadow(0 0 1.2px #fff) drop-shadow(0 1px 2px rgba(0,0,0,.5));
+}
+.pmk-star {
+  position: absolute; top: -7px; right: -7px; font-size: 11px;
+  color: var(--gold-bright); text-shadow: 0 0 3px #000, 0 0 3px #000;
+}
+.pmk-wrap.sel .pmk { box-shadow: 0 0 0 3px var(--gold-bright), 0 1px 5px rgba(0,0,0,.6); }
+.pmk-wrap.sel .pmk-tri { box-shadow: none; filter: drop-shadow(0 0 2px var(--gold-bright)) drop-shadow(0 0 2px var(--gold-bright)); }
+
+/* Pontus popup additions (LIGHT popup theme — dark text on white) */
+.popup-anc { font-size: 12.5px; font-style: italic; color: #8a6d3b; margin: -2px 0 5px; }
+.popup-loc {
+  background: #fdf3d6; border: 1px solid #e3c66b; color: #7a5d12;
+  font-size: 11.5px; font-weight: 600; padding: 5px 9px; border-radius: 7px; margin: 6px 0;
+}
+.popup-metrics { font-size: 11.5px; color: #6d5d42; margin: 5px 0; }
+.popup-metro { font-size: 12px; color: #4a3a1d; margin: 4px 0; }
+.popup-acc {
+  font-size: 11.5px; font-weight: 600; padding: 5px 9px; border-radius: 7px; margin: 7px 0; line-height: 1.4;
+}
+.popup-acc.acc-tour { background: #e7f3e9; border: 1px solid #9cc6a4; color: #2f6b3a; }
+.popup-acc.acc-closed { background: #f3e7ee; border: 1px solid #cba9bd; color: #8a2d63; }
+.acc-note { font-weight: 400; }
+.popup-bib { margin: 9px 0 4px; border-top: 1px solid #e4dcc8; padding-top: 7px; }
+.popup-bib-h { font-size: 11.5px; font-weight: 700; color: #6a531c; margin-bottom: 4px; }
+.popup-bib ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 3px; }
+.popup-bib li { font-size: 11px; color: #5a4d38; line-height: 1.35; }
+.popup-bib a { color: #7a5a1d; }
+.bib-type {
+  display: inline-block; font-size: 9px; text-transform: uppercase; letter-spacing: .04em;
+  background: #ece0c4; color: #7a6741; border-radius: 4px; padding: 1px 5px; margin-right: 5px; vertical-align: middle;
+}
+.badge.b-must { background: #f0e2b8; color: #6a531c; }
+
+/* hide header region pills on mobile — burger menu carries the switch */
+@media (max-width: 880px) { .nav-region { display: none; } }

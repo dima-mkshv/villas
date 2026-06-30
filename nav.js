@@ -1,26 +1,48 @@
-// VILLAE ROMANAE — shared top navigation: language sync, About modal,
-// and a mobile burger menu that mirrors all nav options.
-// Pages set <body data-page="villas|timeline|sites">. Each page script listens
-// for the "vr:langchange" event and re-renders its own content.
+// VILLAE ROMANAE — shared top navigation: region switcher, language sync,
+// About modal, and a mobile burger menu that mirrors all nav options.
+// Pages set <body data-page="..."> and (optionally) <body data-region="israel|pontus">.
+// Default region is "israel" (back-compatible). Each page script listens for
+// the "vr:langchange" event and re-renders its own content.
 "use strict";
 
 (function () {
   const NAV_I18N = {
     ru: {
-      villas: "Карта вилл", timeline: "Таймлайн", sites: "Карта объектов", filters: "Фильтры",
-      about: "О проекте", aboutTitle: "О проекте", aboutLine: "Завайбкожено Димой", aboutClose: "Закрыть"
+      villas: "Карта вилл", timeline: "Таймлайн", sites: "Карта объектов",
+      psites: "Карта объектов", ptimeline: "Таймлайн",
+      filters: "Фильтры", about: "О проекте", aboutTitle: "О проекте",
+      aboutLine: "Завайбкожено Димой", aboutClose: "Закрыть",
+      regionIsrael: "Израиль", regionPontus: "Причерноморье", regionLabel: "Регион"
     },
     en: {
-      villas: "Villa map", timeline: "Timeline", sites: "Sites map", filters: "Filters",
-      about: "About", aboutTitle: "About", aboutLine: "vibecoded by Dima", aboutClose: "Close"
+      villas: "Villa map", timeline: "Timeline", sites: "Sites map",
+      psites: "Sites map", ptimeline: "Timeline",
+      filters: "Filters", about: "About", aboutTitle: "About",
+      aboutLine: "vibecoded by Dima", aboutClose: "Close",
+      regionIsrael: "Israel", regionPontus: "Black Sea", regionLabel: "Region"
     }
   };
 
-  const PAGES = [
-    { nav: "villas", href: "index.html" },
-    { nav: "timeline", href: "timeline.html" },
-    { nav: "sites", href: "sites.html" }
-  ];
+  // region registry — pages per region for the burger menu + the region switcher
+  const REGIONS = {
+    israel: {
+      key: "israel", labelKey: "regionIsrael", emoji: "🏛", home: "index.html",
+      pages: [
+        { nav: "villas", href: "index.html" },
+        { nav: "timeline", href: "timeline.html" },
+        { nav: "sites", href: "sites.html" }
+      ]
+    },
+    pontus: {
+      key: "pontus", labelKey: "regionPontus", emoji: "⚓", home: "pontus.html",
+      pages: [
+        { nav: "psites", href: "pontus.html" },
+        { nav: "ptimeline", href: "pontus-timeline.html" }
+      ]
+    }
+  };
+  const REGION_ORDER = ["israel", "pontus"];
+  const currentRegion = () => (REGIONS[document.body.dataset.region] ? document.body.dataset.region : "israel");
 
   const VALID = ["ru", "en"];
   const langFromUrl = () => {
@@ -36,6 +58,13 @@
     history.replaceState(null, "", u);
   }
 
+  function gotoRegion(rkey) {
+    if (rkey === currentRegion()) return;
+    const u = new URL(REGIONS[rkey].home, location.href);
+    u.searchParams.set("lang", getLang());
+    location.href = u.toString();
+  }
+
   function applyNav() {
     const lang = getLang();
     document.querySelectorAll("[data-i18n-nav]").forEach(el => {
@@ -49,6 +78,7 @@
     document.querySelectorAll(".nav-tabs a").forEach(a =>
       a.classList.toggle("active", a.dataset.nav === page)
     );
+    updateRegion(lang);
     updateAbout(lang);
     updateMenu(lang, page);
   }
@@ -58,6 +88,32 @@
     updateUrl(lang);
     applyNav();
     window.dispatchEvent(new CustomEvent("vr:langchange", { detail: { lang } }));
+  }
+
+  /* ---------- region switcher (injected into the header) ---------- */
+  function ensureRegion() {
+    const nav = document.querySelector(".site-nav");
+    if (!nav || document.getElementById("nav-region")) return;
+    const wrap = document.createElement("div");
+    wrap.className = "nav-region";
+    wrap.id = "nav-region";
+    wrap.setAttribute("role", "group");
+    wrap.innerHTML = REGION_ORDER.map(r =>
+      `<button class="region-btn" type="button" data-region="${r}"><span class="region-emoji">${REGIONS[r].emoji}</span><span class="region-txt" data-i18n-nav="${REGIONS[r].labelKey}"></span></button>`
+    ).join("");
+    const about = nav.querySelector(".nav-about");
+    nav.insertBefore(wrap, about || null);
+    wrap.querySelectorAll(".region-btn").forEach(b =>
+      b.addEventListener("click", () => gotoRegion(b.dataset.region))
+    );
+  }
+
+  function updateRegion(lang) {
+    const cur = currentRegion();
+    document.querySelectorAll("#nav-region .region-btn").forEach(b =>
+      b.classList.toggle("active", b.dataset.region === cur)
+    );
+    // labels handled by the generic [data-i18n-nav] pass in applyNav
   }
 
   /* ---------- About modal ---------- */
@@ -102,9 +158,14 @@
     menu.className = "nav-menu";
     menu.id = "nav-menu";
     menu.hidden = true;
+    const pages = REGIONS[currentRegion()].pages;
     menu.innerHTML =
-      PAGES.map(p => `<a class="nm-item" data-nav="${p.nav}" href="${p.href}"></a>`).join("") +
+      pages.map(p => `<a class="nm-item" data-nav="${p.nav}" href="${p.href}"></a>`).join("") +
       '<button class="nm-item" id="nm-about" type="button"></button>' +
+      '<div class="nm-sep"></div>' +
+      '<div class="nm-regions">' +
+        REGION_ORDER.map(r => `<button class="nm-region" data-region="${r}" type="button">${REGIONS[r].emoji} <span data-i18n-nav="${REGIONS[r].labelKey}"></span></button>`).join("") +
+      '</div>' +
       '<div class="nm-sep"></div>' +
       '<div class="nm-langs">' +
         '<button class="nm-lang" data-lang="ru" type="button">RU</button>' +
@@ -116,17 +177,26 @@
     menu.querySelectorAll(".nm-lang").forEach(b =>
       b.addEventListener("click", () => { setLang(b.dataset.lang); closeMenu(); })
     );
+    menu.querySelectorAll(".nm-region").forEach(b =>
+      b.addEventListener("click", () => { closeMenu(); gotoRegion(b.dataset.region); })
+    );
   }
 
   function updateMenu(lang, page) {
     const menu = document.getElementById("nav-menu");
     if (!menu) return;
     menu.querySelectorAll(".nm-item[data-nav]").forEach(a => {
-      a.textContent = NAV_I18N[lang][a.dataset.nav];
+      a.textContent = NAV_I18N[lang][a.dataset.nav] || a.dataset.nav;
       a.classList.toggle("active", a.dataset.nav === page);
     });
     const ab = menu.querySelector("#nm-about");
     if (ab) ab.textContent = NAV_I18N[lang].about;
+    const cur = currentRegion();
+    menu.querySelectorAll(".nm-region").forEach(b => {
+      const txt = b.querySelector("[data-i18n-nav]");
+      if (txt) txt.textContent = NAV_I18N[lang][txt.dataset.i18nNav] || "";
+      b.classList.toggle("active", b.dataset.region === cur);
+    });
     menu.querySelectorAll(".nm-lang").forEach(b =>
       b.classList.toggle("active", b.dataset.lang === lang)
     );
@@ -142,7 +212,7 @@
     updateUrl(lang);
   })();
 
-  window.VRNav = { getLang, setLang, applyNav };
+  window.VRNav = { getLang, setLang, applyNav, region: currentRegion };
 
   /* ---------- mobile sidebar: close button + swipe-left ---------- */
   function wireSidebar() {
@@ -167,6 +237,7 @@
   }
 
   function wire() {
+    ensureRegion();
     ensureAboutModal();
     ensureMenu();
 
