@@ -812,9 +812,9 @@ h1 {
 
 #sidebar-close {
   top: calc(var(--nav-h) + 12px);
-  font-size: 30px;
-  font-weight: 700;
 }
+
+#sidebar-toggle svg, #sidebar-close svg { display: block; }
 
 #sidebar-close:active, #sidebar-toggle:active { transform: scale(.92); }
 
@@ -832,6 +832,9 @@ h1 {
   }
 
   #sidebar.open { transform: translateX(0); }
+
+  /* keep header text clear of the floating toggle/close button */
+  .sb-header { padding-top: 64px; }
 
   #sidebar-toggle { display: flex; }
   #app:has(#sidebar.open) ~ #sidebar-toggle { display: none; }
