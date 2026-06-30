@@ -1237,13 +1237,16 @@ body[data-page="timeline"] { height: auto; min-height: 100%; overflow-y: auto; }
 .tc-count { font-size: 11px; color: var(--gold-bright); font-weight: 700; }
 
 /* permanent on-map name labels for major sites (shown/hidden by JS declutter) */
+/* black bold by default (terrain/light basemaps); faint white lift, NOT a halo outline */
 .leaflet-tooltip.map-label {
   background: none; border: none; box-shadow: none; padding: 0; margin: 0;
-  color: #f7f1e3; font-family: 'Inter', system-ui, sans-serif; font-weight: 700; font-size: 12px;
-  text-shadow: 0 0 3px #000, 0 1px 2px #000, 0 0 7px rgba(0,0,0,.9);
+  color: #15110a; font-family: 'Inter', system-ui, sans-serif; font-weight: 700; font-size: 12.5px;
+  text-shadow: 0 1px 1.5px rgba(255,255,255,.75);
   white-space: nowrap;
 }
 .leaflet-tooltip.map-label::before { display: none; border: none; }
+/* satellite basemap is dark → white text with a soft dark lift */
+#map.map-base-sat .leaflet-tooltip.map-label { color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,.95); }
 
 /* Pontus markers — divIcon, color by era (--c), shape by type; ★ INSIDE for must-see */
 .pmk-wrap { background: transparent; border: 0; display: flex; align-items: center; justify-content: center; }

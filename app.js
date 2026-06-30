@@ -141,6 +141,7 @@ function renderBasemapControl() {
       if (key === currentBase) return;
       map.removeLayer(BASEMAPS[currentBase]);
       currentBase = key;
+      document.getElementById("map").classList.toggle("map-base-sat", key === "sat");
       BASEMAPS[key].addTo(map);
       renderBasemapControl();
     };
