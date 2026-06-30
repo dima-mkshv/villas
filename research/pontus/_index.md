@@ -5,9 +5,9 @@
 Формат досье — [docs/pontus/05-RESEARCH-LIBRARY.md](../../docs/pontus/05-RESEARCH-LIBRARY.md).
 Мастер-навигатор по источникам — **[_sources.md](_sources.md)**. Доборка хоры — **[_hora-doborka.md](_hora-doborka.md)**.
 
-> **Состояние на 2026-06-30:** 22 досье собраны ресёрчем (десятки агентов, WebSearch/WebFetch, cross-verified).
-> Координаты, хронология, площади, КБН-блоки, античные источники, споры локализации — внутри досье.
-> Следующий шаг — `regions/pontus/sites-data.js` (выжимка) + вынос на карту/таймлайн.
+> **Состояние на 2026-06-30:** 34 досье собраны ресёрчем; **все вынесены на карту** (`regions/pontus/sites-data.js`, регион живёт на villae-romanae.com/pontus.html).
+> 26 основных + 8 в добор «весь Крым и материк»: Херсонес (ЮНЕСКО), Керкинитида, Калос-Лимен, Неаполь Скифский, Харакс, Киммерик, Зенонов Херсонес, Раевское.
+> Координаты, хронология, площади, КБН/IOSPE, античные источники, споры локализации — внутри досье.
 
 ## Покрытие — Крым (европейский Боспор)
 
@@ -24,6 +24,21 @@
 | akra | Акра (затопл.) | Керчь (мыс Такиль) | city | classical | closed | researched | medium 🟡 | [akra.md](akra.md) |
 | kul-oba | Куль-Оба (курган) | близ Керчи | necropolis | classical | closed | researched | high | [kul-oba.md](kul-oba.md) |
 | tsarsky-kurgan | Царский курган | Аджимушкай | necropolis | classical | museum | researched | high | [tsarsky-kurgan.md](tsarsky-kurgan.md) |
+| kimmerikon | Киммерик | Керчь (г. Опук) | city | roman | restricted | researched | medium | [kimmerikon.md](kimmerikon.md) |
+| zenon-chersonesos | Зенонов Херсонес | Керчь (мыс Зюк) | settlement | hellenistic | restricted | researched | medium | [zenon-chersonesos.md](zenon-chersonesos.md) |
+
+## Покрытие — Крым (Херсонес, западный и центральный)
+
+| id | Объект | Район | Тип | Эпоха (гл.) | Доступ | status | conf. | досье |
+|---|---|---|---|---|---|---|---|---|
+| chersonesos | Херсонес Таврический ★ЮНЕСКО | Севастополь | city | hellenistic | museum | researched | high | [chersonesos.md](chersonesos.md) |
+| kerkinitis | Керкинитида | Евпатория | settlement | classical | open | researched | medium | [kerkinitis.md](kerkinitis.md) |
+| kalos-limen | Калос-Лимен | Тарханкут (Черноморское) | fortress | hellenistic | restricted | researched | high | [kalos-limen.md](kalos-limen.md) |
+| neapolis-scythica | Неаполь Скифский | Симферополь | city | hellenistic | museum | researched | high | [neapolis-scythica.md](neapolis-scythica.md) |
+| charax | Харакс | Ай-Тодор (Ялта) | fortress | roman | restricted | researched | high | [charax.md](charax.md) |
+
+> Вторая, **дорийская** волна (Гераклея Понтийская → Херсонес) + позднескифская столица + римский лимес —
+> отдельно от ионийского Боспора. Эпиграфика Херсонеса — **IOSPE I²** (не КБН): декрет Диофанта 352, присяга 401.
 
 ## Покрытие — Тамань (азиатский Боспор)
 
@@ -48,6 +63,7 @@
 | mamay-kale | Мамай-Кале (Мохора) | Сочи (Мамайка) | fortress | roman/late-antique | open | researched | medium | [mamay-kale.md](mamay-kale.md) |
 | godlik | крепость Годлик | Сочи (Лазаревское) | fortress | byzantine | open | researched | medium | [godlik.md](godlik.md) |
 | achipse | крепость Ачипсе | Сочи (Кр. Поляна) | fortress | byzantine | open | researched | medium | [achipse.md](achipse.md) |
+| raevskoe | Раевское городище | Анапа (Раевская) | fortress | roman | open | researched | medium | [raevskoe.md](raevskoe.md) |
 
 ## Покрытие — Приазовье
 
@@ -56,7 +72,7 @@
 | tanais | Танаис | устье Дона (Недвиговка) | emporion | roman | museum | researched | high | [tanais.md](tanais.md) |
 
 > **Доборка (хора, без отдельных досье)** — см. [_hora-doborka.md](_hora-doborka.md): Волна-1, Голубицкая 2,
-> Береговой-4 (святилище), Синдская гавань/Вышестеблиевская 11, Раевское городище, Дюрсо, Широкая Балка и др.
+> Береговой-4 (святилище), Синдская гавань/Вышестеблиевская 11, Дюрсо, Широкая Балка и др. (Раевское — уже вынесено).
 > Развернуть по мере выноса на карту.
 
 ## Заметки по выносу на карту (для sites-data.js)

@@ -1,5 +1,5 @@
 // VILLAE ROMANAE — PONTUS region — periodization of the ancient North Black Sea coast.
-// Greek colonisation → Bosporan Kingdom → Roman protectorate → Byzantium/Tmutarakan.
+// Greek colonisation (Ionian Bosporus + Dorian Chersonesos) → Bosporan Kingdom → Rome → Byzantium/Tmutarakan.
 // Mirrors the Israel periods.js structure (marker color = main period).
 // Draft per docs/pontus/02-PERIODIZATION.md; dates are conventional (Bosporan chronology),
 // refined in code-phase against Gaidukevich / IA RAS. Boundary of the atlas: 10th–11th c.
@@ -25,20 +25,20 @@ const PONTUS_PERIODS = [
     color: "#2f9e8f",
     cultures: { ru: ["ионийцы (Милет, Теос)", "эолийцы (Митилена)"], en: ["Ionians (Miletus, Teos)", "Aeolians (Mytilene)"] },
     blurb: {
-      ru: "С середины VI в. до н.э. ионийцы и эолийцы основывают на Боспоре Киммерийском десятки колоний — Пантикапей, Фанагорию, Гермонассу, Кепы, Феодосию. Тамань заселяется так плотно, что города стоят в ≈10 км друг от друга.",
-      en: "From the mid-6th c. BCE Ionian and Aeolian settlers found dozens of colonies on the Cimmerian Bosporus — Panticapaeum, Phanagoria, Hermonassa, Kepoi, Theodosia. Taman fills so densely that towns sit ~10 km apart."
+      ru: "С середины VI в. до н.э. ионийцы и эолийцы основывают на Боспоре Киммерийском десятки колоний — Пантикапей, Фанагорию, Гермонассу, Кепы, Феодосию; в Западном Крыму ионийцы ставят Керкинитиду. Тамань заселяется так плотно, что города стоят в ≈10 км друг от друга.",
+      en: "From the mid-6th c. BCE Ionian and Aeolian settlers found dozens of colonies on the Cimmerian Bosporus — Panticapaeum, Phanagoria, Hermonassa, Kepoi, Theodosia; in Western Crimea Ionians found Kerkinitis. Taman fills so densely that towns sit ~10 km apart."
     }
   },
   {
     id: "classical",
-    name: { ru: "Классика — ранний Боспор", en: "Classical — early Bosporus" },
+    name: { ru: "Классика — Боспор и Херсонес", en: "Classical — Bosporus & Chersonesos" },
     start: -480, end: -323,
     dateText: { ru: "480–323 гг. до н.э.", en: "480–323 BCE" },
     color: "#4a9b57",
-    cultures: { ru: ["Археанактиды", "Спартокиды", "синды"], en: ["Archaeanactids", "Spartocids", "Sindi"] },
+    cultures: { ru: ["Археанактиды", "Спартокиды", "синды", "дорийцы (Гераклея Понтийская)"], en: ["Archaeanactids", "Spartocids", "Sindi", "Dorians (Heraclea Pontica)"] },
     blurb: {
-      ru: "Около 480 г. до н.э. города Керченского и Таманского полуостровов объединяются в Боспорское царство (Археанактиды, затем Спартокиды). Боспор кормит Афины хлебом и присоединяет Синдику и Феодосию.",
-      en: "Around 480 BCE the cities of the Kerch and Taman peninsulas unite into the Bosporan Kingdom (Archaeanactids, then Spartocids). Bosporus feeds Athens with grain and absorbs Sindica and Theodosia."
+      ru: "Около 480 г. до н.э. города Керченского и Таманского полуостровов объединяются в Боспорское царство (Археанактиды, затем Спартокиды); Боспор кормит Афины хлебом и присоединяет Синдику и Феодосию. В то же время в Западном Крыму выходцы из дорийской Гераклеи Понтийской основывают Херсонес Таврический — независимый от Боспора полис со своей хорой (Керкинитида, Калос-Лимен).",
+      en: "Around 480 BCE the cities of the Kerch and Taman peninsulas unite into the Bosporan Kingdom (Archaeanactids, then Spartocids); Bosporus feeds Athens with grain and absorbs Sindica and Theodosia. Meanwhile in Western Crimea settlers from Dorian Heraclea Pontica found Chersonesos Taurica — a polis independent of the Bosporus, with its own chora (Kerkinitis, Kalos Limen)."
     }
   },
   {
@@ -61,8 +61,8 @@ const PONTUS_PERIODS = [
     color: "#9b2d6f",
     cultures: { ru: ["Боспор — клиент Рима", "Тиберии Юлии"], en: ["Bosporus, Roman client", "Tiberii Julii dynasty"] },
     blurb: {
-      ru: "После гибели Митридата (63 до н.э.) Боспор — вассальное царство Рима под династией Тибериев Юлиев. Расцвет I–III вв., строительство крепостей (Илурат), затем готские походы и удар гуннов около 370 г.",
-      en: "After Mithridates' death (63 BCE) Bosporus becomes a Roman client kingdom under the Tiberii Julii. A 1st–3rd c. flourishing, frontier forts (Iluraton), then Gothic raids and the Hunnic blow around 370 CE."
+      ru: "После гибели Митридата (63 до н.э.) Боспор — вассальное царство Рима под династией Тибериев Юлиев. Расцвет I–III вв., строительство крепостей (Илурат); в Крыму стоит римский гарнизон — крепость Харакс на мысе Ай-Тодор и вексилляции в Херсонесе. Затем готские походы и удар гуннов около 370 г.",
+      en: "After Mithridates' death (63 BCE) Bosporus becomes a Roman client kingdom under the Tiberii Julii. A 1st–3rd c. flourishing, frontier forts (Iluraton); in Crimea a Roman garrison holds the fort of Charax on Cape Ai-Todor and vexillations at Chersonesos. Then Gothic raids and the Hunnic blow around 370 CE."
     }
   },
   {

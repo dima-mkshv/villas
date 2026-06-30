@@ -8,7 +8,7 @@
 /* ---------- i18n ---------- */
 const I18N = {
   ru: {
-    subtitle: "Греческие колонии и города Боспорского царства Северного Причерноморья — от архаики до Византии. Цвет точки = главная эпоха, форма = тип объекта.",
+    subtitle: "Античные города Северного Причерноморья: греческие колонии, Боспорское царство, дорийский Херсонес, скифский Неаполь и римские крепости — от архаики до Византии. Цвет точки = главная эпоха, форма = тип объекта.",
     searchPh: "Поиск: Пантикапей, Фанагория, Танаис…",
     accessLabel: "Доступ",
     tourFilter: "туристические",
@@ -31,7 +31,7 @@ const I18N = {
     bibType: { ancient: "античный", epigraphy: "эпиграфика", modern: "литература" }
   },
   en: {
-    subtitle: "Greek colonies and Bosporan-kingdom cities of the North Black Sea — from the Archaic age to Byzantium. Marker color = headline era, shape = site type.",
+    subtitle: "Ancient cities of the North Black Sea: Greek colonies, the Bosporan Kingdom, Dorian Chersonesos, Scythian Neapolis and Roman forts — from the Archaic age to Byzantium. Marker color = headline era, shape = site type.",
     searchPh: "Search: Pantikapaion, Phanagoria, Tanais…",
     accessLabel: "Access",
     tourFilter: "open to visitors",

@@ -852,6 +852,266 @@ const PONTUS_SITES = [
       { type: "modern", ref: "Шелов Д.Б. Танаис и Нижний Дон в III–I вв. до н.э. М.: Наука, 1970" }
     ],
     _libRef: "research/pontus/tanais.md", _verified: "2026-06-30", _confidence: "high"
+  },
+
+  // ═══════════════════ CRIMEA — Chersonesos, Western & Central (beyond the Bosporus) ═══════════════════
+  {
+    id: "chersonesos", region: "pontus",
+    name: { ru: "Херсонес Таврический", en: "Chersonesus Taurica" },
+    nameAncient: "Χερσόνησος Ταυρική / Chersonesus",
+    modernPlace: { ru: "Севастополь", en: "Sevastopol" },
+    coords: [44.6124, 33.4902], localizationCertain: true,
+    type: "city",
+    periods: ["classical", "hellenistic", "roman", "late-antique", "byzantine"],
+    mainPeriod: "hellenistic",
+    periodText: { ru: "классика – Византия (~2000 лет)", en: "Classical – Byzantine (~2,000 yrs)" },
+    metropolis: { ru: "Гераклея Понтийская (дорийцы)", en: "Heraclea Pontica (Dorians)" },
+    founded: -422, abandoned: 1396,
+    areaHa: 30, sizeClass: "city",
+    preservation: "good", excavationStatus: "past",
+    access: "museum",
+    accessNote: { ru: "Гос. музей-заповедник «Херсонес Таврический», Севастополь", en: "Chersonesus Taurica State Museum-Reserve, Sevastopol" },
+    significance: 5, unesco: true,
+    desc: {
+      ru: "Единственная дорийская колония Северного Причерноморья, основанная Гераклеей Понтийской ок. 422 г. до н.э., — крупнейший греческий полис западного Крыма с огромной хорой. Прошёл через Боспор, Рим и Византию (как Херсон — где в 988 г. крестился князь Владимир); хранит богатейший эпиграфический архив, включая декрет Диофанта и древнейшую гражданскую присягу.",
+      en: "The only Dorian colony of the North Black Sea, founded by Heraclea Pontica c. 422 BCE — the great Greek polis of Western Crimea with a vast chora. It passed through the Bosporus, Rome and Byzantium (as Cherson, where Prince Vladimir was baptised in 988) and preserves the richest epigraphic archive in the region, including the Diophantus decree and the oldest known civic oath."
+    },
+    highlight: { ru: "Единственная дорийская колония Чёрного моря — две тысячи лет от присяги граждан до крещения князя Владимира.", en: "The only Dorian colony on the Black Sea — two millennia from a citizens' oath to the baptism of Prince Vladimir." },
+    links: [
+      { label: "ЮНЕСКО (объект 1411)", url: "https://whc.unesco.org/en/list/1411/" },
+      { label: "Музей «Херсонес Таврический»", url: "https://chersonesos.org/?l=eng" },
+      { label: "Wikipedia (RU)", url: "https://ru.wikipedia.org/wiki/Херсонес_Таврический" },
+      { label: "Wikipedia (EN)", url: "https://en.wikipedia.org/wiki/Chersonesus" }
+    ],
+    bibliography: [
+      { type: "ancient", ref: "Страбон VII.4.2; Константин Багрянородный, DAI гл. 53" },
+      { type: "epigraphy", ref: "IOSPE I² 352 (декрет Диофанта); IOSPE I² 401 (гражданская присяга)", url: "https://iospe.kcl.ac.uk/corpus/index.html" },
+      { type: "modern", ref: "Латышев В.В. IOSPE I²; Херсонесский сборник" }
+    ],
+    _libRef: "research/pontus/chersonesos.md", _verified: "2026-06-30", _confidence: "high"
+  },
+  {
+    id: "kerkinitis", region: "pontus",
+    name: { ru: "Керкинитида", en: "Kerkinitis" },
+    nameAncient: "Κερκίνιτις / Carcinites",
+    modernPlace: { ru: "Евпатория", en: "Yevpatoria" },
+    coords: [45.2009, 33.3666], localizationCertain: true,
+    type: "settlement",
+    periods: ["classical", "hellenistic", "roman"],
+    mainPeriod: "classical",
+    periodText: { ru: "классика – римский период", en: "Classical – Roman" },
+    metropolis: { ru: "ионийцы (метрополия спорна)", en: "Ionians (mother-city disputed)" },
+    founded: -500, abandoned: 50,
+    areaHa: 8, sizeClass: "town",
+    preservation: "poor", excavationStatus: "surveyed",
+    access: "open",
+    accessNote: { ru: "частично раскрыта/экспонируется в Евпатории", en: "partly excavated/displayed in Yevpatoria" },
+    significance: 3,
+    desc: {
+      ru: "Ионийское приморское поселение конца VI в. до н.э. в Каркинитском заливе, торговавшее зерном и рыбой. С конца IV в. до н.э. вошло в состав дорийского Херсонеса и было укреплено каменными стенами; разрушено гуннами и сарматами.",
+      en: "An Ionian coastal settlement of the late 6th c. BCE on the Gulf of Carcinites, trading in grain and fish. From the late 4th c. BCE it was absorbed into Dorian Chersonesos and walled in stone; destroyed by Huns and Sarmatians."
+    },
+    highlight: { ru: "Ионийская Керкинитида под Евпаторией — торговый форпост, поглощённый дорийским Херсонесом.", en: "Ionian Kerkinitis beneath Yevpatoria — a trading outpost absorbed by Dorian Chersonesos." },
+    links: [
+      { label: "Wikipedia (EN)", url: "https://en.wikipedia.org/wiki/Kerkinitis" },
+      { label: "PECS — Kerkinitis (Perseus)", url: "http://www.perseus.tufts.edu/hopper/text?doc=Perseus:text:1999.04.0006:entry=kerkinitis" }
+    ],
+    bibliography: [
+      { type: "ancient", ref: "Страбон VII.4.2; Арриан, Перипл (600 стадий от Херсонеса)" },
+      { type: "modern", ref: "Encyclopedia of Ukraine; геоархеология побережья (Méditerranée, 2014)" }
+    ],
+    _libRef: "research/pontus/kerkinitis.md", _verified: "2026-06-30", _confidence: "medium"
+  },
+  {
+    id: "kalos-limen", region: "pontus",
+    name: { ru: "Калос-Лимен", en: "Kalos Limen" },
+    nameAncient: "Καλὸς Λιμήν («Прекрасная гавань»)",
+    modernPlace: { ru: "пос. Черноморское, п-ов Тарханкут", en: "Chernomorskoye, Tarkhankut Peninsula" },
+    coords: [45.5173, 32.7145], localizationCertain: true,
+    type: "fortress",
+    periods: ["hellenistic", "roman"],
+    mainPeriod: "hellenistic",
+    periodText: { ru: "IV–I вв. до н.э.", en: "4th–1st c. BCE" },
+    metropolis: { ru: "ионийцы → хора Херсонеса", en: "Ionians → Chersonesos chora" },
+    founded: -400, abandoned: -50,
+    areaHa: 4, sizeClass: "small",
+    preservation: "partial", excavationStatus: "past",
+    access: "restricted",
+    accessNote: { ru: "Гос. историко-археол. заповедник «Калос-Лимен» (с 1997)", en: "Kalos Limen State Reserve (since 1997)" },
+    significance: 4,
+    desc: {
+      ru: "Приморская крепость-фактория на мысе Тарханкут, основанная ионийцами ок. 400 г. до н.э. и вошедшая в дальнюю хору дорийского Херсонеса. Квадратные башни и мощные стены держали оборону от скифов и сарматов, пока город не пал в I в. до н.э.",
+      en: "A coastal fortress-emporion on Cape Tarkhankut, founded by Ionians c. 400 BCE and absorbed into the far chora of Dorian Chersonesos. Square towers and stout walls held off Scythians and Sarmatians until the town fell in the 1st c. BCE."
+    },
+    highlight: { ru: "«Прекрасная гавань» на Тарханкуте — крепость дальней хоры Херсонеса, державшая оборону от сарматов.", en: "The 'Fair Harbour' on Tarkhankut — a fortress of Chersonesos' far chora, holding the line against the Sarmatians." },
+    links: [
+      { label: "Wikipedia (EN)", url: "https://en.wikipedia.org/wiki/Kalos_Limen" },
+      { label: "Музей «Калос-Лимен»", url: "https://chersonesos.org/?l=eng&p=out_ant_kalos" }
+    ],
+    bibliography: [
+      { type: "ancient", ref: "Арриан, Перипл («Калос-Лимен, скифская гавань»); Страбон VII.4.2" },
+      { type: "modern", ref: "Раскопки с 1929; ToposText 455327UKLi" }
+    ],
+    _libRef: "research/pontus/kalos-limen.md", _verified: "2026-06-30", _confidence: "high"
+  },
+  {
+    id: "neapolis-scythica", region: "pontus",
+    name: { ru: "Неаполь Скифский", en: "Scythian Neapolis" },
+    nameAncient: "Σκυθικὴ Νεάπολις / Neapolis Scythica",
+    modernPlace: { ru: "Симферополь (Петровские скалы)", en: "Simferopol (Petrovskiye Rocks)" },
+    coords: [44.9428, 34.1206], localizationCertain: true,
+    type: "city",
+    periods: ["hellenistic", "roman", "late-antique"],
+    mainPeriod: "hellenistic",
+    periodText: { ru: "эллинизм – позднеантичный", en: "Hellenistic – Late Antique" },
+    founded: -300, abandoned: 270,
+    areaHa: 20, sizeClass: "city",
+    preservation: "good", excavationStatus: "active",
+    access: "museum",
+    accessNote: { ru: "музей-заповедник «Неаполь Скифский», ул. Археологическая 1, Симферополь", en: "Scythian Neapolis Museum-Reserve, Simferopol" },
+    significance: 4,
+    desc: {
+      ru: "Столица позднескифского царства (не греческая колония) на плато близ Симферополя, расцвет — при царе Скилуре (~130 г. до н.э.). Греко-варварский город со стенами до 12 м, дворцами эллинского стиля и царским мавзолеем; разрушен готами около 270 г. н.э.",
+      en: "Capital of the Late Scythian kingdom (not a Greek colony) on a plateau by Simferopol, at its height under King Skilurus (c. 130 BCE). A Greco-barbarian city with walls up to 12 m, Greek-style palaces and a royal mausoleum; destroyed by Goths c. 270 CE."
+    },
+    highlight: { ru: "Столица поздних скифов — греко-варварский город царя Скилура с дворцами и мавзолеем под Симферополем.", en: "Capital of the Late Scythians — King Skilurus' Greco-barbarian city with palaces and a royal mausoleum at Simferopol." },
+    links: [
+      { label: "Музей «Неаполь Скифский»", url: "http://neapolis-scythian.com" },
+      { label: "Wikipedia (EN)", url: "https://en.wikipedia.org/wiki/Scythian_Neapolis" }
+    ],
+    bibliography: [
+      { type: "ancient", ref: "Страбон VII.4.3, 7 (крепости Скилура: Неаполь, Палакий, Хабеи)" },
+      { type: "epigraphy", ref: "греч. посвящения (Посидей, сын Посидея); мавзолей Аргота/Скилура" }
+    ],
+    _libRef: "research/pontus/neapolis-scythica.md", _verified: "2026-06-30", _confidence: "high"
+  },
+  {
+    id: "charax", region: "pontus",
+    name: { ru: "Харакс", en: "Charax" },
+    nameAncient: "Χάραξ / Charax",
+    modernPlace: { ru: "мыс Ай-Тодор (Гаспра–Ялта)", en: "Cape Ai-Todor (Gaspra–Yalta)" },
+    coords: [44.4292, 34.1219], localizationCertain: true,
+    type: "fortress",
+    periods: ["roman", "late-antique"],
+    mainPeriod: "roman",
+    periodText: { ru: "I–III вв. н.э.", en: "1st–3rd c. CE" },
+    founded: 70, abandoned: 260,
+    areaHa: 4, sizeClass: "small",
+    preservation: "poor", excavationStatus: "past",
+    access: "restricted",
+    accessNote: { ru: "на территории санатория «Ай-Тодор» (доступ ограничен)", en: "on the grounds of the Ai-Todor sanatorium (restricted)" },
+    significance: 4,
+    desc: {
+      ru: "Крупнейший римский военный лагерь в Крыму, основанный при Веспасиане (~70 г. н.э.) на мысе Ай-Тодор и восстановленный вексилляцией Legio I Italica. Две линии стен, термы, акведук и святилища; гарнизон стерёг Херсонес и торговлю от скифов до середины III в.",
+      en: "The largest Roman military camp in Crimea, founded under Vespasian (c. 70 CE) on Cape Ai-Todor and restored by a vexillation of Legio I Italica. Two wall circuits, baths, an aqueduct and shrines; its garrison guarded Chersonesos and trade from the Scythians until the mid-3rd c."
+    },
+    highlight: { ru: "Главный римский форт Крыма на Ай-Тодоре — гарнизон легионеров, стерёгший Херсонес от скифов.", en: "Rome's chief Crimean fort on Cape Ai-Todor — a legionary garrison guarding Chersonesos against the Scythians." },
+    links: [
+      { label: "Wikipedia (EN) — Charax", url: "https://en.wikipedia.org/wiki/Charax,_Crimea" },
+      { label: "Crimea in the Roman era", url: "https://en.wikipedia.org/wiki/Crimea_in_the_Roman_era" }
+    ],
+    bibliography: [
+      { type: "epigraphy", ref: "лат. клейма Legio I Italica / XI Claudia; военные надписи" },
+      { type: "modern", ref: "Блаватский (раскопки 1931–35); Кеппен (1837)" }
+    ],
+    _libRef: "research/pontus/charax.md", _verified: "2026-06-30", _confidence: "high"
+  },
+  {
+    id: "kimmerikon", region: "pontus",
+    name: { ru: "Киммерик", en: "Kimmerikon" },
+    nameAncient: "Κιμμερικόν / Cimmericum",
+    modernPlace: { ru: "гора Опук, Ленинский р-н (юг Керч. п-ова)", en: "Mt. Opuk, Leninsky district (S Kerch peninsula)" },
+    coords: [45.0433, 36.2314], localizationCertain: true,
+    type: "city",
+    periods: ["classical", "hellenistic", "roman", "late-antique"],
+    mainPeriod: "roman",
+    periodText: { ru: "классика – позднеантичный", en: "Classical – Late Antique" },
+    metropolis: { ru: "Милет / Боспор", en: "Miletus / Bosporus" },
+    founded: -500, abandoned: 300,
+    areaHa: null, sizeClass: "town",
+    sizeNote: { ru: "~12–15 га (оценка); стены 2.5 м, акрополь 3.5 м", en: "~12–15 ha (est.); walls 2.5 m, acropolis 3.5 m" },
+    preservation: "partial", excavationStatus: "past",
+    access: "restricted",
+    accessNote: { ru: "на территории Опукского природного заповедника (доступ ограничен)", en: "within Opuk Nature Reserve (restricted)" },
+    significance: 4,
+    desc: {
+      ru: "Укреплённый боспорский город у горы Опук, перекрывавший перешеек рвом и валом для защиты столицы от скифов. Пик в I–II вв. н.э.; разорён готами в середине III в. и заброшен.",
+      en: "A fortified Bosporan city at Mt. Opuk that sealed the isthmus with ditch and rampart to shield the capital from the Scythians. It peaked in the 1st–2nd c. CE, was sacked by Goths in the mid-3rd c. and abandoned."
+    },
+    highlight: { ru: "Укреплённый страж Боспора у горы Опук — рвом и валом запиравший перешеек от скифов.", en: "A fortified Bosporan guard at Mt. Opuk — sealing the isthmus against the Scythians with ditch and rampart." },
+    links: [
+      { label: "Wikipedia (EN)", url: "https://en.wikipedia.org/wiki/Kimmerikon" },
+      { label: "Pleiades", url: "https://pleiades.stoa.org/places/854696" }
+    ],
+    bibliography: [
+      { type: "ancient", ref: "Страбон XI.2.5 (город на перешейке, ров и вал); Птолемей; Стефан Виз." },
+      { type: "modern", ref: "Раскопки 1927, 1947–51; PECS «Kimmerikon»" }
+    ],
+    _libRef: "research/pontus/kimmerikon.md", _verified: "2026-06-30", _confidence: "medium"
+  },
+  {
+    id: "zenon-chersonesos", region: "pontus",
+    name: { ru: "Зенонов Херсонес", en: "Zenon's Chersonesos" },
+    nameAncient: "Ζήνωνος Χερσόνησος",
+    modernPlace: { ru: "мыс Зюк, близ с. Курортное (сев. Керч. п-ова)", en: "Cape Zyuk, near Kurortnoye (N Kerch peninsula)" },
+    coords: [45.4705, 36.3485], localizationCertain: true,
+    type: "settlement",
+    periods: ["archaic", "classical", "hellenistic", "roman", "late-antique", "byzantine"],
+    mainPeriod: "hellenistic",
+    periodText: { ru: "архаика – Византия", en: "Archaic – Byzantine" },
+    metropolis: { ru: "Боспор / Милет", en: "Bosporus / Miletus" },
+    founded: -550, abandoned: 640,
+    areaHa: null, sizeClass: "small",
+    preservation: "partial", excavationStatus: "surveyed",
+    access: "restricted",
+    accessNote: { ru: "городище у мыса Зюк, без инфраструктуры", en: "settlement at Cape Zyuk, no facilities" },
+    significance: 3,
+    desc: {
+      ru: "Многослойное боспорское поселение у мыса Зюк с непрерывной жизнью от архаики до Византии: каменные вымостки, винодельни, водоотвод. Имя, возможно, связано с византийским императором Зеноном (V в.) или местным эпонимом — вопрос спорный.",
+      en: "A multi-period Bosporan settlement at Cape Zyuk, continuously occupied from the Archaic to the Byzantine age: stone pavements, wineries, drainage. Its name may refer to the Byzantine emperor Zeno (5th c.) or a local eponym — the matter is disputed."
+    },
+    highlight: { ru: "Многослойное поселение у мыса Зюк — от архаики до Византии, возможно, названо в честь императора Зенона.", en: "A multi-period settlement at Cape Zyuk — Archaic to Byzantine, perhaps named after Emperor Zeno." },
+    links: [
+      { label: "Pleiades", url: "https://pleiades.stoa.org/places/854751" }
+    ],
+    bibliography: [
+      { type: "ancient", ref: "Псевдо-Арриан; Птолемей; Плиний NH" },
+      { type: "modern", ref: "статьи о мысе Зюк (Hyperboreus)" }
+    ],
+    _libRef: "research/pontus/zenon-chersonesos.md", _verified: "2026-06-30", _confidence: "medium"
+  },
+
+  // ═══════════════════ MAINLAND (Krasnodar) — extra ═══════════════════
+  {
+    id: "raevskoe", region: "pontus",
+    name: { ru: "Раевское городище", en: "Raevskoe (Nogai-Kale)" },
+    nameAncient: "Ногай-Кале (античн. имя не установлено)",
+    modernPlace: { ru: "близ ст. Раевская, Анапский р-н", en: "near Raevskaya, Anapa district" },
+    coords: [44.857, 37.648], localizationCertain: true,
+    type: "fortress",
+    periods: ["classical", "hellenistic", "roman"],
+    mainPeriod: "roman",
+    periodText: { ru: "классика – римский период", en: "Classical – Roman" },
+    founded: -350, abandoned: 250,
+    areaHa: 5.63, sizeClass: "town",
+    preservation: "partial", excavationStatus: "active",
+    access: "open",
+    accessNote: { ru: "тур. маршрут (8 точек), ОКН; находки — Новороссийский музей, ИА РАН", en: "tourist route (8 waypoints); finds in Novorossiysk Museum, IA RAS" },
+    significance: 3,
+    desc: {
+      ru: "Одна из лучше всего сохранившихся боспорских крепостей материкового побережья на Абрауском полуострове: стена почти в километр окружает 5.63 га, внутри — монументальное здание с перистильным двором и металлургические мастерские. По одной из версий, здесь стоял дворец боспорского царя Евмела.",
+      en: "One of the best-preserved mainland Bosporan fortresses, on the Abrau peninsula: a near-kilometre wall encloses 5.63 ha, with a monumental peristyle building and metalworking shops inside. By one hypothesis it held the palace of the Bosporan king Eumelos."
+    },
+    highlight: { ru: "Лучшая сохранившаяся боспорская крепость материка — почти километр стен и, возможно, дворец царя Евмела.", en: "The best-preserved mainland Bosporan fortress — nearly a kilometre of walls and perhaps the palace of King Eumelos." },
+    links: [
+      { label: "Раевское городище (novorab.ru)", url: "https://novorab.ru/2020/08/15/raevskoe-gorodishhe-pod-novorossijskom-24-veka-zagadok-i-otkrytij/" },
+      { label: "Новороссийская экспедиция ИА РАН", url: "https://archaeolog.ru/expeditions/expeditions-2024/novorossiyskaya-arkheologicheskaya-ekspeditsiya-2024" }
+    ],
+    bibliography: [
+      { type: "ancient", ref: "возможно дворец Евмела — Диодор XX.24–25 (гипотеза)" },
+      { type: "modern", ref: "Малышев А.А. (Новороссийская экспедиция ИА РАН); Abrau Antiqua, 2009" }
+    ],
+    _libRef: "research/pontus/raevskoe.md", _verified: "2026-06-30", _confidence: "medium"
   }
 ];
 
