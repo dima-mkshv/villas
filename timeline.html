@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Таймлайн — VILLAE ROMANAE</title>
+  <meta name="description" content="Хронология археологических периодов Израиля от каменного века до крестоносцев">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏛️</text></svg>">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="timeline">
+  <header class="site-nav">
+    <a class="nav-logo" href="index.html">🏛️ <span>VILLAE&nbsp;ROMANAE</span></a>
+    <nav class="nav-tabs">
+      <a href="index.html" data-nav="villas" data-i18n-nav="villas"></a>
+      <a href="timeline.html" data-nav="timeline" data-i18n-nav="timeline"></a>
+      <a href="sites.html" data-nav="sites" data-i18n-nav="sites"></a>
+    </nav>
+    <div class="nav-lang lang-switch" role="group" aria-label="Language">
+      <button class="lang-btn" data-lang="ru">RU</button>
+      <button class="lang-btn" data-lang="en">EN</button>
+    </div>
+  </header>
+
+  <main class="tl-page">
+    <header class="tl-header">
+      <h1 class="tl-title" id="tl-title"></h1>
+      <p class="tl-intro" id="tl-intro"></p>
+      <p class="tl-note" id="tl-note"></p>
+    </header>
+
+    <div class="tl-stream" id="tl-stream"></div>
+    <div class="tl-horizon" id="tl-horizon"></div>
+  </main>
+
+  <script src="periods.js"></script>
+  <script src="sites-data.js"></script>
+  <script src="nav.js"></script>
+  <script src="timeline.js"></script>
+</body>
+</html>
