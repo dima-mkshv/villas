@@ -13,7 +13,7 @@
 
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
-  <link rel="stylesheet" href="styles.css?v=14">
+  <link rel="stylesheet" href="styles.css?v=15">
 </head>
 <body class="map-page" data-page="psites" data-region="pontus">
   <header class="site-nav">
@@ -49,6 +49,14 @@
           <span class="chk-mark acc-mark-closed">✓</span>
           <span data-i18n="closedFilter"></span>
         </label>
+
+        <div class="filter-label sig-lbl" data-i18n="sigLabel"></div>
+        <div class="sig-filter" id="sig-filter">
+          <button class="sig-btn active" type="button" data-min="1" data-i18n="sigAll"></button>
+          <button class="sig-btn" type="button" data-min="3">3+</button>
+          <button class="sig-btn" type="button" data-min="4">4+</button>
+          <button class="sig-btn" type="button" data-min="5">★ 5</button>
+        </div>
       </section>
 
       <section class="sb-periods">
@@ -60,6 +68,11 @@
           </div>
         </div>
         <div class="period-filter" id="period-filter"></div>
+      </section>
+
+      <section class="sb-shapes">
+        <div class="filter-label" data-i18n="shapeLegendLabel"></div>
+        <div class="shape-legend" id="shape-legend"></div>
       </section>
 
       <div class="sb-count" id="count"></div>
@@ -77,9 +90,9 @@
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
           integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-  <script src="regions/pontus/periods.js?v=14"></script>
-  <script src="regions/pontus/sites-data.js?v=14"></script>
-  <script src="nav.js?v=14"></script>
-  <script src="pontus.js?v=14"></script>
+  <script src="regions/pontus/periods.js?v=15"></script>
+  <script src="regions/pontus/sites-data.js?v=15"></script>
+  <script src="nav.js?v=15"></script>
+  <script src="pontus.js?v=15"></script>
 </body>
 </html>

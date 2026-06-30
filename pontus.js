@@ -15,6 +15,9 @@ const I18N = {
     closedFilter: "закрытые / археологические",
     erasLabel: "Эпохи (фильтр и легенда)",
     allEras: "Все", clearEras: "Сброс",
+    sigLabel: "Значимость (фильтр)", sigAll: "Все",
+    shapeLegendLabel: "Форма маркера = тип объекта",
+    shapeCircle: "Город · поселение", shapeSquare: "Крепость", shapeDiamond: "Некрополь · курган", shapeTri: "Святилище",
     shown: (n, total) => `Показано: ${n} из ${total}`,
     empty: "Ничего не нашлось для выбранных фильтров.",
     sources: "Данные: КБН/IOSPE, Страбон, ИА РАН, музеи · полные досье — research/pontus/. Карта: Esri, CARTO, OpenStreetMap.",
@@ -38,6 +41,9 @@ const I18N = {
     closedFilter: "restricted / archaeological",
     erasLabel: "Eras (filter & legend)",
     allEras: "All", clearEras: "Clear",
+    sigLabel: "Significance (filter)", sigAll: "All",
+    shapeLegendLabel: "Marker shape = site type",
+    shapeCircle: "City · settlement", shapeSquare: "Fortress", shapeDiamond: "Necropolis · kurgan", shapeTri: "Sanctuary",
     shown: (n, total) => `Showing ${n} of ${total}`,
     empty: "Nothing matches the selected filters.",
     sources: "Data: CIRB/IOSPE, Strabo, IA RAS, museums · full dossiers — research/pontus/. Map: Esri, CARTO, OpenStreetMap.",
@@ -65,6 +71,7 @@ const state = {
   q: "",
   tour: true,
   closed: true,
+  minSig: 1,
   eras: new Set(PONTUS_PERIODS.map(p => p.id)),
   selectedId: null
 };
@@ -122,11 +129,12 @@ const markerLayer = L.layerGroup().addTo(map);
 function makeIcon(site, selected) {
   const shape = SHAPE[site.type] || "circle";
   const color = PONTUS_PERIOD_COLOR(site.mainPeriod);
-  const star = site.significance >= 5 ? '<span class="pmk-star">★</span>' : "";
+  const isStar = site.significance >= 5;
+  const starEl = isStar ? `<span class="pmk-s pmk-s-${shape}">★</span>` : "";
   return L.divIcon({
-    className: "pmk-wrap" + (selected ? " sel" : ""),
-    html: `<span class="pmk pmk-${shape}" style="--c:${color}"></span>${star}`,
-    iconSize: [22, 22], iconAnchor: [11, 11], popupAnchor: [0, -12]
+    className: "pmk-wrap" + (selected ? " sel" : "") + (isStar ? " star" : ""),
+    html: `<span class="pmk pmk-${shape}" style="--c:${color}"></span>${starEl}`,
+    iconSize: [24, 24], iconAnchor: [12, 12], popupAnchor: [0, -13]
   });
 }
 
@@ -275,6 +283,7 @@ function visibleSites() {
     const tour = isTour(s);
     if (tour && !state.tour) return false;
     if (!tour && !state.closed) return false;
+    if ((s.significance || 0) < state.minSig) return false;
     if (q) {
       const hay = [
         s.name.en, s.name.ru, s.nameAncient || "",
@@ -361,6 +370,17 @@ function renderPeriodFilter() {
   }
 }
 
+/* ---------- shape legend (marker form = type) ---------- */
+function renderShapeLegend() {
+  const wrap = document.getElementById("shape-legend");
+  if (!wrap) return;
+  const L8 = t();
+  const items = [["circle", L8.shapeCircle], ["square", L8.shapeSquare], ["diamond", L8.shapeDiamond], ["tri", L8.shapeTri]];
+  wrap.innerHTML = items.map(([sh, lab]) =>
+    `<div class="sl-item"><span class="sl-mk"><span class="pmk pmk-${sh}" style="--c:#a89880"></span></span><span>${esc(lab)}</span></div>`
+  ).join("");
+}
+
 /* ---------- language ---------- */
 function applyLang() {
   const L8 = t();
@@ -373,6 +393,7 @@ function applyLang() {
   bindTooltips();
   renderBasemapControl();
   renderPeriodFilter();
+  renderShapeLegend();
   applyFilters();
   if (state.selectedId) {
     const site = PONTUS_SITE_BY_ID[state.selectedId];
@@ -385,6 +406,13 @@ function applyLang() {
 document.getElementById("search").addEventListener("input", e => { state.q = e.target.value; applyFilters(); });
 document.getElementById("f-tour").addEventListener("change", e => { state.tour = e.target.checked; applyFilters(); });
 document.getElementById("f-closed").addEventListener("change", e => { state.closed = e.target.checked; applyFilters(); });
+document.querySelectorAll("#sig-filter .sig-btn").forEach(b =>
+  b.addEventListener("click", () => {
+    state.minSig = +b.dataset.min;
+    document.querySelectorAll("#sig-filter .sig-btn").forEach(x => x.classList.toggle("active", x === b));
+    applyFilters();
+  })
+);
 document.getElementById("pf-all").onclick = () => { state.eras = new Set(PONTUS_PERIODS.map(p => p.id)); renderPeriodFilter(); applyFilters(); };
 document.getElementById("pf-none").onclick = () => { state.eras = new Set(); renderPeriodFilter(); applyFilters(); };
 document.getElementById("sidebar-toggle").onclick = () => { document.getElementById("sidebar").classList.toggle("open"); };
