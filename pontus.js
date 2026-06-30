@@ -140,7 +140,12 @@ function makeIcon(site, selected) {
 
 function makeMarker(site) {
   const m = L.marker(site.coords, { icon: makeIcon(site, false) });
-  m.on("click", () => select(site.id, { pan: false }));
+  // Bind once with a content function so it re-renders (and re-translates) on every open.
+  // Selection follows Leaflet's own open/close events — no manual open here, so the
+  // built-in marker toggle can't fight us (was: re-click closed the popup it just opened).
+  m.bindPopup(() => popupHtml(site), { maxWidth: 350, minWidth: 320, autoPanPadding: [25, 25] });
+  m.on("popupopen", () => onPopupOpen(site.id));
+  m.on("popupclose", () => onPopupClose(site.id));
   return m;
 }
 
@@ -234,27 +239,51 @@ function popupHtml(site) {
   </div>`;
 }
 
-/* ---------- selection ---------- */
-function clearSelection() {
-  if (!state.selectedId) return;
-  const site = PONTUS_SITE_BY_ID[state.selectedId];
-  const pm = markers[state.selectedId];
-  if (pm && site) pm.setIcon(makeIcon(site, false));
-  document.querySelectorAll(".site-card.selected").forEach(el => el.classList.remove("selected"));
-  state.selectedId = null;
+/* ---------- selection (driven by popup open/close events) ---------- */
+function highlight(id, on) {
+  const site = PONTUS_SITE_BY_ID[id];
+  const m = markers[id];
+  if (site && m) {
+    m.setIcon(makeIcon(site, on));
+    m.setZIndexOffset(on ? 1000 : 0);
+  }
 }
 
+function onPopupOpen(id) {
+  // Safety: if some other marker is still flagged, drop it (popupclose normally already did).
+  if (state.selectedId && state.selectedId !== id) {
+    highlight(state.selectedId, false);
+    document.querySelectorAll(".site-card.selected").forEach(el => el.classList.remove("selected"));
+  }
+  state.selectedId = id;
+  highlight(id, true);
+  const card = document.querySelector(`.site-card[data-id="${id}"]`);
+  if (card) {
+    card.classList.add("selected");
+    card.scrollIntoView({ block: "nearest", behavior: "smooth" });
+  }
+  history.replaceState(null, "", "#site=" + id);
+  if (window.innerWidth <= 880) document.getElementById("sidebar").classList.remove("open");
+}
+
+function onPopupClose(id) {
+  if (state.selectedId !== id) return;
+  highlight(id, false);
+  document.querySelectorAll(`.site-card[data-id="${id}"]`).forEach(el => el.classList.remove("selected"));
+  state.selectedId = null;
+  history.replaceState(null, "", location.pathname + location.search);
+}
+
+// Used when filters hide the selected marker, etc. → close drives the cleanup.
+function clearSelection() {
+  if (state.selectedId != null) map.closePopup();
+}
+
+// Programmatic open from a list card or deep-link. Marker clicks open via Leaflet's own toggle.
 function select(id, { pan = true } = {}) {
   const site = PONTUS_SITE_BY_ID[id];
   if (!site) return;
-  clearSelection();
-  state.selectedId = id;
-
   const m = markers[id];
-  m.setIcon(makeIcon(site, true));
-  m.setZIndexOffset(1000);
-
-  m.bindPopup(popupHtml(site), { maxWidth: 350, minWidth: 320, autoPanPadding: [25, 25] });
   if (pan) {
     let opened = false;
     const open = () => { if (!opened) { opened = true; m.openPopup(); } };
@@ -264,15 +293,6 @@ function select(id, { pan = true } = {}) {
   } else {
     m.openPopup();
   }
-
-  const card = document.querySelector(`.site-card[data-id="${id}"]`);
-  if (card) {
-    card.classList.add("selected");
-    card.scrollIntoView({ block: "nearest", behavior: "smooth" });
-  }
-
-  history.replaceState(null, "", "#site=" + id);
-  if (window.innerWidth <= 880) document.getElementById("sidebar").classList.remove("open");
 }
 
 /* ---------- filtering ---------- */
@@ -305,8 +325,8 @@ function applyFilters() {
     const isShown = markerLayer.hasLayer(m);
     if (shouldShow && !isShown) markerLayer.addLayer(m);
     if (!shouldShow && isShown) {
+      if (state.selectedId === site.id) map.closePopup(); // → popupclose → onPopupClose cleans up
       markerLayer.removeLayer(m);
-      if (state.selectedId === site.id) { map.closePopup(); clearSelection(); }
     }
   }
   document.getElementById("count").textContent = t().shown(vis.length, PONTUS_SITES.length);
