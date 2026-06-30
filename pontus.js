@@ -8,15 +8,15 @@
 /* ---------- i18n ---------- */
 const I18N = {
   ru: {
-    subtitle: "Античные города Северного Причерноморья: греческие колонии, Боспорское царство, дорийский Херсонес, скифский Неаполь и римские крепости — от архаики до Византии. Цвет точки = главная эпоха, форма = тип объекта.",
+    subtitle: "Античные города Северного Причерноморья: греческие колонии, Боспорское царство, дорийский Херсонес, скифский Неаполь и римские крепости — от архаики до Византии. Цвет точки = первая эпоха (основание), форма = тип объекта.",
     searchPh: "Поиск: Пантикапей, Фанагория, Танаис…",
     accessLabel: "Доступ",
     tourFilter: "туристические",
     closedFilter: "закрытые / археологические",
     erasLabel: "Эпохи (фильтр и легенда)",
     allEras: "Все", clearEras: "Сброс",
-    sigLabel: "Значимость (фильтр)", sigAll: "Все",
-    shapeLegendLabel: "Форма маркера = тип объекта",
+    sigLabel: "Значимость", sigAll: "Все",
+    unescoFilter: "только объекты ЮНЕСКО", typeLabel: "Тип объекта",
     shapeCircle: "Город · поселение", shapeSquare: "Крепость", shapeDiamond: "Некрополь · курган", shapeTri: "Святилище",
     shown: (n, total) => `Показано: ${n} из ${total}`,
     empty: "Ничего не нашлось для выбранных фильтров.",
@@ -34,15 +34,15 @@ const I18N = {
     bibType: { ancient: "античный", epigraphy: "эпиграфика", modern: "литература" }
   },
   en: {
-    subtitle: "Ancient cities of the North Black Sea: Greek colonies, the Bosporan Kingdom, Dorian Chersonesos, Scythian Neapolis and Roman forts — from the Archaic age to Byzantium. Marker color = headline era, shape = site type.",
+    subtitle: "Ancient cities of the North Black Sea: Greek colonies, the Bosporan Kingdom, Dorian Chersonesos, Scythian Neapolis and Roman forts — from the Archaic age to Byzantium. Marker colour = earliest (founding) era, shape = site type.",
     searchPh: "Search: Pantikapaion, Phanagoria, Tanais…",
     accessLabel: "Access",
     tourFilter: "open to visitors",
     closedFilter: "restricted / archaeological",
     erasLabel: "Eras (filter & legend)",
     allEras: "All", clearEras: "Clear",
-    sigLabel: "Significance (filter)", sigAll: "All",
-    shapeLegendLabel: "Marker shape = site type",
+    sigLabel: "Significance", sigAll: "All",
+    unescoFilter: "UNESCO sites only", typeLabel: "Site type",
     shapeCircle: "City · settlement", shapeSquare: "Fortress", shapeDiamond: "Necropolis · kurgan", shapeTri: "Sanctuary",
     shown: (n, total) => `Showing ${n} of ${total}`,
     empty: "Nothing matches the selected filters.",
@@ -72,12 +72,16 @@ const state = {
   tour: true,
   closed: true,
   minSig: 1,
+  unescoOnly: false,
+  types: new Set(["circle", "square", "diamond", "tri"]),
   eras: new Set(PONTUS_PERIODS.map(p => p.id)),
   selectedId: null
 };
 let pendingSelect = null;
 const t = () => I18N[state.lang];
 const isTour = s => TOURISTIC.has(s.access);
+// Base marker colour = the earliest era the site appears in (its founding/first horizon).
+const firstPeriodId = s => [...s.periods].sort((a, b) => PONTUS_PERIOD_INDEX[a] - PONTUS_PERIOD_INDEX[b])[0];
 
 /* ---------- map ---------- */
 const map = L.map("map", { zoomControl: true, worldCopyJump: false });
@@ -128,7 +132,7 @@ const markerLayer = L.layerGroup().addTo(map);
 
 function makeIcon(site, selected) {
   const shape = SHAPE[site.type] || "circle";
-  const color = PONTUS_PERIOD_COLOR(site.mainPeriod);
+  const color = PONTUS_PERIOD_COLOR(firstPeriodId(site));
   const isStar = site.significance >= 5;
   const starEl = isStar ? `<span class="pmk-s pmk-s-${shape}">★</span>` : "";
   return L.divIcon({
@@ -304,6 +308,8 @@ function visibleSites() {
     if (tour && !state.tour) return false;
     if (!tour && !state.closed) return false;
     if ((s.significance || 0) < state.minSig) return false;
+    if (!state.types.has(SHAPE[s.type] || "circle")) return false;
+    if (state.unescoOnly && !s.unesco) return false;
     if (q) {
       const hay = [
         s.name.en, s.name.ru, s.nameAncient || "",
@@ -342,7 +348,7 @@ function renderList(vis) {
     return;
   }
   const sorted = [...vis].sort((a, b) =>
-    PONTUS_PERIOD_INDEX[a.mainPeriod] - PONTUS_PERIOD_INDEX[b.mainPeriod] ||
+    PONTUS_PERIOD_INDEX[firstPeriodId(a)] - PONTUS_PERIOD_INDEX[firstPeriodId(b)] ||
     a.name[state.lang].localeCompare(b.name[state.lang], state.lang)
   );
   for (const site of sorted) {
@@ -354,7 +360,7 @@ function renderList(vis) {
       t().typeName[site.type] || "",
       site.localizationCertain === false ? "🟡" : ""
     ].filter(Boolean).join(" · ");
-    card.innerHTML = `<span class="card-dot" style="background:${PONTUS_PERIOD_COLOR(site.mainPeriod)}"></span>
+    card.innerHTML = `<span class="card-dot" style="background:${PONTUS_PERIOD_COLOR(firstPeriodId(site))}"></span>
       <div class="card-body">
         <div class="card-name">${esc(site.name[state.lang])}</div>
         <div class="card-meta">${esc(meta)}</div>
@@ -390,15 +396,31 @@ function renderPeriodFilter() {
   }
 }
 
-/* ---------- shape legend (marker form = type) ---------- */
-function renderShapeLegend() {
-  const wrap = document.getElementById("shape-legend");
+/* ---------- type filter (multi-select; also doubles as the shape legend) ---------- */
+function renderTypeFilter() {
+  const wrap = document.getElementById("type-filter");
   if (!wrap) return;
   const L8 = t();
-  const items = [["circle", L8.shapeCircle], ["square", L8.shapeSquare], ["diamond", L8.shapeDiamond], ["tri", L8.shapeTri]];
-  wrap.innerHTML = items.map(([sh, lab]) =>
-    `<div class="sl-item"><span class="sl-mk"><span class="pmk pmk-${sh}" style="--c:#a89880"></span></span><span>${esc(lab)}</span></div>`
-  ).join("");
+  const defs = [["circle", L8.shapeCircle], ["square", L8.shapeSquare], ["diamond", L8.shapeDiamond], ["tri", L8.shapeTri]];
+  wrap.innerHTML = "";
+  for (const [sh, lab] of defs) {
+    const count = PONTUS_SITES.filter(s => (SHAPE[s.type] || "circle") === sh).length;
+    const on = state.types.has(sh);
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "type-chip" + (on ? "" : " off");
+    btn.dataset.shape = sh;
+    btn.innerHTML =
+      `<span class="tc-mk"><span class="pmk pmk-${sh}" style="--c:#a89880"></span></span>` +
+      `<span class="tc-name">${esc(lab)}</span><span class="tc-count">${count}</span>`;
+    btn.onclick = () => {
+      if (state.types.has(sh)) state.types.delete(sh);
+      else state.types.add(sh);
+      renderTypeFilter();
+      applyFilters();
+    };
+    wrap.appendChild(btn);
+  }
 }
 
 /* ---------- language ---------- */
@@ -413,7 +435,7 @@ function applyLang() {
   bindTooltips();
   renderBasemapControl();
   renderPeriodFilter();
-  renderShapeLegend();
+  renderTypeFilter();
   applyFilters();
   if (state.selectedId) {
     const site = PONTUS_SITE_BY_ID[state.selectedId];
@@ -426,6 +448,7 @@ function applyLang() {
 document.getElementById("search").addEventListener("input", e => { state.q = e.target.value; applyFilters(); });
 document.getElementById("f-tour").addEventListener("change", e => { state.tour = e.target.checked; applyFilters(); });
 document.getElementById("f-closed").addEventListener("change", e => { state.closed = e.target.checked; applyFilters(); });
+document.getElementById("f-unesco").addEventListener("change", e => { state.unescoOnly = e.target.checked; applyFilters(); });
 document.querySelectorAll("#sig-filter .sig-btn").forEach(b =>
   b.addEventListener("click", () => {
     state.minSig = +b.dataset.min;
