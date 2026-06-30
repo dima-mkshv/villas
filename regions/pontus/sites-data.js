@@ -601,6 +601,38 @@ const PONTUS_SITES = [
     ],
     _libRef: "research/pontus/apatouron.md", _verified: "2026-06-30", _confidence: "low"
   },
+  {
+    id: "beregovoy-4", region: "pontus",
+    name: { ru: "Береговой-4 (святилище Деметры и Коры)", en: "Beregovoy-4 (Demeter & Kore sanctuary)" },
+    nameAncient: null,
+    modernPlace: { ru: "пос. Береговой, Фонталовский п-ов, Тамань", en: "Beregovoy, Fontalovsky peninsula, Taman" },
+    coords: [45.3400, 36.7400], localizationCertain: false,
+    type: "sanctuary",
+    periods: ["archaic", "classical", "hellenistic"],
+    mainPeriod: "classical",
+    periodText: { ru: "кон. VI – сер. I в. до н.э.", en: "late 6th – mid 1st c. BCE" },
+    founded: -520, abandoned: -50,
+    areaHa: null, sizeClass: "small",
+    preservation: "poor", excavationStatus: "excavated",
+    access: "closed",
+    accessNote: { ru: "сельское святилище, не музеефицировано; находки — в фондах ИА РАН / музеях. Точное место раскопа не опубликовано.", en: "rural sanctuary, not developed for visits; finds in IA RAS / museum collections; exact dig location unpublished." },
+    significance: 4,
+    desc: {
+      ru: "Уникальный открытый теменос (святилище под небом) Элевсинских богинь — Деметры и Коры-Персефоны, где почитались также Дионис и Афина — действовавший с конца VI до середины I в. до н.э. в сельской округе азиатского Боспора. Раскопаны сырцовые стены восточной ограды, прямоугольный сырцовый алтарь и серия кострищ-жертвенников с чернофигурной росписью, рельефной керамикой и терракотами (грозди винограда, медальоны Афины и горгоны Медузы). Одно из немногих изученных сельских святилищ Боспора — окно в религию рядового населения за пять веков.",
+      en: "A rare open-air temenos of the Eleusinian goddesses — Demeter and Kore-Persephone, with Dionysus and Athena also worshipped — active from the late 6th to the mid-1st century BCE in the rural hinterland of the Asian Bosporus. Excavations uncovered the mud-brick walls of its eastern enclosure, a rectangular sun-dried-brick altar, and a series of bonfire-altars with black-figure painted ware, relief vessels and terracottas (grape clusters, medallions of Athena and the Gorgon Medusa). One of the few excavated rural Bosporan sanctuaries — a window onto the religion of the ordinary population over five centuries."
+    },
+    highlight: { ru: "Сельское святилище Деметры и Коры под открытым небом: сырцовый алтарь, кострища-жертвенники и терракоты с Афиной и горгоной Медузой — пять веков веры рядового Боспора.", en: "An open-air country sanctuary of Demeter and Kore: a mud-brick altar, bonfire-altars and terracottas of Athena and the Gorgon Medusa — five centuries of ordinary Bosporan faith." },
+    links: [
+      { label: "ИА РАН — раскопки «Береговой 4» (1999–2004)", url: "https://archaeolog.ru/about/history/expeditions-1990-present/1999-2004-gg--raskopki-pamyatnika-beregovoy-4" },
+      { label: "Завойкин — Афина и горгона Медуза (КСИА 245, 2016)", url: "https://www.academia.edu/36586734" }
+    ],
+    bibliography: [
+      { type: "modern", ref: "Завойкин А.А. Афина и горгона Медуза в святилище «Береговой 4» // КСИА. 2016. Вып. 245. С. 168–184", url: "https://www.academia.edu/36586734" },
+      { type: "modern", ref: "Завойкин А.А. Святилище элевсинских богинь на «Береговом 4» (раскопки Таманской экспедиции ИА РАН, 1999–2004)", url: "https://archaeolog.ru/about/history/expeditions-1990-present/1999-2004-gg--raskopki-pamyatnika-beregovoy-4" },
+      { type: "modern", ref: "Открыт разведками Б.Г. Петерса (1986–1988); раскопки А.А. Завойкина (центр) и Н.И. Сударева (север)" }
+    ],
+    _libRef: "research/pontus/beregovoy-4.md", _verified: "2026-06-30", _confidence: "medium"
+  },
 
   // ═══════════════════ MAINLAND COAST — Anapa → Sochi ═══════════════════
   {
