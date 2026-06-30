@@ -18,7 +18,7 @@ const I18N = {
     shown: (n, total) => `Показано: ${n} из ${total}`,
     empty: "Ничего не нашлось для выбранных фильтров.",
     sources: "Данные: КБН/IOSPE, Страбон, ИА РАН, музеи · полные досье — research/pontus/. Карта: Esri, CARTO, OpenStreetMap.",
-    route: "Маршрут", waze: "Waze",
+    route: "Маршрут", yandex: "Яндекс Карты",
     basemaps: { topo: "Рельеф", sat: "Спутник", light: "Светлая" },
     typeName: { city: "город", settlement: "поселение", fortress: "крепость", necropolis: "некрополь / курган", sanctuary: "святилище", harbor: "гавань" },
     sizeName: { metropolis: "мегаполис", city: "город", town: "городок", small: "малый", unknown: "размер неизв." },
@@ -41,7 +41,7 @@ const I18N = {
     shown: (n, total) => `Showing ${n} of ${total}`,
     empty: "Nothing matches the selected filters.",
     sources: "Data: CIRB/IOSPE, Strabo, IA RAS, museums · full dossiers — research/pontus/. Map: Esri, CARTO, OpenStreetMap.",
-    route: "Directions", waze: "Waze",
+    route: "Directions", yandex: "Yandex Maps",
     basemaps: { topo: "Terrain", sat: "Satellite", light: "Light" },
     typeName: { city: "city", settlement: "settlement", fortress: "fortress", necropolis: "necropolis / kurgan", sanctuary: "sanctuary", harbor: "harbour" },
     sizeName: { metropolis: "metropolis", city: "city", town: "town", small: "small", unknown: "size unknown" },
@@ -206,7 +206,7 @@ function popupHtml(site) {
   ).join("");
   const nav =
     `<a class="popup-link nav" href="https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}" target="_blank" rel="noopener">🧭 ${L8.route}</a>` +
-    `<a class="popup-link nav" href="https://waze.com/ul?ll=${lat},${lng}&navigate=yes" target="_blank" rel="noopener">🚗 ${L8.waze}</a>`;
+    `<a class="popup-link nav" href="https://yandex.ru/maps/?rtext=~${lat},${lng}&rtt=auto" target="_blank" rel="noopener">🚗 ${L8.yandex}</a>`;
 
   return `<div class="popup-body">
     <h3 class="popup-title">${esc(site.name[state.lang])}</h3>
