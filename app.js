@@ -26,6 +26,8 @@ const I18N = {
     waze: "Waze",
     basemaps: { topo: "Рельеф", sat: "Спутник", light: "Светлая" },
     westBankBadge: "Западный берег",
+    wbWarnTitle: "⚠️ ВНИМАНИЕ: ЗАПАДНЫЙ БЕРЕГ",
+    wbWarnText: "Страховка проката тут не действует, а въезд в зону A опасен.",
     subtypes: {
       "villa": "Вилла",
       "manor": "Усадьба",
@@ -59,6 +61,8 @@ const I18N = {
     waze: "Waze",
     basemaps: { topo: "Terrain", sat: "Satellite", light: "Light" },
     westBankBadge: "West Bank",
+    wbWarnTitle: "⚠️ WARNING: WEST BANK",
+    wbWarnText: "Rental-car insurance is void here, and entering Area A is dangerous.",
     subtypes: {
       "villa": "Villa",
       "manor": "Manor",
@@ -211,6 +215,10 @@ function popupHtml(site) {
     site.region === "west_bank" ? `<span class="badge b-wb">${L8.westBankBadge}</span>` : ""
   ].join("");
 
+  const wbWarn = site.region === "west_bank"
+    ? `<div class="popup-warn"><strong>${L8.wbWarnTitle}</strong><span>${L8.wbWarnText}</span></div>`
+    : "";
+
   const links = site.links.map(l =>
     `<a class="popup-link" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)} ↗</a>`
   ).join("");
@@ -223,6 +231,7 @@ function popupHtml(site) {
     <h3 class="popup-title">${esc(site.name[state.lang])}</h3>
     ${site.name.he ? `<div class="popup-he" dir="rtl">${esc(site.name.he)}</div>` : ""}
     <div class="popup-badges">${badges}</div>
+    ${wbWarn}
     <div class="popup-view">${L8.viewLabel}: ${starsHtml(site.view)} <span style="color:${RATING_COLORS[site.view]}">${site.view}/5</span></div>
     <p class="popup-viewnote">${esc(site.viewNote[state.lang])}</p>
     <div class="popup-period">⏳ ${esc(site.period[state.lang])}</div>
@@ -264,8 +273,11 @@ function select(id, { pan = true } = {}) {
 
   m.bindPopup(popupHtml(site), { maxWidth: 340, minWidth: 320, autoPanPadding: [25, 25] });
   if (pan) {
+    let opened = false;
+    const open = () => { if (!opened) { opened = true; m.openPopup(); } };
     map.flyTo(site.coords, Math.max(map.getZoom(), 13), { duration: 0.8 });
-    map.once("moveend", () => m.openPopup());
+    map.once("moveend", open);
+    setTimeout(open, 900); // fallback if the map doesn't actually move
   } else {
     m.openPopup();
   }

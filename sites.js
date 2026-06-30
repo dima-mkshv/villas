@@ -22,7 +22,9 @@ const I18N = {
     waze: "Waze",
     basemaps: { topo: "Рельеф", sat: "Спутник", light: "Светлая" },
     westBankBadge: "Западный берег",
-    unescoBadge: "ЮНЕСКО"
+    unescoBadge: "ЮНЕСКО",
+    wbWarnTitle: "⚠️ ВНИМАНИЕ: ЗАПАДНЫЙ БЕРЕГ",
+    wbWarnText: "Страховка проката тут не действует, а въезд в зону A опасен."
   },
   en: {
     subtitle: "Archaeological sites of Israel open to visitors — from the Stone Age to the Crusaders. A marker's color is the site's headline era.",
@@ -40,7 +42,9 @@ const I18N = {
     waze: "Waze",
     basemaps: { topo: "Terrain", sat: "Satellite", light: "Light" },
     westBankBadge: "West Bank",
-    unescoBadge: "UNESCO"
+    unescoBadge: "UNESCO",
+    wbWarnTitle: "⚠️ WARNING: WEST BANK",
+    wbWarnText: "Rental-car insurance is void here, and entering Area A is dangerous."
   }
 };
 
@@ -167,6 +171,10 @@ function popupHtml(site) {
     site.region === "west_bank" ? `<span class="badge b-wb">${L8.westBankBadge}</span>` : ""
   ].join("");
 
+  const wbWarn = site.region === "west_bank"
+    ? `<div class="popup-warn"><strong>${L8.wbWarnTitle}</strong><span>${L8.wbWarnText}</span></div>`
+    : "";
+
   const links = site.links.map(l =>
     `<a class="popup-link" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)} ↗</a>`
   ).join("");
@@ -179,6 +187,7 @@ function popupHtml(site) {
     <h3 class="popup-title">${esc(site.name[state.lang])}</h3>
     ${site.name.he ? `<div class="popup-he" dir="rtl">${esc(site.name.he)}</div>` : ""}
     ${badges ? `<div class="popup-badges">${badges}</div>` : ""}
+    ${wbWarn}
     <div class="popup-period">⏳ ${esc(site.periodText[state.lang])}</div>
     <div class="popup-eras">${eraChipsHtml(site)}</div>
     <p class="popup-viewnote">${esc(site.highlight[state.lang])}</p>
@@ -210,8 +219,11 @@ function select(id, { pan = true } = {}) {
 
   m.bindPopup(popupHtml(site), { maxWidth: 340, minWidth: 320, autoPanPadding: [25, 25] });
   if (pan) {
+    let opened = false;
+    const open = () => { if (!opened) { opened = true; m.openPopup(); } };
     map.flyTo(site.coords, Math.max(map.getZoom(), 12), { duration: 0.8 });
-    map.once("moveend", () => m.openPopup());
+    map.once("moveend", open);
+    setTimeout(open, 900); // fallback if the map doesn't actually move
   } else {
     m.openPopup();
   }
