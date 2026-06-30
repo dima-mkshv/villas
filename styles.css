@@ -831,29 +831,39 @@ h1 {
   justify-content: center;
   position: fixed;
   left: 12px;
+  top: calc(var(--nav-h) + 12px);
   z-index: 1100;
+  border: 1px solid var(--gold);
+  background: rgba(24,20,15,.96);
+  color: var(--gold-bright);
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 3px 14px rgba(0,0,0,.55);
+}
+
+/* open = labeled gold pill, so it's obvious it opens the filters */
+#sidebar-toggle {
+  gap: 7px;
+  height: 44px;
+  padding: 0 16px;
+  border-radius: 22px;
+  font: 800 14px 'Inter', sans-serif;
+  letter-spacing: .02em;
+  background: var(--gold);
+  color: #1a1408;
+  border-color: var(--gold);
+}
+
+/* close = round arrow */
+#sidebar-close {
   width: 50px;
   height: 50px;
   padding: 0;
   border-radius: 50%;
-  border: 1px solid var(--gold);
-  background: rgba(24,20,15,.95);
-  color: var(--gold-bright);
-  font-size: 24px;
-  line-height: 1;
-  cursor: pointer;
-  box-shadow: 0 3px 12px rgba(0,0,0,.5);
-}
-
-#sidebar-toggle { top: calc(var(--nav-h) + 12px); }
-
-#sidebar-close {
-  top: calc(var(--nav-h) + 12px);
 }
 
 #sidebar-toggle svg, #sidebar-close svg { display: block; }
-
-#sidebar-close:active, #sidebar-toggle:active { transform: scale(.92); }
+#sidebar-close:active, #sidebar-toggle:active { transform: scale(.95); }
 
 @media (max-width: 880px) {
   #sidebar {
@@ -866,9 +876,14 @@ h1 {
     transform: translateX(-105%);
     transition: transform .25s ease;
     box-shadow: 6px 0 30px rgba(0,0,0,.5);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   #sidebar.open { transform: translateX(0); }
+
+  /* whole sidebar scrolls on mobile (filters + list together) */
+  #site-list { flex: 0 0 auto; overflow: visible; }
 
   /* keep header text clear of the floating toggle/close button */
   .sb-header { padding-top: 64px; }
@@ -877,7 +892,7 @@ h1 {
   #app:has(#sidebar.open) ~ #sidebar-toggle { display: none; }
   #app:has(#sidebar.open) ~ #sidebar-close { display: flex; }
 
-  .leaflet-left .leaflet-control-zoom { margin-left: 78px; }
+  .leaflet-left .leaflet-control-zoom { margin-left: 152px; }
 
   /* bigger, scrollable top nav */
   :root { --nav-h: 58px; }

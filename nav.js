@@ -7,11 +7,11 @@
 (function () {
   const NAV_I18N = {
     ru: {
-      villas: "Карта вилл", timeline: "Таймлайн", sites: "Карта объектов",
+      villas: "Карта вилл", timeline: "Таймлайн", sites: "Карта объектов", filters: "Фильтры",
       about: "О проекте", aboutTitle: "О проекте", aboutLine: "Завайбкожено Димой", aboutClose: "Закрыть"
     },
     en: {
-      villas: "Villa map", timeline: "Timeline", sites: "Sites map",
+      villas: "Villa map", timeline: "Timeline", sites: "Sites map", filters: "Filters",
       about: "About", aboutTitle: "About", aboutLine: "vibecoded by Dima", aboutClose: "Close"
     }
   };
