@@ -82,6 +82,9 @@ const t = () => I18N[state.lang];
 const isTour = s => TOURISTIC.has(s.access);
 // Base marker colour = the earliest era the site appears in (its founding/first horizon).
 const firstPeriodId = s => [...s.periods].sort((a, b) => PONTUS_PERIOD_INDEX[a] - PONTUS_PERIOD_INDEX[b])[0];
+// Permanent on-map name labels: candidates = significance >= 4 (decluttered by priority in JS).
+const LABEL_MIN_SIG = 4;
+const isLabelSite = s => (s.significance || 0) >= LABEL_MIN_SIG;
 
 /* ---------- map ---------- */
 const map = L.map("map", { zoomControl: true, worldCopyJump: false });
@@ -157,11 +160,50 @@ function bindTooltips() {
   for (const site of PONTUS_SITES) {
     const m = markers[site.id];
     m.unbindTooltip();
-    m.bindTooltip(site.name[state.lang], { direction: "top", offset: [0, -10], opacity: 0.95 });
+    if (isLabelSite(site)) {
+      m.bindTooltip(site.name[state.lang], { permanent: true, direction: "right", offset: [12, 0], className: "map-label", interactive: false });
+    } else {
+      m.bindTooltip(site.name[state.lang], { direction: "top", offset: [0, -10], opacity: 0.95 });
+    }
+  }
+  scheduleDeclutter();
+}
+
+/* ---------- label declutter: show permanent labels where they fit, hide collisions (priority first) ---------- */
+// Run synchronously on discrete events (zoomend/moveend/filter) — rAF is paused in
+// background tabs and setTimeout is throttled there, so a direct call is the reliable choice.
+function scheduleDeclutter() { declutterLabels(); }
+function declutterLabels() {
+  const items = [];
+  for (const site of PONTUS_SITES) {
+    if (!isLabelSite(site)) continue;
+    const m = markers[site.id];
+    if (!markerLayer.hasLayer(m)) continue;
+    const tt = m.getTooltip();
+    const el = tt && tt.getElement();
+    if (!el) continue;
+    el.style.display = "";                 // reset to measurable before deciding
+    items.push({ site, el });
+  }
+  // priority: selected first, then higher significance, then larger area
+  items.sort((a, b) =>
+    ((b.site.id === state.selectedId) - (a.site.id === state.selectedId)) ||
+    ((b.site.significance || 0) - (a.site.significance || 0)) ||
+    ((b.site.areaHa || 0) - (a.site.areaHa || 0))
+  );
+  const kept = [];
+  const PAD = 3;
+  for (const it of items) {
+    const r = it.el.getBoundingClientRect();
+    if (!r.width) continue;
+    const clash = kept.some(k => r.left - PAD < k.right && r.right + PAD > k.left && r.top - PAD < k.bottom && r.bottom + PAD > k.top);
+    if (clash) it.el.style.display = "none";
+    else kept.push({ left: r.left - PAD, top: r.top - PAD, right: r.right + PAD, bottom: r.bottom + PAD });
   }
 }
 
 for (const site of PONTUS_SITES) markers[site.id] = makeMarker(site);
+map.on("zoomend moveend", scheduleDeclutter);
 
 /* ---------- popup ---------- */
 const esc = s => String(s)
@@ -349,6 +391,7 @@ function applyFilters() {
   }
   document.getElementById("count").textContent = t().shown(vis.length, PONTUS_SITES.length);
   renderList(vis);
+  scheduleDeclutter();
 }
 
 /* ---------- list ---------- */
