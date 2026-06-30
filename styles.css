@@ -394,11 +394,11 @@ h1 {
 }
 
 .villa-mark { border-radius: 50%; }
-.chk input:checked + .villa-mark {
-  background: linear-gradient(135deg, var(--r5), var(--r3) 55%, var(--r1));
-  border-color: #fff;
-}
+.palace-mark { border-radius: 3px; }
+.city-mark { border-radius: 2px; transform: rotate(45deg); }
 
+.chk input:checked + .villa-mark,
+.chk input:checked + .palace-mark,
 .chk input:checked + .city-mark {
   background: linear-gradient(135deg, var(--r5), var(--r3) 55%, var(--r1));
   border-color: #fff;

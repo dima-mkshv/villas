@@ -4,9 +4,10 @@
 /* ---------- i18n ---------- */
 const I18N = {
   ru: {
-    subtitle: "Римские виллы, дворцы и города Израиля. Все объекты окрашены по рейтингу вида — римляне знали, где строить.",
+    subtitle: "Интерактивный археологический атлас римских вилл и дворцов — с рейтингом панорам!",
     searchPh: "Поиск: Масада, Кейсария, вилла…",
-    villas: "Виллы и дворцы",
+    villas: "Виллы",
+    palaces: "Дворцы",
     cities: "Города",
     minView: "Вид от:",
     westBank: "включая Западный берег",
@@ -36,9 +37,10 @@ const I18N = {
     }
   },
   en: {
-    subtitle: "Roman villas, palaces and cities of Israel. All sites are colored by view rating — the Romans knew where to build.",
+    subtitle: "An interactive archaeological atlas of Roman villas and palaces — ranked by their views!",
     searchPh: "Search: Masada, Caesarea, villa…",
-    villas: "Villas & palaces",
+    villas: "Villas",
+    palaces: "Palaces",
     cities: "Cities",
     minView: "View from:",
     westBank: "include the West Bank",
@@ -76,7 +78,7 @@ const GOLD = "#c9a227";
 /* ---------- state ---------- */
 const state = {
   lang: localStorage.getItem("vr_lang") || "ru",
-  types: { villa: true, city: true },
+  shapes: { circle: true, square: true, diamond: true },
   minView: 1,
   westBank: true,
   q: "",
@@ -285,7 +287,7 @@ map.on("popupclose", () => { /* keep selection highlight; just hash cleanup not 
 function visibleSites() {
   const q = state.q.trim().toLowerCase();
   return SITES.filter(s => {
-    if (!state.types[s.type]) return false;
+    if (!state.shapes[shapeOf(s)]) return false;
     if (s.view < state.minView) return false;
     if (!state.westBank && s.region === "west_bank") return false;
     if (q) {
@@ -422,12 +424,17 @@ document.getElementById("search").addEventListener("input", e => {
 });
 
 document.getElementById("f-villa").addEventListener("change", e => {
-  state.types.villa = e.target.checked;
+  state.shapes.circle = e.target.checked;
+  applyFilters();
+});
+
+document.getElementById("f-palace").addEventListener("change", e => {
+  state.shapes.square = e.target.checked;
   applyFilters();
 });
 
 document.getElementById("f-city").addEventListener("change", e => {
-  state.types.city = e.target.checked;
+  state.shapes.diamond = e.target.checked;
   applyFilters();
 });
 
@@ -441,7 +448,6 @@ document.getElementById("sidebar-toggle").onclick = () => {
 };
 
 /* ---------- init ---------- */
-renderLegendScale();
 renderStarFilter();
 applyLang();
 
