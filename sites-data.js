@@ -53,6 +53,7 @@ const ARCH_SITES = [
   },
   {
     id: "tel-dan",
+    unesco: true,
     name: { en: "Tel Dan", ru: "Тель-Дан", he: "תל דן" },
     coords: [33.2490, 35.6520],
     periods: ["neolithic", "chalcolithic", "bronze-early", "bronze-middle", "bronze-late", "iron-i", "iron-ii", "hellenistic", "roman"],
@@ -119,6 +120,7 @@ const ARCH_SITES = [
   },
   {
     id: "beit-shean",
+    unesco: true,
     name: { en: "Beit She'an / Scythopolis", ru: "Бейт-Шеан / Скифополь", he: "בית שאן" },
     coords: [32.5004, 35.5018],
     periods: ["chalcolithic", "bronze-early", "bronze-middle", "bronze-late", "iron-i", "iron-ii", "hellenistic", "roman", "byzantine", "early-islamic"],
@@ -139,6 +141,7 @@ const ARCH_SITES = [
   },
   {
     id: "tzippori",
+    unesco: true,
     name: { en: "Tzippori / Sepphoris", ru: "Ципори / Сепфорис", he: "ציפורי" },
     coords: [32.7456, 35.2786],
     periods: ["iron-ii", "hellenistic", "roman", "byzantine", "early-islamic"],
@@ -182,6 +185,7 @@ const ARCH_SITES = [
   },
   {
     id: "hamat-tiberias",
+    unesco: true,
     name: { en: "Hamat Tiberias", ru: "Хамат-Тверия", he: "חמת טבריה" },
     coords: [32.7686, 35.5483],
     periods: ["roman", "byzantine"],
@@ -202,6 +206,7 @@ const ARCH_SITES = [
   },
   {
     id: "beit-alfa",
+    unesco: true,
     name: { en: "Beit Alfa Synagogue", ru: "Синагога Бейт-Альфа", he: "בית אלפא" },
     coords: [32.5190, 35.4270],
     periods: ["byzantine"],
@@ -261,6 +266,7 @@ const ARCH_SITES = [
   },
   {
     id: "khirbet-minya",
+    unesco: true,
     name: { en: "Khirbat al-Minya", ru: "Хирбат аль-Минья", he: "חירבת אל-מניה" },
     coords: [32.8649, 35.5362],
     periods: ["early-islamic"],
@@ -301,6 +307,7 @@ const ARCH_SITES = [
   },
   {
     id: "kursi",
+    unesco: true,
     name: { en: "Kursi / Gergesa", ru: "Курси / Гергеса", he: "כורסי" },
     coords: [32.8261, 35.6504],
     periods: ["byzantine", "early-islamic"],
@@ -383,6 +390,7 @@ const ARCH_SITES = [
   },
   {
     id: "caesarea-maritima",
+    unesco: true,
     name: { en: "Caesarea Maritima", ru: "Кесария Приморская", he: "קיסריה" },
     coords: [32.5000, 34.8917],
     periods: ["hellenistic", "roman", "byzantine", "early-islamic"],
@@ -403,6 +411,7 @@ const ARCH_SITES = [
   },
   {
     id: "apollonia-arsuf",
+    unesco: true,
     name: { en: "Apollonia–Arsuf", ru: "Аполлония–Арсуф", he: "אפולוניה" },
     coords: [32.1953, 34.8067],
     periods: ["babylonian-persian", "hellenistic", "roman", "byzantine", "early-islamic"],
@@ -830,6 +839,7 @@ const ARCH_SITES = [
   // ───────────────────────────── JERUSALEM, JUDEA & SAMARIA ─────────────────────────────
   {
     id: "city-of-david",
+    unesco: true,
     name: { en: "City of David", ru: "Город Давида", he: "עיר דוד" },
     coords: [31.7736, 35.2356],
     periods: ["bronze-early", "bronze-middle", "bronze-late", "iron-i", "iron-ii", "babylonian-persian", "hellenistic", "roman", "byzantine", "early-islamic"],
@@ -850,6 +860,7 @@ const ARCH_SITES = [
   },
   {
     id: "jerusalem-archaeological-park",
+    unesco: true,
     name: { en: "Jerusalem Archaeological Park (Davidson Center)", ru: "Иерусалимский археологический парк (Центр Дэвидсона)", he: "הפארק הארכיאולוגי בירושלים" },
     coords: [31.7753, 35.2350],
     periods: ["iron-ii", "babylonian-persian", "hellenistic", "roman", "byzantine", "early-islamic"],
@@ -870,6 +881,7 @@ const ARCH_SITES = [
   },
   {
     id: "ramla-white-mosque-pool",
+    unesco: true,
     name: { en: "Ramla — White Mosque & Pool of Arches", ru: "Рамла — Белая мечеть и Бассейн арок", he: "רמלה — המסגד הלבן" },
     coords: [31.9275, 34.8661],
     periods: ["early-islamic"],

@@ -132,15 +132,61 @@ function makeMarker(site) {
   return m;
 }
 
+// Permanent on-map labels for the major sites (arch map has no rating → curated priority).
+const ARCH_LABEL_PRIO = {
+  "caesarea-maritima": 5, "masada": 5, "tel-megiddo": 5, "beit-shean": 5, "city-of-david": 5,
+  "tel-hazor": 4, "avdat": 4, "beit-guvrin-maresha": 4, "qumran": 4, "herodium": 4,
+  "tel-dan": 4, "gamla": 4, "jerusalem-archaeological-park": 4, "tzippori": 4,
+  "tel-lachish": 3, "banias": 3, "tel-beer-sheva": 3, "ashkelon": 3, "beit-shearim": 3,
+  "sebastia-samaria": 3, "tel-gezer": 3, "mamshit": 3, "shivta": 3, "haluza": 3,
+  "tel-arad": 3, "old-jaffa": 3, "apollonia-arsuf": 3, "ein-gedi": 3, "khirbet-qeiyafa": 3
+};
+const isLabelSite = s => (ARCH_LABEL_PRIO[s.id] || 0) > 0;
+
 function bindTooltips() {
   for (const site of ARCH_SITES) {
     const m = markers[site.id];
     m.unbindTooltip();
-    m.bindTooltip(site.name[state.lang], { direction: "top", offset: [0, -6], opacity: 0.95 });
+    if (isLabelSite(site)) {
+      m.bindTooltip(site.name[state.lang], { permanent: true, direction: "right", offset: [10, 0], className: "map-label", interactive: false });
+    } else {
+      m.bindTooltip(site.name[state.lang], { direction: "top", offset: [0, -6], opacity: 0.95 });
+    }
+  }
+  scheduleDeclutter();
+}
+
+/* Label declutter: show permanent labels where they fit, hide collisions (priority first). */
+function scheduleDeclutter() { declutterLabels(); }
+function declutterLabels() {
+  const items = [];
+  for (const site of ARCH_SITES) {
+    if (!isLabelSite(site)) continue;
+    const m = markers[site.id];
+    if (!markerLayer.hasLayer(m)) continue;
+    const tt = m.getTooltip();
+    const el = tt && tt.getElement();
+    if (!el) continue;
+    el.style.display = "";
+    items.push({ site, el });
+  }
+  items.sort((a, b) =>
+    ((b.site.id === state.selectedId) - (a.site.id === state.selectedId)) ||
+    ((ARCH_LABEL_PRIO[b.site.id] || 0) - (ARCH_LABEL_PRIO[a.site.id] || 0))
+  );
+  const kept = [];
+  const PAD = 3;
+  for (const it of items) {
+    const r = it.el.getBoundingClientRect();
+    if (!r.width) continue;
+    const clash = kept.some(k => r.left - PAD < k.right && r.right + PAD > k.left && r.top - PAD < k.bottom && r.bottom + PAD > k.top);
+    if (clash) it.el.style.display = "none";
+    else kept.push({ left: r.left - PAD, top: r.top - PAD, right: r.right + PAD, bottom: r.bottom + PAD });
   }
 }
 
 for (const site of ARCH_SITES) markers[site.id] = makeMarker(site);
+map.on("zoomend moveend", scheduleDeclutter);
 
 /* ---------- popup ---------- */
 const esc = s => String(s)
@@ -276,6 +322,7 @@ function applyFilters() {
 
   document.getElementById("count").textContent = t().shown(vis.length, ARCH_SITES.length);
   renderList(vis);
+  scheduleDeclutter();
 }
 
 /* ---------- list ---------- */

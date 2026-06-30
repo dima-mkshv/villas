@@ -105,6 +105,7 @@ const SITES = [
   },
   {
     id: "apollonia-roman-villa",
+    unescoTentative: 1491,
     type: "villa",
     subtype: "villa",
     name: { en: "Roman Villa at Apollonia–Arsuf", ru: "Римская вилла в Аполлонии-Арсуфе", he: "תל ארשף" },
@@ -221,6 +222,7 @@ const SITES = [
   },
   {
     id: "caesarea-promontory-palace",
+    unescoTentative: 1480,
     type: "villa",
     subtype: "palace",
     name: { en: "Caesarea — Promontory Palace", ru: "Кесария — дворец Ирода на мысе", he: "ארמון הורדוס בקיסריה" },
@@ -245,6 +247,7 @@ const SITES = [
   },
   {
     id: "jerusalem-herods-palace-citadel",
+    unesco: 148,
     type: "villa",
     subtype: "palace",
     name: { en: "Herod's Palace & the Citadel (Tower of David)", ru: "Дворец Ирода и Цитадель (Башня Давида)", he: "ארמון הורדוס ומגדל דוד" },
@@ -269,6 +272,7 @@ const SITES = [
   },
   {
     id: "sepphoris-dionysus-house",
+    unescoTentative: 1471,
     type: "villa",
     subtype: "mansion",
     name: { en: "Sepphoris — Dionysus House", ru: "Циппори — дом Диониса", he: "בית דיוניסוס בציפורי" },
@@ -501,6 +505,7 @@ const SITES = [
   // ───────────────────────────────── CITIES ─────────────────────────────────
   {
     id: "caesarea-maritima",
+    unescoTentative: 1480,
     type: "city",
     subtype: "city",
     name: { en: "Caesarea Maritima", ru: "Кейсария", he: "קיסריה" },
@@ -547,6 +552,7 @@ const SITES = [
   },
   {
     id: "sepphoris-tzippori",
+    unescoTentative: 1471,
     type: "city",
     subtype: "city",
     name: { en: "Sepphoris (Tzippori)", ru: "Циппори (Сепфорис)", he: "ציפורי" },

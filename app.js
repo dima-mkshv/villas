@@ -185,15 +185,53 @@ function makeMarker(site) {
   return m;
 }
 
+// Permanent on-map labels for the best-view sites (view >= 4), decluttered by priority.
+const isLabelSite = s => (s.view || 0) >= 4;
+
 function bindTooltips() {
   for (const site of SITES) {
     const m = markers[site.id];
     m.unbindTooltip();
-    m.bindTooltip(site.name[state.lang], { direction: "top", offset: [0, -8], opacity: 0.95 });
+    if (isLabelSite(site)) {
+      m.bindTooltip(site.name[state.lang], { permanent: true, direction: "right", offset: [11, 0], className: "map-label", interactive: false });
+    } else {
+      m.bindTooltip(site.name[state.lang], { direction: "top", offset: [0, -8], opacity: 0.95 });
+    }
+  }
+  scheduleDeclutter();
+}
+
+/* Label declutter: show permanent labels where they fit, hide collisions (priority first). */
+function scheduleDeclutter() { declutterLabels(); }
+function declutterLabels() {
+  const items = [];
+  for (const site of SITES) {
+    if (!isLabelSite(site)) continue;
+    const m = markers[site.id];
+    if (!markerLayer.hasLayer(m)) continue;
+    const tt = m.getTooltip();
+    const el = tt && tt.getElement();
+    if (!el) continue;
+    el.style.display = "";
+    items.push({ site, el });
+  }
+  items.sort((a, b) =>
+    ((b.site.id === state.selectedId) - (a.site.id === state.selectedId)) ||
+    ((b.site.view || 0) - (a.site.view || 0))
+  );
+  const kept = [];
+  const PAD = 3;
+  for (const it of items) {
+    const r = it.el.getBoundingClientRect();
+    if (!r.width) continue;
+    const clash = kept.some(k => r.left - PAD < k.right && r.right + PAD > k.left && r.top - PAD < k.bottom && r.bottom + PAD > k.top);
+    if (clash) it.el.style.display = "none";
+    else kept.push({ left: r.left - PAD, top: r.top - PAD, right: r.right + PAD, bottom: r.bottom + PAD });
   }
 }
 
 for (const site of SITES) markers[site.id] = makeMarker(site);
+map.on("zoomend moveend", scheduleDeclutter);
 
 /* ---------- popup ---------- */
 const esc = s => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -214,12 +252,14 @@ function popupHtml(site) {
 
   const badges = [
     `<span class="badge b-type">${site.type === "villa" ? "🏛 " : "🏟 "}${L8.subtypes[site.subtype]}</span>`,
-    site.unesco ? `<span class="badge b-unesco">★ ${L8.unescoBadge}</span>` : "",
+    (site.unesco || site.unescoTentative) ? `<span class="badge b-unesco">★ ${L8.unescoBadge}</span>` : "",
     site.region === "west_bank" ? `<span class="badge b-wb">${L8.westBankBadge}</span>` : ""
   ].join("");
 
   const unescoLink = site.unesco
     ? `<a class="popup-link" href="https://whc.unesco.org/en/list/${site.unesco}/" target="_blank" rel="noopener">★ ${L8.unescoBadge} ↗</a>`
+    : site.unescoTentative
+    ? `<a class="popup-link" href="https://whc.unesco.org/en/tentativelists/${site.unescoTentative}/" target="_blank" rel="noopener">★ ${L8.unescoBadge} ↗</a>`
     : "";
 
   const wbWarn = site.region === "west_bank"
@@ -337,6 +377,7 @@ function applyFilters() {
 
   document.getElementById("count").textContent = t().shown(vis.length, SITES.length);
   renderList(vis);
+  scheduleDeclutter();
 }
 
 /* ---------- list ---------- */
@@ -364,7 +405,7 @@ function renderList(vis) {
 
     const meta = [
       t().subtypes[site.subtype],
-      site.unesco ? "★ " + t().unescoBadge : "",
+      (site.unesco || site.unescoTentative) ? "★ " + t().unescoBadge : "",
       site.region === "west_bank" ? t().westBankBadge : ""
     ].filter(Boolean).join(" · ");
 
