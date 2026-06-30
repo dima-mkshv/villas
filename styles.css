@@ -892,7 +892,8 @@ h1 {
   #app:has(#sidebar.open) ~ #sidebar-toggle { display: none; }
   #app:has(#sidebar.open) ~ #sidebar-close { display: flex; }
 
-  .leaflet-left .leaflet-control-zoom { margin-left: 152px; }
+  /* stack zoom buttons UNDER the Filters pill (avoids overlap at any pill width) */
+  .leaflet-left .leaflet-control-zoom { margin-top: 64px; margin-left: 12px; }
 
   /* bigger, scrollable top nav */
   :root { --nav-h: 58px; }
