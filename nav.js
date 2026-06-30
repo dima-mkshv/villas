@@ -1,4 +1,5 @@
-// VILLAE ROMANAE — shared top navigation + language sync + About modal.
+// VILLAE ROMANAE — shared top navigation: language sync, About modal,
+// and a mobile burger menu that mirrors all nav options.
 // Pages set <body data-page="villas|timeline|sites">. Each page script listens
 // for the "vr:langchange" event and re-renders its own content.
 "use strict";
@@ -14,6 +15,12 @@
       about: "About", aboutTitle: "About", aboutLine: "vibecoded by Dima", aboutClose: "Close"
     }
   };
+
+  const PAGES = [
+    { nav: "villas", href: "index.html" },
+    { nav: "timeline", href: "timeline.html" },
+    { nav: "sites", href: "sites.html" }
+  ];
 
   const getLang = () => localStorage.getItem("vr_lang") || "ru";
 
@@ -31,6 +38,7 @@
       a.classList.toggle("active", a.dataset.nav === page)
     );
     updateAbout(lang);
+    updateMenu(lang, page);
   }
 
   function setLang(lang) {
@@ -58,7 +66,6 @@
         '</div>' +
       '</div>';
     document.body.appendChild(overlay);
-
     overlay.addEventListener("click", e => { if (e.target === overlay) closeAbout(); });
     overlay.querySelector("#about-close").addEventListener("click", closeAbout);
   }
@@ -74,6 +81,46 @@
 
   function openAbout() { const o = document.getElementById("about-overlay"); if (o) o.hidden = false; }
   function closeAbout() { const o = document.getElementById("about-overlay"); if (o) o.hidden = true; }
+
+  /* ---------- Burger dropdown menu ---------- */
+  function ensureMenu() {
+    if (document.getElementById("nav-menu")) return;
+    const menu = document.createElement("div");
+    menu.className = "nav-menu";
+    menu.id = "nav-menu";
+    menu.hidden = true;
+    menu.innerHTML =
+      PAGES.map(p => `<a class="nm-item" data-nav="${p.nav}" href="${p.href}"></a>`).join("") +
+      '<button class="nm-item" id="nm-about" type="button"></button>' +
+      '<div class="nm-sep"></div>' +
+      '<div class="nm-langs">' +
+        '<button class="nm-lang" data-lang="ru" type="button">RU</button>' +
+        '<button class="nm-lang" data-lang="en" type="button">EN</button>' +
+      '</div>';
+    document.body.appendChild(menu);
+
+    menu.querySelector("#nm-about").addEventListener("click", () => { closeMenu(); openAbout(); });
+    menu.querySelectorAll(".nm-lang").forEach(b =>
+      b.addEventListener("click", () => { setLang(b.dataset.lang); closeMenu(); })
+    );
+  }
+
+  function updateMenu(lang, page) {
+    const menu = document.getElementById("nav-menu");
+    if (!menu) return;
+    menu.querySelectorAll(".nm-item[data-nav]").forEach(a => {
+      a.textContent = NAV_I18N[lang][a.dataset.nav];
+      a.classList.toggle("active", a.dataset.nav === page);
+    });
+    const ab = menu.querySelector("#nm-about");
+    if (ab) ab.textContent = NAV_I18N[lang].about;
+    menu.querySelectorAll(".nm-lang").forEach(b =>
+      b.classList.toggle("active", b.dataset.lang === lang)
+    );
+  }
+
+  function toggleMenu() { const m = document.getElementById("nav-menu"); if (m) m.hidden = !m.hidden; }
+  function closeMenu() { const m = document.getElementById("nav-menu"); if (m) m.hidden = true; }
 
   window.VRNav = { getLang, setLang, applyNav };
 
@@ -101,13 +148,26 @@
 
   function wire() {
     ensureAboutModal();
+    ensureMenu();
+
     document.querySelectorAll(".site-nav .lang-btn").forEach(b =>
       b.addEventListener("click", () => setLang(b.dataset.lang))
     );
     document.querySelectorAll(".nav-about").forEach(b =>
       b.addEventListener("click", openAbout)
     );
-    document.addEventListener("keydown", e => { if (e.key === "Escape") closeAbout(); });
+
+    const burger = document.getElementById("nav-burger");
+    if (burger) burger.addEventListener("click", e => { e.stopPropagation(); toggleMenu(); });
+
+    // click outside closes the dropdown
+    document.addEventListener("click", e => {
+      const m = document.getElementById("nav-menu");
+      if (m && !m.hidden && !m.contains(e.target) && e.target !== burger) closeMenu();
+    });
+
+    document.addEventListener("keydown", e => { if (e.key === "Escape") { closeAbout(); closeMenu(); } });
+
     wireSidebar();
     applyNav();
   }
