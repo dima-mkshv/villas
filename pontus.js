@@ -200,6 +200,17 @@ function bibHtml(site) {
   return `<div class="popup-bib"><div class="popup-bib-h">📚 ${esc(L8.bibLabel)}</div><ul>${items}</ul></div>`;
 }
 
+function imageHtml(site) {
+  const im = (typeof PONTUS_IMAGES !== "undefined") ? PONTUS_IMAGES[site.id] : null;
+  if (!im) return "";
+  const cap = im.caption ? esc(im.caption[state.lang] || im.caption.ru) : "";
+  const credit = [im.credit, im.license].filter(Boolean).map(esc).join(" · ");
+  return `<figure class="popup-fig">` +
+    `<img class="popup-img" src="${PONTUS_IMAGE_URL(im.file, 800)}" alt="${esc(site.name[state.lang])}" loading="lazy" onerror="this.closest('.popup-fig').remove()">` +
+    `<figcaption class="popup-cap">${cap}${credit ? ` <a class="popup-credit" href="${esc(im.page)}" target="_blank" rel="noopener">📷 ${credit} ↗</a>` : ""}</figcaption>` +
+    `</figure>`;
+}
+
 function popupHtml(site) {
   const L8 = t();
   const [lat, lng] = site.coords;
@@ -226,6 +237,7 @@ function popupHtml(site) {
     `<a class="popup-link nav" href="https://yandex.ru/maps/?rtext=~${lat},${lng}&rtt=auto" target="_blank" rel="noopener">🚗 ${L8.yandex}</a>`;
 
   return `<div class="popup-body">
+    ${imageHtml(site)}
     <h3 class="popup-title">${esc(site.name[state.lang])}</h3>
     ${site.nameAncient ? `<div class="popup-anc">${esc(site.nameAncient)}</div>` : ""}
     ${badges ? `<div class="popup-badges">${badges}</div>` : ""}
