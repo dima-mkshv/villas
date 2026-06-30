@@ -22,7 +22,19 @@
     { nav: "sites", href: "sites.html" }
   ];
 
-  const getLang = () => localStorage.getItem("vr_lang") || "ru";
+  const VALID = ["ru", "en"];
+  const langFromUrl = () => {
+    const p = new URLSearchParams(location.search).get("lang");
+    return VALID.includes(p) ? p : null;
+  };
+  const getLang = () => langFromUrl() || localStorage.getItem("vr_lang") || "ru";
+
+  function updateUrl(lang) {
+    const u = new URL(location.href);
+    if (u.searchParams.get("lang") === lang) return;
+    u.searchParams.set("lang", lang);
+    history.replaceState(null, "", u);
+  }
 
   function applyNav() {
     const lang = getLang();
@@ -43,6 +55,7 @@
 
   function setLang(lang) {
     localStorage.setItem("vr_lang", lang);
+    updateUrl(lang);
     applyNav();
     window.dispatchEvent(new CustomEvent("vr:langchange", { detail: { lang } }));
   }
@@ -121,6 +134,13 @@
 
   function toggleMenu() { const m = document.getElementById("nav-menu"); if (m) m.hidden = !m.hidden; }
   function closeMenu() { const m = document.getElementById("nav-menu"); if (m) m.hidden = true; }
+
+  // keep ?lang= in the URL in sync with the active language (on every page load)
+  (function syncLangUrl() {
+    const lang = getLang();
+    localStorage.setItem("vr_lang", lang);
+    updateUrl(lang);
+  })();
 
   window.VRNav = { getLang, setLang, applyNav };
 
