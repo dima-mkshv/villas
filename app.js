@@ -26,6 +26,7 @@ const I18N = {
     waze: "Waze",
     basemaps: { topo: "Рельеф", sat: "Спутник", light: "Светлая" },
     westBankBadge: "Западный берег",
+    unescoBadge: "ЮНЕСКО",
     wbWarnTitle: "⚠️ ВНИМАНИЕ: ЗАПАДНЫЙ БЕРЕГ",
     wbWarnText: "Страховка проката тут не действует, а въезд в зону A опасен.",
     subtypes: {
@@ -61,6 +62,7 @@ const I18N = {
     waze: "Waze",
     basemaps: { topo: "Terrain", sat: "Satellite", light: "Light" },
     westBankBadge: "West Bank",
+    unescoBadge: "UNESCO",
     wbWarnTitle: "⚠️ WARNING: WEST BANK",
     wbWarnText: "Rental-car insurance is void here, and entering Area A is dangerous.",
     subtypes: {
@@ -212,8 +214,13 @@ function popupHtml(site) {
 
   const badges = [
     `<span class="badge b-type">${site.type === "villa" ? "🏛 " : "🏟 "}${L8.subtypes[site.subtype]}</span>`,
+    site.unesco ? `<span class="badge b-unesco">★ ${L8.unescoBadge}</span>` : "",
     site.region === "west_bank" ? `<span class="badge b-wb">${L8.westBankBadge}</span>` : ""
   ].join("");
+
+  const unescoLink = site.unesco
+    ? `<a class="popup-link" href="https://whc.unesco.org/en/list/${site.unesco}/" target="_blank" rel="noopener">★ ${L8.unescoBadge} ↗</a>`
+    : "";
 
   const wbWarn = site.region === "west_bank"
     ? `<div class="popup-warn"><strong>${L8.wbWarnTitle}</strong><span>${L8.wbWarnText}</span></div>`
@@ -236,7 +243,7 @@ function popupHtml(site) {
     <p class="popup-viewnote">${esc(site.viewNote[state.lang])}</p>
     <div class="popup-period">⏳ ${esc(site.period[state.lang])}</div>
     <p class="popup-desc">${esc(site.desc[state.lang])}</p>
-    <div class="popup-links">${links}${nav}</div>
+    <div class="popup-links">${links}${unescoLink}${nav}</div>
     <div class="popup-coords">${lat.toFixed(4)}, ${lng.toFixed(4)}</div>
   </div>`;
 }
@@ -357,6 +364,7 @@ function renderList(vis) {
 
     const meta = [
       t().subtypes[site.subtype],
+      site.unesco ? "★ " + t().unescoBadge : "",
       site.region === "west_bank" ? t().westBankBadge : ""
     ].filter(Boolean).join(" · ");
 

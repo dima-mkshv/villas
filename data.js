@@ -8,6 +8,7 @@ const SITES = [
   // ───────────────────────── VILLAS, PALACES & MANSIONS ─────────────────────────
   {
     id: "masada-northern-palace",
+    unesco: 1040,
     type: "villa",
     subtype: "palace",
     name: { en: "Masada — Northern Palace", ru: "Масада — Северный дворец", he: "ארמון הצפון במצדה" },
@@ -640,6 +641,7 @@ const SITES = [
   },
   {
     id: "beit-guvrin-maresha",
+    unesco: 1370,
     type: "city",
     subtype: "city",
     name: { en: "Beit Guvrin (Eleutheropolis) & Maresha", ru: "Бейт-Гуврин (Элевтерополь)", he: "בית גוברין" },
@@ -687,6 +689,7 @@ const SITES = [
   },
   {
     id: "akko-ptolemais",
+    unesco: 1042,
     type: "city",
     subtype: "city",
     name: { en: "Akko (Ptolemais)", ru: "Акко (Птолемаида)", he: "עכו" },
@@ -867,6 +870,7 @@ const SITES = [
   },
   {
     id: "avdat",
+    unesco: 1107,
     type: "city",
     subtype: "town",
     name: { en: "Avdat", ru: "Авдат", he: "עבדת" },
@@ -890,6 +894,7 @@ const SITES = [
   },
   {
     id: "mamshit",
+    unesco: 1107,
     type: "city",
     subtype: "town",
     name: { en: "Mamshit (Mampsis)", ru: "Мамшит", he: "ממשית" },
@@ -913,6 +918,7 @@ const SITES = [
   },
   {
     id: "shivta",
+    unesco: 1107,
     type: "city",
     subtype: "town",
     name: { en: "Shivta (Sobata)", ru: "Шивта", he: "שבטה" },

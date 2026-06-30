@@ -10,6 +10,7 @@ const I18N = {
     subtitle: "Археологические объекты Израиля, открытые для посещения, — от каменного века до крестоносцев. Цвет точки = главная эпоха объекта.",
     searchPh: "Поиск: Мегиддо, Кесария, набатеи…",
     westBank: "включая Западный берег",
+    unescoFilter: "только ЮНЕСКО ★",
     erasLabel: "Эпохи (фильтр и легенда)",
     allEras: "Все",
     clearEras: "Сброс",
@@ -30,6 +31,7 @@ const I18N = {
     subtitle: "Archaeological sites of Israel open to visitors — from the Stone Age to the Crusaders. A marker's color is the site's headline era.",
     searchPh: "Search: Megiddo, Caesarea, Nabataean…",
     westBank: "include the West Bank",
+    unescoFilter: "UNESCO only ★",
     erasLabel: "Eras (filter & legend)",
     allEras: "All",
     clearEras: "Clear",
@@ -55,6 +57,7 @@ const state = {
   lang: (window.VRNav ? VRNav.getLang() : localStorage.getItem("vr_lang")) || "ru",
   q: "",
   westBank: true,
+  unescoOnly: false,
   eras: new Set(PERIODS.map(p => p.id)), // all on by default
   selectedId: null
 };
@@ -244,6 +247,7 @@ function visibleSites() {
   return ARCH_SITES.filter(s => {
     if (!s.periods.some(p => state.eras.has(p))) return false;
     if (!state.westBank && s.region === "west_bank") return false;
+    if (state.unescoOnly && !s.unesco) return false;
     if (q) {
       const hay = [
         s.name.en, s.name.ru, s.name.he || "",
@@ -369,6 +373,11 @@ document.getElementById("search").addEventListener("input", e => {
 
 document.getElementById("f-wb").addEventListener("change", e => {
   state.westBank = e.target.checked;
+  applyFilters();
+});
+
+document.getElementById("f-unesco").addEventListener("change", e => {
+  state.unescoOnly = e.target.checked;
   applyFilters();
 });
 

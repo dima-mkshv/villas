@@ -709,7 +709,10 @@ const ARCH_SITES = [
       en: "The oldest, largest, least touristy Nabataean city — a ghost in the dunes",
       ru: "Самый древний и нетуристический набатейский город — призрак в дюнах"
     },
-    links: [{ label: "Wikipedia (EN)", url: "https://en.wikipedia.org/wiki/Elusa_(Haluza)" }]
+    links: [
+      { label: "Wikipedia (EN)", url: "https://en.wikipedia.org/wiki/Elusa_(Haluza)" },
+      { label: "UNESCO", url: "https://whc.unesco.org/en/list/1107/" }
+    ]
   },
   {
     id: "shivta",
