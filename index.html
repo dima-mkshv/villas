@@ -13,7 +13,7 @@
 
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
-  <link rel="stylesheet" href="styles.css?v=3">
+  <link rel="stylesheet" href="styles.css?v=4">
 </head>
 <body class="map-page" data-page="villas">
   <header class="site-nav">
@@ -72,9 +72,10 @@
           <span data-i18n="viewMeh"></span>
           <span data-i18n="viewEpic"></span>
         </div>
-        <div class="legend-city">
-          <span class="legend-city-swatch"></span>
-          <span data-i18n="legendCity"></span>
+        <div class="legend-shapes">
+          <span class="lg-shape"><span class="lg-circle"></span><span data-i18n="shapeVilla"></span></span>
+          <span class="lg-shape"><span class="lg-square"></span><span data-i18n="shapePalace"></span></span>
+          <span class="lg-shape"><span class="lg-diamond"></span><span data-i18n="shapeCity"></span></span>
         </div>
       </section>
 
@@ -93,8 +94,8 @@
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
           integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-  <script src="data.js?v=3"></script>
-  <script src="nav.js?v=3"></script>
-  <script src="app.js?v=3"></script>
+  <script src="data.js?v=4"></script>
+  <script src="nav.js?v=4"></script>
+  <script src="app.js?v=4"></script>
 </body>
 </html>

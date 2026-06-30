@@ -4,16 +4,19 @@
 /* ---------- i18n ---------- */
 const I18N = {
   ru: {
-    subtitle: "Римские виллы, дворцы и города Израиля. Виллы окрашены по рейтингу вида — римляне знали, где строить.",
+    subtitle: "Римские виллы, дворцы и города Израиля. Все объекты окрашены по рейтингу вида — римляне знали, где строить.",
     searchPh: "Поиск: Масада, Кейсария, вилла…",
     villas: "Виллы и дворцы",
     cities: "Города",
     minView: "Вид от:",
     westBank: "включая Западный берег",
-    legendView: "Рейтинг вида (виллы и дворцы)",
+    legendView: "Рейтинг вида (все объекты)",
     viewMeh: "так себе",
     viewEpic: "охуенный",
     legendCity: "римский город",
+    shapeVilla: "вилла",
+    shapePalace: "дворец",
+    shapeCity: "город",
     shown: (n, total) => `Показано: ${n} из ${total}`,
     empty: "Ничего не нашлось. Римляне сюда не дошли.",
     sources: "Данные: Wikipedia · Israel Nature & Parks Authority · BibleWalks · Madain Project. Карта: Esri, CARTO, OpenStreetMap.",
@@ -33,16 +36,19 @@ const I18N = {
     }
   },
   en: {
-    subtitle: "Roman villas, palaces and cities of Israel. Villas are colored by view rating — the Romans knew where to build.",
+    subtitle: "Roman villas, palaces and cities of Israel. All sites are colored by view rating — the Romans knew where to build.",
     searchPh: "Search: Masada, Caesarea, villa…",
     villas: "Villas & palaces",
     cities: "Cities",
     minView: "View from:",
     westBank: "include the West Bank",
-    legendView: "View rating (villas & palaces)",
+    legendView: "View rating (all sites)",
     viewMeh: "meh",
     viewEpic: "epic",
     legendCity: "Roman city",
+    shapeVilla: "villa",
+    shapePalace: "palace",
+    shapeCity: "city",
     shown: (n, total) => `Showing ${n} of ${total}`,
     empty: "Nothing found. The Romans never made it here.",
     sources: "Data: Wikipedia · Israel Nature & Parks Authority · BibleWalks · Madain Project. Map: Esri, CARTO, OpenStreetMap.",
@@ -138,12 +144,21 @@ function renderBasemapControl() {
 const markers = {}; // id -> marker
 const markerLayer = L.layerGroup().addTo(map);
 
+// circle = villa/manor/mansion · square = palace/fortress-palace · diamond = city
+function shapeOf(site) {
+  if (site.subtype === "palace" || site.subtype === "fortress-palace") return "square";
+  if (site.type === "city") return "diamond";
+  return "circle";
+}
+
 function makeMarker(site) {
+  const color = RATING_COLORS[site.view];
+  const shape = shapeOf(site);
   let m;
-  if (site.type === "villa") {
+  if (shape === "circle") {
     m = L.circleMarker(site.coords, {
       radius: 9,
-      fillColor: RATING_COLORS[site.view],
+      fillColor: color,
       fillOpacity: 0.95,
       color: "#ffffff",
       weight: 2.5
@@ -151,10 +166,10 @@ function makeMarker(site) {
   } else {
     m = L.marker(site.coords, {
       icon: L.divIcon({
-        className: "city-icon",
-        html: '<div class="city-sq"></div>',
-        iconSize: [19, 19],
-        iconAnchor: [9, 9]
+        className: "mk-icon",
+        html: `<div class="mk-${shape}" style="background:${color}"></div>`,
+        iconSize: [22, 22],
+        iconAnchor: [11, 11]
       })
     });
   }
@@ -221,7 +236,7 @@ function clearSelection() {
   const prev = SITES.find(s => s.id === state.selectedId);
   const pm = markers[state.selectedId];
   if (prev && pm) {
-    if (prev.type === "villa") {
+    if (pm.setStyle) {
       pm.setStyle({ color: "#ffffff", weight: 2.5, radius: 9 });
     } else if (pm._icon) {
       pm._icon.classList.remove("selected");
@@ -238,7 +253,7 @@ function select(id, { pan = true } = {}) {
   state.selectedId = id;
 
   const m = markers[id];
-  if (site.type === "villa") {
+  if (m.setStyle) {
     m.setStyle({ color: GOLD, weight: 4, radius: 11 });
     m.bringToFront();
   } else if (m._icon) {
@@ -324,9 +339,7 @@ function renderList(vis) {
     card.className = "site-card" + (site.id === state.selectedId ? " selected" : "");
     card.dataset.id = site.id;
 
-    const dot = site.type === "villa"
-      ? `<span class="card-dot" style="background:${RATING_COLORS[site.view]}"></span>`
-      : `<span class="card-dot city"></span>`;
+    const dot = `<span class="card-dot ${shapeOf(site)}" style="background:${RATING_COLORS[site.view]}"></span>`;
 
     const meta = [
       t().subtypes[site.subtype],
