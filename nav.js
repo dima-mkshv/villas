@@ -77,6 +77,28 @@
 
   window.VRNav = { getLang, setLang, applyNav };
 
+  /* ---------- mobile sidebar: close button + swipe-left ---------- */
+  function wireSidebar() {
+    const sb = document.getElementById("sidebar");
+    if (!sb) return;
+    const close = () => sb.classList.remove("open");
+
+    const btn = document.getElementById("sidebar-close");
+    if (btn) btn.addEventListener("click", close);
+
+    let x0 = null, y0 = null;
+    sb.addEventListener("touchstart", e => {
+      const t = e.touches[0]; x0 = t.clientX; y0 = t.clientY;
+    }, { passive: true });
+    sb.addEventListener("touchend", e => {
+      if (x0 == null) return;
+      const t = e.changedTouches[0];
+      const dx = t.clientX - x0, dy = t.clientY - y0;
+      if (dx < -45 && Math.abs(dx) > Math.abs(dy)) close();
+      x0 = y0 = null;
+    }, { passive: true });
+  }
+
   function wire() {
     ensureAboutModal();
     document.querySelectorAll(".site-nav .lang-btn").forEach(b =>
@@ -86,6 +108,7 @@
       b.addEventListener("click", openAbout)
     );
     document.addEventListener("keydown", e => { if (e.key === "Escape") closeAbout(); });
+    wireSidebar();
     applyNav();
   }
 
