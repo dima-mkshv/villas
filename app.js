@@ -11,6 +11,7 @@ const I18N = {
     cities: "Города",
     minView: "Вид от:",
     westBank: "включая Западный берег",
+    unescoOnly: "только ЮНЕСКО ★",
     legendView: "Рейтинг вида (все объекты)",
     viewMeh: "так себе",
     viewEpic: "охуенный",
@@ -47,6 +48,7 @@ const I18N = {
     cities: "Cities",
     minView: "View from:",
     westBank: "include the West Bank",
+    unescoOnly: "UNESCO only ★",
     legendView: "View rating (all sites)",
     viewMeh: "meh",
     viewEpic: "epic",
@@ -87,6 +89,7 @@ const state = {
   shapes: { circle: true, square: true, diamond: true },
   minView: 1,
   westBank: true,
+  unescoOnly: false,
   q: "",
   selectedId: null
 };
@@ -163,25 +166,17 @@ function shapeOf(site) {
 function makeMarker(site) {
   const color = RATING_COLORS[site.view];
   const shape = shapeOf(site);
-  let m;
-  if (shape === "circle") {
-    m = L.circleMarker(site.coords, {
-      radius: 9,
-      fillColor: color,
-      fillOpacity: 0.95,
-      color: "#ffffff",
-      weight: 2.5
-    });
-  } else {
-    m = L.marker(site.coords, {
-      icon: L.divIcon({
-        className: "mk-icon",
-        html: `<div class="mk-${shape}" style="background:${color}"></div>`,
-        iconSize: [22, 22],
-        iconAnchor: [11, 11]
-      })
-    });
-  }
+  const isU = !!(site.unesco || site.unescoTentative);
+  const star = isU ? `<span class="mk-star">★</span>` : "";
+  // All markers are divIcons (incl. circles) so the UNESCO ★ can sit inside the glyph.
+  const m = L.marker(site.coords, {
+    icon: L.divIcon({
+      className: "mk-icon" + (isU ? " unesco" : ""),
+      html: `<div class="mk-${shape}" style="background:${color}"></div>${star}`,
+      iconSize: [22, 22],
+      iconAnchor: [11, 11]
+    })
+  });
   m.on("click", () => select(site.id, { pan: false }));
   return m;
 }
@@ -350,6 +345,7 @@ function visibleSites() {
     if (!state.shapes[shapeOf(s)]) return false;
     if (s.view < state.minView) return false;
     if (!state.westBank && s.region === "west_bank") return false;
+    if (state.unescoOnly && !(s.unesco || s.unescoTentative)) return false;
     if (q) {
       const hay = [
         s.name.en, s.name.ru, s.name.he || "",
@@ -502,6 +498,11 @@ document.getElementById("f-city").addEventListener("change", e => {
 
 document.getElementById("f-wb").addEventListener("change", e => {
   state.westBank = e.target.checked;
+  applyFilters();
+});
+
+document.getElementById("f-unesco").addEventListener("change", e => {
+  state.unescoOnly = e.target.checked;
   applyFilters();
 });
 
