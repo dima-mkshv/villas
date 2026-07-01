@@ -17,13 +17,13 @@ const I18N = {
     allEras: "Все", clearEras: "Сброс",
     sigLabel: "Значимость", sigAll: "Все",
     unescoFilter: "только объекты ЮНЕСКО", typeLabel: "Тип объекта",
-    shapeCircle: "Город · поселение", shapeSquare: "Крепость", shapeDiamond: "Некрополь · курган", shapeTri: "Святилище",
+    shapeCircle: "Город · поселение", shapeSquare: "Крепость", shapeDiamond: "Некрополь", shapeTri: "Святилище", shapeKurgan: "Скифы Причерноморья",
     shown: (n, total) => `Показано: ${n} из ${total}`,
     empty: "Ничего не нашлось для выбранных фильтров.",
     sources: "Данные: КБН/IOSPE, Страбон, ИА РАН, музеи · полные досье — research/pontus/. Карта: Esri, CARTO, OpenStreetMap.",
     route: "Маршрут", yandex: "Яндекс Карты",
     basemaps: { topo: "Рельеф", sat: "Спутник", light: "Светлая" },
-    typeName: { city: "город", settlement: "поселение", fortress: "крепость", necropolis: "некрополь / курган", sanctuary: "святилище", harbor: "гавань" },
+    typeName: { city: "город", settlement: "поселение", fortress: "крепость", necropolis: "некрополь", sanctuary: "святилище", harbor: "гавань", kurgan: "скифский курган" },
     sizeName: { metropolis: "мегаполис", city: "город", town: "городок", small: "малый", unknown: "размер неизв." },
     presName: { excellent: "сохранность отличная", good: "сохранность хорошая", partial: "сохранность частичная", poor: "сохранность слабая", lost: "не сохранилось" },
     accTour: "🟢 Можно посетить", accClosed: "🔴 Закрытый / археологический",
@@ -43,13 +43,13 @@ const I18N = {
     allEras: "All", clearEras: "Clear",
     sigLabel: "Significance", sigAll: "All",
     unescoFilter: "UNESCO sites only", typeLabel: "Site type",
-    shapeCircle: "City · settlement", shapeSquare: "Fortress", shapeDiamond: "Necropolis · kurgan", shapeTri: "Sanctuary",
+    shapeCircle: "City · settlement", shapeSquare: "Fortress", shapeDiamond: "Necropolis", shapeTri: "Sanctuary", shapeKurgan: "Pontic Scythians",
     shown: (n, total) => `Showing ${n} of ${total}`,
     empty: "Nothing matches the selected filters.",
     sources: "Data: CIRB/IOSPE, Strabo, IA RAS, museums · full dossiers — research/pontus/. Map: Esri, CARTO, OpenStreetMap.",
     route: "Directions", yandex: "Yandex Maps",
     basemaps: { topo: "Terrain", sat: "Satellite", light: "Light" },
-    typeName: { city: "city", settlement: "settlement", fortress: "fortress", necropolis: "necropolis / kurgan", sanctuary: "sanctuary", harbor: "harbour" },
+    typeName: { city: "city", settlement: "settlement", fortress: "fortress", necropolis: "necropolis", sanctuary: "sanctuary", harbor: "harbour", kurgan: "Scythian kurgan" },
     sizeName: { metropolis: "metropolis", city: "city", town: "town", small: "small", unknown: "size unknown" },
     presName: { excellent: "excellent preservation", good: "good preservation", partial: "partial preservation", poor: "poor preservation", lost: "not preserved" },
     accTour: "🟢 Open to visitors", accClosed: "🔴 Restricted / archaeological",
@@ -62,7 +62,7 @@ const I18N = {
 };
 
 const GOLD = "#c9a227";
-const SHAPE = { city: "circle", settlement: "circle", harbor: "circle", fortress: "square", necropolis: "diamond", sanctuary: "tri" };
+const SHAPE = { city: "circle", settlement: "circle", harbor: "circle", fortress: "square", necropolis: "diamond", sanctuary: "tri", kurgan: "kurgan" };
 const TOURISTIC = new Set(["museum", "open"]);
 
 /* ---------- state ---------- */
@@ -73,7 +73,7 @@ const state = {
   closed: true,
   minSig: 1,
   unescoOnly: false,
-  types: new Set(["circle", "square", "diamond", "tri"]),
+  types: new Set(["circle", "square", "diamond", "tri", "kurgan"]),
   eras: new Set(PONTUS_PERIODS.map(p => p.id)),
   selectedId: null
 };
@@ -138,6 +138,14 @@ function makeIcon(site, selected) {
   const shape = SHAPE[site.type] || "circle";
   const color = PONTUS_PERIOD_COLOR(firstPeriodId(site));
   const isStar = site.significance >= 5;
+  if (shape === "kurgan") {
+    // Scythian kurgans render as a 🦌 emoji glyph (drawn in CSS via ::before) — no shape box, no ★ overlay.
+    return L.divIcon({
+      className: "pmk-wrap kurgan" + (selected ? " sel" : ""),
+      html: `<span class="pmk pmk-kurgan"></span>`,
+      iconSize: [24, 24], iconAnchor: [12, 12], popupAnchor: [0, -13]
+    });
+  }
   const starEl = isStar ? `<span class="pmk-s pmk-s-${shape}">★</span>` : "";
   return L.divIcon({
     className: "pmk-wrap" + (selected ? " sel" : "") + (isStar ? " star" : ""),
@@ -243,16 +251,44 @@ function bibHtml(site) {
   return `<div class="popup-bib"><div class="popup-bib-h">📚 ${esc(L8.bibLabel)}</div><ul>${items}</ul></div>`;
 }
 
-function imageHtml(site) {
-  const im = (typeof PONTUS_IMAGES !== "undefined") ? PONTUS_IMAGES[site.id] : null;
-  if (!im) return "";
+function figHtml(im, site) {
   const cap = im.caption ? esc(im.caption[state.lang] || im.caption.ru) : "";
   const credit = [im.credit, im.license].filter(Boolean).map(esc).join(" · ");
   return `<figure class="popup-fig">` +
-    `<img class="popup-img" src="${PONTUS_IMAGE_URL(im.file, 800)}" alt="${esc(site.name[state.lang])}" loading="lazy" onerror="this.closest('.popup-fig').remove()">` +
+    `<img class="popup-img" src="${PONTUS_IMAGE_URL(im.file, 800)}" alt="${esc(site.name[state.lang])}" loading="lazy" onerror="pcImgErr(this)">` +
     `<figcaption class="popup-cap">${cap}${credit ? ` <a class="popup-credit" href="${esc(im.page)}" target="_blank" rel="noopener">📷 ${credit} ↗</a>` : ""}</figcaption>` +
     `</figure>`;
 }
+// One image → a single figure; several → a swipeable carousel (arrows + dots, scroll-snap for touch).
+function imageHtml(site) {
+  const raw = (typeof PONTUS_IMAGES !== "undefined") ? PONTUS_IMAGES[site.id] : null;
+  if (!raw) return "";
+  const ims = (Array.isArray(raw) ? raw : [raw]).filter(Boolean);
+  if (!ims.length) return "";
+  if (ims.length === 1) return figHtml(ims[0], site);
+  const slides = ims.map(im => figHtml(im, site)).join("");
+  const dots = ims.map((_, i) => `<button class="pc-dot${i === 0 ? " on" : ""}" type="button" onclick="pcGo(this,${i})" aria-label="${i + 1}"></button>`).join("");
+  return `<div class="popup-carousel">` +
+    `<div class="pc-track" onscroll="pcDots(this)">${slides}</div>` +
+    `<button class="pc-nav pc-prev" type="button" onclick="pcNav(this,-1)" aria-label="prev">‹</button>` +
+    `<button class="pc-nav pc-next" type="button" onclick="pcNav(this,1)" aria-label="next">›</button>` +
+    `<div class="pc-dots">${dots}</div>` +
+    `</div>`;
+}
+/* carousel controls — global, invoked from inline handlers in the popup HTML string */
+function pcNav(btn, dir) {
+  const tr = btn.parentElement.querySelector(".pc-track");
+  tr.scrollBy({ left: dir * tr.clientWidth, behavior: "smooth" });
+}
+function pcGo(dot, i) {
+  const tr = dot.closest(".popup-carousel").querySelector(".pc-track");
+  tr.scrollTo({ left: i * tr.clientWidth, behavior: "smooth" });
+}
+function pcDots(tr) {
+  const i = Math.round(tr.scrollLeft / Math.max(1, tr.clientWidth));
+  tr.parentElement.querySelectorAll(".pc-dot").forEach((d, j) => d.classList.toggle("on", j === i));
+}
+function pcImgErr(img) { const f = img.closest(".popup-fig"); if (f) f.remove(); }
 
 function popupHtml(site) {
   const L8 = t();
@@ -457,7 +493,7 @@ function renderTypeFilter() {
   const wrap = document.getElementById("type-filter");
   if (!wrap) return;
   const L8 = t();
-  const defs = [["circle", L8.shapeCircle], ["square", L8.shapeSquare], ["diamond", L8.shapeDiamond], ["tri", L8.shapeTri]];
+  const defs = [["circle", L8.shapeCircle], ["square", L8.shapeSquare], ["diamond", L8.shapeDiamond], ["tri", L8.shapeTri], ["kurgan", L8.shapeKurgan]];
   wrap.innerHTML = "";
   for (const [sh, lab] of defs) {
     const count = PONTUS_SITES.filter(s => (SHAPE[s.type] || "circle") === sh).length;

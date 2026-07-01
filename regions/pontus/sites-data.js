@@ -312,7 +312,7 @@ const PONTUS_SITES = [
     nameAncient: "Kul-Oba (курган)",
     modernPlace: { ru: "~6 км к З от Керчи", en: "~6 km W of Kerch" },
     coords: [45.3492, 36.3817], localizationCertain: true,
-    type: "necropolis",
+    type: "kurgan",
     periods: ["classical"],
     mainPeriod: "classical",
     periodText: { ru: "IV в. до н.э.", en: "4th c. BCE" },
@@ -1144,6 +1144,115 @@ const PONTUS_SITES = [
       { type: "modern", ref: "Малышев А.А. (Новороссийская экспедиция ИА РАН); Abrau Antiqua, 2009", url: "https://archaeolog.ru/media/books_2009/Abrau%20Antiqua_2009.pdf" }
     ],
     _libRef: "research/pontus/raevskoe.md", _verified: "2026-06-30", _confidence: "medium"
+  },
+
+  // ═══════════ SCYTHIANS — kurgans of the Kuban / N. Caucasus steppe (type: kurgan, 🦌) ═══════════
+  // (Куль-Оба, Крым — консолидирована в исходную запись выше; там type сменён necropolis→kurgan.)
+  {
+    id: "kostromskaya", region: "pontus",
+    name: { ru: "Костромской курган", en: "Kostromskaya kurgan" },
+    modernPlace: { ru: "ст. Костромская, Краснодарский край", en: "Kostromskaya, Krasnodar Krai" },
+    coords: [44.500, 40.600], localizationCertain: false,
+    type: "kurgan",
+    periods: ["pre-greek"],
+    mainPeriod: "pre-greek",
+    periodText: { ru: "конец VII в. до н.э.", en: "late 7th c. BCE" },
+    access: "closed",
+    accessNote: { ru: "раскопан Веселовским в 1897; золотой олень — в Эрмитаже", en: "excavated by Veselovsky 1897; the gold stag in the Hermitage" },
+    significance: 5,
+    desc: {
+      ru: "Курган прикубанской скифской знати. Дал «костромского оленя» — золотую бляху-нашивку на железный щит (31.7 см) с ветвистыми рогами вдоль тела: эталон скифского звериного стиля, одна из самых знаменитых вещей Эрмитажа. Вокруг вождя — 13 человеческих и 22 конских погребения.",
+      en: "A kurgan of the Kuban Scythian elite. It produced the 'Kostromskaya stag' — a gold plaque (31.7 cm) mounted on an iron shield, its antlers laid back along the body: the benchmark of Scythian animal style and one of the Hermitage's most famous pieces. Around the chief lay 13 human and 22 horse burials."
+    },
+    highlight: { ru: "«Костромской олень» — золотая бляха-щит, эталон скифского звериного стиля.", en: "The 'Kostromskaya stag' — a gold shield-plaque, the benchmark of Scythian animal style." },
+    links: [
+      { label: "Wikipedia (RU)", url: "https://ru.wikipedia.org/wiki/Костромской_курган" },
+      { label: "Эрмитаж — зал 64 (скифы)", url: "https://www.hermitagemuseum.org/wps/portal/hermitage/explore/buildings/rooms/room_64" }
+    ],
+    bibliography: [
+      { type: "modern", ref: "Артамонов М.И. Сокровища скифских курганов. Л.–Прага, 1966" },
+      { type: "modern", ref: "Галанина Л.К. Скифские древности Прикубанья — раскопки Н.И. Веселовского, 1897" }
+    ],
+    _libRef: "скифы/kurgans.md", _verified: "2026-07-01", _confidence: "medium"
+  },
+  {
+    id: "kelermes", region: "pontus",
+    name: { ru: "Келермесские курганы", en: "Kelermes kurgans" },
+    modernPlace: { ru: "ст. Келермесская, Адыгея", en: "Kelermesskaya, Adygea" },
+    coords: [44.789, 40.131], localizationCertain: true,
+    type: "kurgan",
+    periods: ["pre-greek", "archaic"],
+    mainPeriod: "pre-greek",
+    periodText: { ru: "VII–VI вв. до н.э.", en: "7th–6th c. BCE" },
+    access: "closed",
+    accessNote: { ru: "находки — Эрмитаж; атрибуция раннескифская / меотская спорна", en: "finds in the Hermitage; early-Scythian vs Maeotian attribution disputed" },
+    significance: 4,
+    desc: {
+      ru: "Одни из древнейших царских курганов скифского круга в Прикубанье. Золотая диадема с протомой грифона, серебряное зеркало с «владычицей зверей», золотая бляха-пантера (33 см), железный акинак с золотыми ножнами в переднеазиатском стиле — след возвращения скифов из переднеазиатских походов; вокруг — до 24 коней.",
+      en: "Among the oldest royal kurgans of the Scythian circle in the Kuban. A gold diadem with a gryphon protome, a silver 'Mistress of Beasts' mirror, a gold panther plaque (33 cm), an iron akinakes with a gold Near-Eastern-style scabbard — echoes of the Scythians' return from campaigns in the Near East; up to 24 horses around the grave."
+    },
+    highlight: { ru: "Золотая пантера, акинак в переднеазиатском стиле и «владычица зверей» — раннескифское Прикубанье.", en: "A gold panther, a Near-Eastern akinakes and the 'Mistress of Beasts' — the early-Scythian Kuban." },
+    links: [
+      { label: "Wikipedia (RU)", url: "https://ru.wikipedia.org/wiki/Келермесские_курганы" },
+      { label: "Эрмитаж — зал 63 (скифы)", url: "https://www.hermitagemuseum.org/wps/portal/hermitage/explore/buildings/rooms/room_63" }
+    ],
+    bibliography: [
+      { type: "modern", ref: "Галанина Л.К. Келермесские курганы. М., 1997" },
+      { type: "modern", ref: "Артамонов М.И. Сокровища скифских курганов. Л.–Прага, 1966" }
+    ],
+    _libRef: "скифы/kurgans.md", _verified: "2026-07-01", _confidence: "high"
+  },
+  {
+    id: "ulsky", region: "pontus",
+    name: { ru: "Ульские курганы", en: "Ulsky kurgans" },
+    modernPlace: { ru: "аул Уляп, Адыгея", en: "Ulyap, Adygea" },
+    coords: [45.0544, 39.9822], localizationCertain: true,
+    type: "kurgan",
+    periods: ["pre-greek", "archaic", "classical"],
+    mainPeriod: "archaic",
+    periodText: { ru: "конец VII – IV в. до н.э.", en: "late 7th – 4th c. BCE" },
+    access: "closed",
+    accessNote: { ru: "меото-скифское святилище; ОКН РФ; находки — Эрмитаж", en: "Meoto-Scythian sanctuary; RF heritage; finds in the Hermitage" },
+    significance: 4,
+    desc: {
+      ru: "Комплекс из двух групп насыпей — крупное меото-скифское святилище. Серебряный ритон с протомой крылатого коня и рельефом «боги против гигантов», золотая бляха «грифоны терзают оленя», каменный алтарь на 15-метровом кургане и до 400–500 жертвенных коней в крупнейшей насыпи.",
+      en: "A complex of two mound groups — a major Meoto-Scythian sanctuary. A silver rhyton with a winged-horse protome and a 'gods versus giants' relief, a gold 'griffins rending a deer' plaque, a stone altar atop the 15-metre kurgan, and up to 400–500 sacrificial horses in the largest mound."
+    },
+    highlight: { ru: "Святилище с сотнями жертвенных коней и серебряным ритоном «боги против гигантов».", en: "A sanctuary with hundreds of sacrificial horses and a silver 'gods versus giants' rhyton." },
+    links: [
+      { label: "Wikipedia (RU)", url: "https://ru.wikipedia.org/wiki/Ульские_курганы" }
+    ],
+    bibliography: [
+      { type: "modern", ref: "Лесков А.М. Курганы: находки, проблемы. Л.: Наука, 1981" },
+      { type: "modern", ref: "Эрлих В.Р. Раскопки святилища у аула Уляп (Ульские курганы)" }
+    ],
+    _libRef: "скифы/kurgans.md", _verified: "2026-07-01", _confidence: "high"
+  },
+  {
+    id: "seven-brothers", region: "pontus",
+    name: { ru: "Семибратние курганы", en: "Seven Brothers kurgans" },
+    modernPlace: { ru: "близ Семибратнего городища, Краснодарский край", en: "near Semibratneye, Krasnodar Krai" },
+    coords: [45.1378, 37.5092], localizationCertain: false,
+    type: "kurgan",
+    periods: ["classical"],
+    mainPeriod: "classical",
+    periodText: { ru: "V–IV вв. до н.э.", en: "5th–4th c. BCE" },
+    access: "closed",
+    accessNote: { ru: "курганы синдской знати у древней Лабриты; находки — Эрмитаж", en: "kurgans of the Sindian elite by ancient Labrys; finds in the Hermitage" },
+    significance: 3,
+    desc: {
+      ru: "Курганы синдской знати рядом с Семибратним городищем (античная Лабрита). Серебряная тарелка с оленем и золочёными рогами, около 300 золотых нашивных бляшек (Афина, сфинксы, львы, горгонейоны), ритоны и килики, 347 наконечников стрел и чешуйчатый доспех — уже сильно эллинизированный греко-варварский мир.",
+      en: "Kurgans of the Sindian elite beside the Semibratneye hillfort (ancient Labrys). A silver plate with a gilded-antlered deer, some 300 gold appliqué plaques (Athena, sphinxes, lions, gorgoneia), rhyta and kylikes, 347 arrowheads and scale armour — an already heavily Hellenized Greco-barbarian world."
+    },
+    highlight: { ru: "Курганы синдской знати: серебряная тарелка с оленем и сотни золотых бляшек.", en: "Kurgans of the Sindian elite: a silver deer plate and hundreds of gold plaques." },
+    links: [
+      { label: "Wikipedia (RU)", url: "https://ru.wikipedia.org/wiki/Семибратние_курганы" }
+    ],
+    bibliography: [
+      { type: "modern", ref: "Коровина А.К. Семибратние курганы; раскопки В.Г. Тизенгаузена, 1875–76" },
+      { type: "modern", ref: "Артамонов М.И. Сокровища скифских курганов. Л.–Прага, 1966" }
+    ],
+    _libRef: "скифы/kurgans.md", _verified: "2026-07-01", _confidence: "medium"
   }
 ];
 

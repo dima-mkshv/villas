@@ -10,7 +10,13 @@ const TL_I18N = {
     cultures: "Народы и державы",
     sites: "Знаковые объекты",
     onMap: "Показать на карте",
-    more: n => `ещё ${n} →`
+    more: n => `ещё ${n} →`,
+    scy: {
+      name: "🦌 Скифы Причерноморья",
+      dates: "VII–IV вв. до н.э.",
+      blurb: "Пока греки строили колонии на берегу, в степях Прикубанья и Крыма курганы скифской и синдо-меотской знати копили золото звериного стиля — часто работы тех же греков для скифских царей: Куль-Оба у Пантикапея, «костромской олень», келермесская пантера.",
+      sites: "Курганы"
+    }
   },
   en: {
     title: "Chronology of the North Black Sea",
@@ -19,7 +25,13 @@ const TL_I18N = {
     cultures: "Peoples & powers",
     sites: "Notable sites",
     onMap: "Show on map",
-    more: n => `+${n} more →`
+    more: n => `+${n} more →`,
+    scy: {
+      name: "🦌 Pontic Scythians",
+      dates: "7th–4th c. BCE",
+      blurb: "While the Greeks built colonies on the coast, in the steppes of the Kuban and Crimea the kurgans of the Scythian and Sindo-Maeotian elite piled up gold in the animal style — often made by those same Greeks for Scythian kings: Kul-Oba by Panticapaeum, the 'Kostromskaya stag', the Kelermes panther.",
+      sites: "Kurgans"
+    }
   }
 };
 
@@ -77,6 +89,8 @@ function renderTimeline() {
         <a class="tl-map-btn" href="pontus.html#period=${p.id}">${L.onMap} →</a>
       </div>`;
     stream.appendChild(art);
+    // Standalone thematic card for the Scythian kurgans, right after the pre-Greek steppe context.
+    if (p.id === "pre-greek") stream.appendChild(buildScythiansCard(lg, L));
   }
 
   const h = document.getElementById("tl-horizon");
@@ -84,6 +98,29 @@ function renderTimeline() {
     `<h2>⚔️ ${esc(PONTUS_HORIZON.name[lg])}</h2>` +
     `<div class="tl-dates">${esc(PONTUS_HORIZON.dateText[lg])}</div>` +
     `<p>${esc(PONTUS_HORIZON.note[lg])}</p>`;
+}
+
+// A dedicated "🦌 Скифы Причерноморья" card — the kurgans span pre-Greek→classical, so they
+// get one thematic card of their own rather than being scattered across period cards.
+function buildScythiansCard(lg, L) {
+  const KURGANS = ["kul-oba", "kostromskaya", "kelermes", "ulsky", "seven-brothers"];
+  const links = KURGANS
+    .filter(id => PONTUS_SITE_BY_ID[id])
+    .map(id => `<a class="tl-site-link" href="pontus.html#site=${id}">${esc(PONTUS_SITE_BY_ID[id].name[lg])}</a>`)
+    .join("");
+  const art = document.createElement("article");
+  art.className = "tl-period tl-scythians";
+  art.id = "p-scythians";
+  art.style.setProperty("--c", "#a97b2c");
+  art.innerHTML = `
+      <div class="tl-card">
+        <div class="tl-dates">${esc(L.scy.dates)}</div>
+        <h2 class="tl-name">${esc(L.scy.name)}</h2>
+        <div class="tl-sites"><span class="tl-sites-label">${esc(L.scy.sites)}:</span> ${links}</div>
+        <p class="tl-blurb">${esc(L.scy.blurb)}</p>
+        <a class="tl-map-btn" href="pontus.html#site=kul-oba">${esc(L.onMap)} →</a>
+      </div>`;
+  return art;
 }
 
 renderTimeline();

@@ -1296,6 +1296,13 @@ body[data-page="timeline"] { height: auto; min-height: 100%; overflow-y: auto; }
 .pmk-s-tri { transform: translate(-50%, 12%); font-size: 9px; }
 .pmk-wrap.sel .pmk { box-shadow: 0 0 0 3px var(--gold-bright), 0 1px 5px rgba(0,0,0,.6); }
 .pmk-wrap.sel .pmk-tri { box-shadow: none; filter: drop-shadow(0 0 2px var(--gold-bright)) drop-shadow(0 0 2px var(--gold-bright)); }
+/* Scythian kurgans (type: kurgan) — 🦌 emoji glyph marker, no shape box, no ★ overlay */
+.pmk-kurgan { width: auto; height: auto; background: none; border: 0; box-shadow: none; line-height: 1; }
+.pmk-kurgan::before { content: "🦌"; font-size: 18px; line-height: 1; display: block; filter: drop-shadow(0 0 1.5px #fff) drop-shadow(0 1px 1px rgba(0,0,0,.55)); }
+.pmk-wrap.star .pmk-kurgan { width: auto; height: auto; }
+.pmk-wrap.sel .pmk-kurgan { box-shadow: none; }
+.pmk-wrap.sel .pmk-kurgan::before { filter: drop-shadow(0 0 3px var(--gold-bright)) drop-shadow(0 0 3px var(--gold-bright)); transform: scale(1.12); }
+.tc-mk .pmk-kurgan::before { font-size: 16px; }
 
 /* Pontus popup additions (LIGHT popup theme — dark text on white) */
 .popup-anc { font-size: 12.5px; font-style: italic; color: #8a6d3b; margin: -2px 0 5px; }
@@ -1311,6 +1318,17 @@ body[data-page="timeline"] { height: auto; min-height: 100%; overflow-y: auto; }
 .popup-cap { font-size: 11px; line-height: 1.4; color: #6d5d42; margin-top: 5px; }
 .popup-credit { color: #8a6d3b; text-decoration: none; white-space: nowrap; }
 .popup-credit:hover { text-decoration: underline; }
+/* photo carousel — several images per site (view + animal-style finds) */
+.popup-carousel { position: relative; margin: 0 0 11px; }
+.popup-carousel .pc-track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+.popup-carousel .pc-track::-webkit-scrollbar { display: none; }
+.popup-carousel .popup-fig { flex: 0 0 100%; scroll-snap-align: center; margin: 0; }
+.pc-nav { position: absolute; top: 79px; transform: translateY(-50%); width: 26px; height: 26px; padding: 0; border: 0; border-radius: 50%; background: rgba(20,16,8,.5); color: #fff; font: 700 17px/24px Inter, sans-serif; cursor: pointer; z-index: 2; }
+.pc-nav:hover { background: rgba(20,16,8,.82); }
+.pc-prev { left: 7px; } .pc-next { right: 7px; }
+.pc-dots { position: absolute; top: 141px; left: 0; right: 0; display: flex; gap: 5px; justify-content: center; z-index: 2; }
+.pc-dot { width: 7px; height: 7px; padding: 0; border: 0; border-radius: 50%; background: rgba(255,255,255,.55); box-shadow: 0 0 2px rgba(0,0,0,.6); cursor: pointer; }
+.pc-dot.on { background: #fff; }
 .popup-metro { font-size: 12px; color: #4a3a1d; margin: 4px 0; }
 .popup-acc {
   font-size: 11.5px; font-weight: 600; padding: 5px 9px; border-radius: 7px; margin: 7px 0; line-height: 1.4;
