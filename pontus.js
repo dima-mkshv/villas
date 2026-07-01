@@ -290,9 +290,23 @@ function pcDots(tr) {
 }
 function pcImgErr(img) { const f = img.closest(".popup-fig"); if (f) f.remove(); }
 
+// Popup title links to the site's canonical source (prefers Wikipedia in the current language).
+function primaryLink(site) {
+  const ls = site.links || [];
+  if (!ls.length) return null;
+  const wikiLang = ls.find(l => l.url.includes("//" + state.lang + ".wikipedia"));
+  const wikiAny = ls.find(l => l.url.includes("wikipedia.org"));
+  return (wikiLang || wikiAny || ls[0]).url;
+}
+
 function popupHtml(site) {
   const L8 = t();
   const [lat, lng] = site.coords;
+  const titleName = esc(site.name[state.lang]);
+  const titleHref = primaryLink(site);
+  const titleHtml = titleHref
+    ? `<h3 class="popup-title"><a class="popup-title-link" href="${esc(titleHref)}" target="_blank" rel="noopener">${titleName}<span class="pt-ext">↗</span></a></h3>`
+    : `<h3 class="popup-title">${titleName}</h3>`;
 
   const badges = [
     site.significance >= 5 ? `<span class="badge b-must">${L8.mustSee}</span>` : "",
@@ -317,7 +331,7 @@ function popupHtml(site) {
 
   return `<div class="popup-body">
     ${imageHtml(site)}
-    <h3 class="popup-title">${esc(site.name[state.lang])}</h3>
+    ${titleHtml}
     ${site.nameAncient ? `<div class="popup-anc">${esc(site.nameAncient)}</div>` : ""}
     ${badges ? `<div class="popup-badges">${badges}</div>` : ""}
     ${loc}

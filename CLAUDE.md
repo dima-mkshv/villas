@@ -45,6 +45,9 @@
   проверена на localhost — сразу `git add <файлы> && git commit && git push origin main`,
   без доп. вопросов. `main` = прод (GitHub Pages + Cloudflare → villae-romanae.com).
   Коммить только свои файлы; НЕ коммить `.DS_Store` и прочий мусор. Пуш — с `dangerouslyDisableSandbox`.
+- **Всегда выдавай Дмитрию ссылки на изменённые страницы** — ПЕРЕД пушем localhost
+  (`http://localhost:8137/<страница>`), ПОСЛЕ деплоя прод (`https://villae-romanae.com/<страница>`),
+  чтобы он проверил обновление и не искал ссылку сам.
 - Попапы — только event-driven (`bindPopup` один раз + `popupopen`/`popupclose`).
   Никогда не вызывай `openPopup` в обработчике клика по маркеру — ломается на iOS.
 
