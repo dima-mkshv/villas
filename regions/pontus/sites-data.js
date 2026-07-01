@@ -36,8 +36,8 @@ const PONTUS_SITES = [
       { label: "Керченский музей-заповедник", url: "https://kerchmuseum.ru" }
     ],
     bibliography: [
-      { type: "ancient", ref: "Страбон, География VII.4.4; XI.2.10" },
-      { type: "ancient", ref: "Диодор Сицилийский XX.24.3" },
+      { type: "ancient", ref: "Страбон, География VII.4.4; XI.2.10", url: "https://topostext.org/work/144#7.4.4" },
+      { type: "ancient", ref: "Диодор Сицилийский XX.24.3", url: "https://topostext.org/work/134#20.24.3" },
       { type: "epigraphy", ref: "КБН 1–867 (≈65% корпуса; манумиссии КБН 70–74)", url: "https://epigraphy.packhum.org/book/231" },
       { type: "modern", ref: "Блаватский В.Д. Пантикапей. М.: Наука, 1964" }
     ],
@@ -70,9 +70,9 @@ const PONTUS_SITES = [
       { label: "Wikipedia (EN)", url: "https://en.wikipedia.org/wiki/Nymphaion_(Crimea)" }
     ],
     bibliography: [
-      { type: "ancient", ref: "Страбон VII.4.4; Эсхин, Против Ктесифонта III.171" },
+      { type: "ancient", ref: "Страбон VII.4.4; Эсхин, Против Ктесифонта III.171", url: "https://topostext.org/work/144#7.4.4" },
       { type: "epigraphy", ref: "КБН 911–940; SEG 37.668 (Митридат «царь царей»)" },
-      { type: "modern", ref: "Грач Н.Л. Некрополь Нимфея. СПб.: Наука, 1999" }
+      { type: "modern", ref: "Грач Н.Л. Некрополь Нимфея. СПб.: Наука, 1999", url: "https://cyberleninka.ru/article/n/iz-istorii-issledovaniy-kurgannyh-nekropoley-nimfeya" }
     ],
     _libRef: "research/pontus/nymphaion.md", _verified: "2026-06-30", _confidence: "high"
   },
@@ -104,9 +104,9 @@ const PONTUS_SITES = [
       { label: "PECS — Theodosia (Perseus)", url: "https://www.perseus.tufts.edu/hopper/text?doc=Perseus:text:1999.04.0006:entry=theodosia" }
     ],
     bibliography: [
-      { type: "ancient", ref: "Страбон VII.4.3–4; Демосфен, Против Лептина 20.31–33; Полиэн V.23" },
-      { type: "epigraphy", ref: "КБН 947–952" },
-      { type: "modern", ref: "Петрова Э.Б. Античная Феодосия. Симферополь, 2000; Гаврилов А.В. Округа античной Феодосии, 2004" }
+      { type: "ancient", ref: "Страбон VII.4.3–4; Демосфен, Против Лептина 20.31–33; Полиэн V.23", url: "https://topostext.org/work/144#7.4.3" },
+      { type: "epigraphy", ref: "КБН 947–952", url: "https://epigraphy.packhum.org/text/183680" },
+      { type: "modern", ref: "Петрова Э.Б. Античная Феодосия. Симферополь, 2000; Гаврилов А.В. Округа античной Феодосии, 2004", url: "https://cyberleninka.ru/article/n/feodosiya-i-eyo-okruga-v-antichnuyu-epohu" }
     ],
     _libRef: "research/pontus/theodosia.md", _verified: "2026-06-30", _confidence: "high"
   },
@@ -138,9 +138,9 @@ const PONTUS_SITES = [
       { label: "БРЭ", url: "https://bigenc.ru/c/mirmekii-d5ab3d" }
     ],
     bibliography: [
-      { type: "ancient", ref: "Страбон VII.4.5; Псевдо-Скилак §68" },
-      { type: "epigraphy", ref: "КБН 868–889; свинцовое письмо 2017 (SEG 68.497)" },
-      { type: "modern", ref: "Гайдукевич В.Ф. Античные города Боспора. Мирмекий. Л.: Наука, 1987" }
+      { type: "ancient", ref: "Страбон VII.4.5; Псевдо-Скилак §68", url: "https://topostext.org/work/144#7.4.5" },
+      { type: "epigraphy", ref: "КБН 868–889; свинцовое письмо 2017 (SEG 68.497)", url: "https://epigraphy.packhum.org/text/183600" },
+      { type: "modern", ref: "Гайдукевич В.Ф. Античные города Боспора. Мирмекий. Л.: Наука, 1987", url: "https://arheologija.ru/mirmekiy/" }
     ],
     _libRef: "research/pontus/myrmekion.md", _verified: "2026-06-30", _confidence: "high"
   },
@@ -172,9 +172,9 @@ const PONTUS_SITES = [
       { label: "Pleiades", url: "https://pleiades.stoa.org/places/854745" }
     ],
     bibliography: [
-      { type: "ancient", ref: "Плиний NH 4.86 (как «Dia»); Птолемей III.6.3 (у Страбона отсутствует)" },
-      { type: "epigraphy", ref: "КБН 901–910" },
-      { type: "modern", ref: "Зинько В.Н. Тиритака. Раскоп XXVI (Боспор. иссл. Suppl. 10–11, 2013–14)" }
+      { type: "ancient", ref: "Плиний NH 4.86 (как «Dia»); Птолемей III.6.3 (у Страбона отсутствует)", url: "https://topostext.org/work/148#4.86" },
+      { type: "epigraphy", ref: "КБН 901–910", url: "https://epigraphy.packhum.org/text/183634" },
+      { type: "modern", ref: "Зинько В.Н. Тиритака. Раскоп XXVI (Боспор. иссл. Suppl. 10–11, 2013–14)", url: "https://www.academia.edu/11071463/Amphorae_and_Table_Wares_In_V_N_Zinko_ed_Tyritake_Sector_XXVI_Vol_II_Bosporan_Studies_Suppl_11_Simferopol_Kerch_2014" }
     ],
     _libRef: "research/pontus/tyritake.md", _verified: "2026-06-30", _confidence: "high"
   },
@@ -204,9 +204,9 @@ const PONTUS_SITES = [
       { label: "Bosporan warfare (СПбГУ)", url: "https://bosporwarfare.spbu.ru" }
     ],
     bibliography: [
-      { type: "ancient", ref: "Птолемей III.6 (единственный; у Страбона отсутствует)" },
-      { type: "epigraphy", ref: "КБН 966–968 (строит. надписи)" },
-      { type: "modern", ref: "Горончаровский В.А. Античная крепость Илурат. СПб., 2019; Гайдукевич, МИА 85, 1958" }
+      { type: "ancient", ref: "Птолемей III.6 (единственный; у Страбона отсутствует)", url: "https://topostext.org/work/209#3.6.5" },
+      { type: "epigraphy", ref: "КБН 966–968 (строит. надписи)", url: "https://epigraphy.packhum.org/text/183699" },
+      { type: "modern", ref: "Горончаровский В.А. Античная крепость Илурат. СПб., 2019; Гайдукевич, МИА 85, 1958", url: "https://www.old.archeo.ru/izdaniya-1/vagnejshije-izdanija/pdf/2019Goroncharovskij.pdf/at_download/file" }
     ],
     _libRef: "research/pontus/iluraton.md", _verified: "2026-06-30", _confidence: "high"
   },
@@ -236,9 +236,9 @@ const PONTUS_SITES = [
       { label: "Пантикапей.ру — Китей", url: "http://pantikapei.ru/antichnyj-gorod-kitej.html" }
     ],
     bibliography: [
-      { type: "ancient", ref: "Псевдо-Скилак §68; Плиний NH IV.86; Птолемей III.6" },
-      { type: "epigraphy", ref: "КБН 942–944 (942 — храм. надпись 234 н.э.)" },
-      { type: "modern", ref: "Молев Е.А., Молева Н.В. Боспорский город Китей. Симферополь–Керчь, 2010" }
+      { type: "ancient", ref: "Псевдо-Скилак §68; Плиний NH IV.86; Птолемей III.6", url: "https://topostext.org/work/102#1.68" },
+      { type: "epigraphy", ref: "КБН 942–944 (942 — храм. надпись 234 н.э.)", url: "https://epigraphy.packhum.org/text/183675" },
+      { type: "modern", ref: "Молев Е.А., Молева Н.В. Боспорский город Китей. Симферополь–Керчь, 2010", url: "https://cyberleninka.ru/article/n/asklepiy-pergamskiy-i-artemida-efesskaya-na-keramicheskom-medalone-iz-kiteya" }
     ],
     _libRef: "research/pontus/kytaion.md", _verified: "2026-06-30", _confidence: "high"
   },
@@ -269,8 +269,8 @@ const PONTUS_SITES = [
     ],
     bibliography: [
       { type: "ancient", ref: "Псевдо-Арриан §69, 76; Стефан Византийский" },
-      { type: "epigraphy", ref: "В КБН отсутствует; SEG XXXVII 678 (V в. до н.э.)" },
-      { type: "modern", ref: "Вахтина М.Ю. Порфмий — греческий город у переправы (Боспор. иссл. 22, 2009)" }
+      { type: "epigraphy", ref: "В КБН отсутствует; SEG XXXVII 678 (V в. до н.э.)", url: "https://epigraphy.packhum.org/text/339184" },
+      { type: "modern", ref: "Вахтина М.Ю. Порфмий — греческий город у переправы (Боспор. иссл. 22, 2009)", url: "http://dspace.nbuv.gov.ua/handle/123456789/6339" }
     ],
     _libRef: "research/pontus/porphmion.md", _verified: "2026-06-30", _confidence: "high"
   },
@@ -300,9 +300,9 @@ const PONTUS_SITES = [
       { label: "Wikipedia (EN)", url: "https://en.wikipedia.org/wiki/Akra,_Crimea" }
     ],
     bibliography: [
-      { type: "ancient", ref: "Страбон XI.2.8; Птолемей III.6; Псевдо-Арриан §76–77" },
-      { type: "epigraphy", ref: "КБН 889" },
-      { type: "modern", ref: "Соловьёв С.Л., Вахонеев В.В., Шепко Л.Г. Акра — античный город на Европейском Боспоре. СПб., 2021" }
+      { type: "ancient", ref: "Страбон XI.2.8; Птолемей III.6; Псевдо-Арриан §76–77", url: "https://topostext.org/work/144#11.2.8" },
+      { type: "epigraphy", ref: "КБН 889", url: "https://epigraphy.packhum.org/text/183622" },
+      { type: "modern", ref: "Соловьёв С.Л., Вахонеев В.В., Шепко Л.Г. Акра — античный город на Европейском Боспоре. СПб., 2021", url: "https://cyberleninka.ru/article/n/bronzovyy-persten-iz-zatoplennoy-chasti-akry" }
     ],
     _libRef: "research/pontus/akra.md", _verified: "2026-06-30", _confidence: "medium"
   },
@@ -332,8 +332,8 @@ const PONTUS_SITES = [
       { label: "Wikipedia (EN)", url: "https://en.wikipedia.org/wiki/Kul-Oba" }
     ],
     bibliography: [
-      { type: "ancient", ref: "Геродот IV.71–72 (скифский погреб. обряд, общее)" },
-      { type: "modern", ref: "Артамонов М.И. Сокровища скифских курганов в собрании ГЭ. 1966" }
+      { type: "ancient", ref: "Геродот IV.71–72 (скифский погреб. обряд, общее)", url: "https://topostext.org/work/22#4.71" },
+      { type: "modern", ref: "Артамонов М.И. Сокровища скифских курганов в собрании ГЭ. 1966", url: "http://kronk.spb.ru/library/artamonov-mi-1966.htm" }
     ],
     _libRef: "research/pontus/kul-oba.md", _verified: "2026-06-30", _confidence: "high"
   },
@@ -363,8 +363,8 @@ const PONTUS_SITES = [
       { label: "Wikipedia (EN)", url: "https://en.wikipedia.org/wiki/Royal_Kurgan" }
     ],
     bibliography: [
-      { type: "epigraphy", ref: "граффито Κοσμάε (в КБН/CIRB)" },
-      { type: "modern", ref: "Ашик А.Б. Боспорское царство. Одесса, 1848–49; Гайдукевич, 1949" }
+      { type: "epigraphy", ref: "граффито Κοσμάε (в КБН/CIRB)", url: "https://en.wikipedia.org/wiki/Royal_Kurgan" },
+      { type: "modern", ref: "Ашик А.Б. Боспорское царство. Одесса, 1848–49; Гайдукевич, 1949", url: "https://play.google.com/store/books/details?id=pFrcO3V9YsYC" }
     ],
     _libRef: "research/pontus/tsarsky-kurgan.md", _verified: "2026-06-30", _confidence: "high"
   },
@@ -398,9 +398,9 @@ const PONTUS_SITES = [
       { label: "Wikipedia (EN)", url: "https://en.wikipedia.org/wiki/Phanagoria" }
     ],
     bibliography: [
-      { type: "ancient", ref: "Страбон XI.2.10; Арриан, Перипл 29; Аппиан, Mithr. 108" },
+      { type: "ancient", ref: "Страбон XI.2.10; Арриан, Перипл 29; Аппиан, Mithr. 108", url: "https://topostext.org/work/144#11.2.10" },
       { type: "epigraphy", ref: "КБН 971–1005", url: "https://epigraphy.packhum.org/book/231" },
-      { type: "modern", ref: "Кузнецов В.Д. Фанагория (М., 2000; т.1, 2010)" }
+      { type: "modern", ref: "Кузнецов В.Д. Фанагория (М., 2000; т.1, 2010)", url: "https://archaeolog.ru/el-bib/el-cat/el-series/fanagoria/fanagoria-1" }
     ],
     _libRef: "research/pontus/phanagoria.md", _verified: "2026-06-30", _confidence: "high"
   },
@@ -432,8 +432,8 @@ const PONTUS_SITES = [
       { label: "Таманский музейный комплекс (Культура.РФ)", url: "https://www.culture.ru/institutes/65658/" }
     ],
     bibliography: [
-      { type: "ancient", ref: "Арриан, Перипл 29; Страбон XI.2.10; Дионисий Периэгет §553" },
-      { type: "epigraphy", ref: "КБН 1065–1110; КБН 1072" },
+      { type: "ancient", ref: "Арриан, Перипл 29; Страбон XI.2.10; Дионисий Периэгет §553", url: "https://topostext.org/work/203#29" },
+      { type: "epigraphy", ref: "КБН 1065–1110; КБН 1072", url: "https://epigraphy.packhum.org/text/183799" },
       { type: "modern", ref: "Гайдукевич В.Ф. Боспорское царство, 1949; Финогенова, Древности Боспора 8, 2005" }
     ],
     _libRef: "research/pontus/hermonassa.md", _verified: "2026-06-30", _confidence: "high"
@@ -466,9 +466,9 @@ const PONTUS_SITES = [
       { label: "Pleiades", url: "https://pleiades.stoa.org/places/854695" }
     ],
     bibliography: [
-      { type: "ancient", ref: "Страбон XI.2.10; Плиний NH VI.18 («Cepoe Milesiorum»); Эсхин III.171" },
-      { type: "epigraphy", ref: "SEG 27.435; SEG 45.990; КБН (азиат. блок)" },
-      { type: "modern", ref: "Сокольский Н.И. Кепы (в «Античный город», 1963)" }
+      { type: "ancient", ref: "Страбон XI.2.10; Плиний NH VI.18 («Cepoe Milesiorum»); Эсхин III.171", url: "https://topostext.org/work/144#11.2.10" },
+      { type: "epigraphy", ref: "SEG 27.435; SEG 45.990; КБН (азиат. блок)", url: "https://epigraphy.packhum.org/regions/1869" },
+      { type: "modern", ref: "Сокольский Н.И. Кепы (в «Античный город», 1963)", url: "http://www.sno.pro1.ru/lib/antichniy_gorod/10.htm" }
     ],
     _libRef: "research/pontus/kepoi.md", _verified: "2026-06-30", _confidence: "high"
   },
@@ -500,9 +500,9 @@ const PONTUS_SITES = [
       { label: "БРЭ", url: "https://w.histrf.ru/articles/patrey" }
     ],
     bibliography: [
-      { type: "ancient", ref: "Страбон XI.2.7–8; Гекатей Милетский (фрагм., «Патрасий»); Псевдо-Скилак §72" },
-      { type: "epigraphy", ref: "КБН 1112; свинцовое письмо Пистоса (Завойкина, Hyperboreus 24/1, 2018)" },
-      { type: "modern", ref: "Абрамов А.П. Патрей (Ancient Greek Colonies in the Black Sea II, 2003)" }
+      { type: "ancient", ref: "Страбон XI.2.7–8; Гекатей Милетский (фрагм., «Патрасий»); Псевдо-Скилак §72", url: "https://topostext.org/work/144#11.2.8" },
+      { type: "epigraphy", ref: "КБН 1112; свинцовое письмо Пистоса (Завойкина, Hyperboreus 24/1, 2018)", url: "https://epigraphy.packhum.org/text/183847" },
+      { type: "modern", ref: "Абрамов А.П. Патрей (Ancient Greek Colonies in the Black Sea II, 2003)", url: "https://www.academia.edu/32113037/ANCIENT_GREEK_COLONIES_IN_THE_BLACK_SEA_GRAMMENOS_D_V_and_E_K_PETROPOULOS_eds_PUBLICATIONS_OF_THE_ARCHAEOLOGICAL_INSTITUTE_OF_NORTHERN_GREECE_No4_THESSALONIKI_2003" }
     ],
     _libRef: "research/pontus/patraeus.md", _verified: "2026-06-30", _confidence: "high"
   },
@@ -533,8 +533,8 @@ const PONTUS_SITES = [
       { label: "Pleiades", url: "https://pleiades.stoa.org/places/854744" }
     ],
     bibliography: [
-      { type: "ancient", ref: "Страбон XI.2.4" },
-      { type: "modern", ref: "Кошеленко Г.А. и др. Античные государства Северного Причерноморья, 1984" }
+      { type: "ancient", ref: "Страбон XI.2.4", url: "https://topostext.org/work/144#11.2.4" },
+      { type: "modern", ref: "Кошеленко Г.А. и др. Античные государства Северного Причерноморья, 1984", url: "https://arheologija.ru/antichnyie-gosudarstva-severnogo-prichernomorya/" }
     ],
     _libRef: "research/pontus/tyramba.md", _verified: "2026-06-30", _confidence: "medium"
   },
@@ -564,8 +564,8 @@ const PONTUS_SITES = [
       { label: "Anca Dan, «Coracanda…» (HAL)", url: "https://hal.science/hal-02612779" }
     ],
     bibliography: [
-      { type: "ancient", ref: "Страбон XI.2.8, XI.2.14" },
-      { type: "modern", ref: "Окороков, Егоров. Поиски античной Корокондамы (Наследие, 2018)" }
+      { type: "ancient", ref: "Страбон XI.2.8, XI.2.14", url: "https://topostext.org/work/144#11.2.8" },
+      { type: "modern", ref: "Окороков, Егоров. Поиски античной Корокондамы (Наследие, 2018)", url: "https://nasledie-journal.ru/ru/journals/27/243.html" }
     ],
     _libRef: "research/pontus/korokondame.md", _verified: "2026-06-30", _confidence: "medium"
   },
@@ -595,9 +595,9 @@ const PONTUS_SITES = [
       { label: "Ustinova, Aphrodite Ourania (Kernos 12)", url: "https://journals.openedition.org/kernos/1228" }
     ],
     bibliography: [
-      { type: "ancient", ref: "Страбон XI.2.10; Плиний NH VI.18; Птолемей V.9.5" },
-      { type: "epigraphy", ref: "КБН 30, 31, 35, 75, 1111 (Афродите Урании «Апатуру медеусе»)" },
-      { type: "modern", ref: "Токтасьев С.Р. Апатур (ВДИ 1986/2); Ustinova Yu. The Supreme Gods of the Bosporan Kingdom (Brill, 1999)" }
+      { type: "ancient", ref: "Страбон XI.2.10; Плиний NH VI.18; Птолемей V.9.5", url: "https://topostext.org/work/144#11.2.10" },
+      { type: "epigraphy", ref: "КБН 30, 31, 35, 75, 1111 (Афродите Урании «Апатуру медеусе»)", url: "https://epigraphy.packhum.org/text/183846" },
+      { type: "modern", ref: "Токтасьев С.Р. Апатур (ВДИ 1986/2); Ustinova Yu. The Supreme Gods of the Bosporan Kingdom (Brill, 1999)", url: "https://archive.org/details/supremegodsofbos0000usti" }
     ],
     _libRef: "research/pontus/apatouron.md", _verified: "2026-06-30", _confidence: "low"
   },
@@ -629,7 +629,7 @@ const PONTUS_SITES = [
     bibliography: [
       { type: "modern", ref: "Завойкин А.А. Афина и горгона Медуза в святилище «Береговой 4» // КСИА. 2016. Вып. 245. С. 168–184", url: "https://www.academia.edu/36586734" },
       { type: "modern", ref: "Завойкин А.А. Святилище элевсинских богинь на «Береговом 4» (раскопки Таманской экспедиции ИА РАН, 1999–2004)", url: "https://archaeolog.ru/about/history/expeditions-1990-present/1999-2004-gg--raskopki-pamyatnika-beregovoy-4" },
-      { type: "modern", ref: "Открыт разведками Б.Г. Петерса (1986–1988); раскопки А.А. Завойкина (центр) и Н.И. Сударева (север)" }
+      { type: "modern", ref: "Открыт разведками Б.Г. Петерса (1986–1988); раскопки А.А. Завойкина (центр) и Н.И. Сударева (север)", url: "https://www.academia.edu/36586734" }
     ],
     _libRef: "research/pontus/beregovoy-4.md", _verified: "2026-06-30", _confidence: "medium"
   },
@@ -662,9 +662,9 @@ const PONTUS_SITES = [
       { label: "Penn Museum — Gorgippia", url: "https://www.penn.museum/sites/expedition/gorgippia/" }
     ],
     bibliography: [
-      { type: "ancient", ref: "Страбон XI.2.10; Псевдо-Скилак §74 («Синдская гавань»)" },
-      { type: "epigraphy", ref: "КБН 1111–1180; КБН 1134 (союз навклеров)" },
-      { type: "modern", ref: "Кругликова И.Т. Синдская гавань. Горгиппия. Анапа. М.: Наука, 1975; Алексеева Е.М. Античный город Горгиппия, 1997" }
+      { type: "ancient", ref: "Страбон XI.2.10; Псевдо-Скилак §74 («Синдская гавань»)", url: "https://topostext.org/work/144#11.2.10" },
+      { type: "epigraphy", ref: "КБН 1111–1180; КБН 1134 (союз навклеров)", url: "https://epigraphy.packhum.org/text/183844" },
+      { type: "modern", ref: "Кругликова И.Т. Синдская гавань. Горгиппия. Анапа. М.: Наука, 1975; Алексеева Е.М. Античный город Горгиппия, 1997", url: "https://archaeolog.ru/media/books_1990s/alekseeva_1997.pdf" }
     ],
     _libRef: "research/pontus/gorgippia.md", _verified: "2026-06-30", _confidence: "high"
   },
@@ -694,8 +694,8 @@ const PONTUS_SITES = [
       { label: "novorab.ru — Где находились античные Баты", url: "https://novorab.ru/2024/03/23/gde-nahodilis-antichnye-baty-kogda-ne-bylo-novorossijska/" }
     ],
     bibliography: [
-      { type: "ancient", ref: "Страбон XI.2.14; Псевдо-Арриан; Птолемей V.9" },
-      { type: "modern", ref: "Дмитриев, Малышев. Поселение Мысхако — ЮВ форпост Боспора (ПИФК X, 2001)" }
+      { type: "ancient", ref: "Страбон XI.2.14; Псевдо-Арриан; Птолемей V.9", url: "https://topostext.org/work/144#11.2.14" },
+      { type: "modern", ref: "Дмитриев, Малышев. Поселение Мысхако — ЮВ форпост Боспора (ПИФК X, 2001)", url: "https://pifk.magtu.ru/" }
     ],
     _libRef: "research/pontus/bata-myskhako.md", _verified: "2026-06-30", _confidence: "medium"
   },
@@ -726,8 +726,8 @@ const PONTUS_SITES = [
       { label: "Pleiades — Torikos/Pagrae", url: "https://pleiades.stoa.org/places/825407" }
     ],
     bibliography: [
-      { type: "ancient", ref: "Псевдо-Скилак §76; Птолемей V.9.9 (Торетский мыс); Арриан §28 (Pagrae)" },
-      { type: "modern", ref: "Онайко Н.А. Архаический Торик. М., 1980" }
+      { type: "ancient", ref: "Псевдо-Скилак §76; Птолемей V.9.9 (Торетский мыс); Арриан §28 (Pagrae)", url: "https://topostext.org/work/102#2.74" },
+      { type: "modern", ref: "Онайко Н.А. Архаический Торик. М., 1980", url: "https://knizhen-pazar.net/products/books/1006512-arhaicheskiy-torik-antichn-y-gorod-na-severo-vostoke-ponta" }
     ],
     _libRef: "research/pontus/torikos.md", _verified: "2026-06-30", _confidence: "medium"
   },
@@ -758,7 +758,7 @@ const PONTUS_SITES = [
     ],
     bibliography: [
       { type: "ancient", ref: "Арриан, Перипл (~134); Анонимный перипл V в.; Константин Багрянородный, DAI" },
-      { type: "modern", ref: "Воронов Ю.Н. Древности Сочи и его окрестностей. Краснодар, 1979" }
+      { type: "modern", ref: "Воронов Ю.Н. Древности Сочи и его окрестностей. Краснодар, 1979", url: "http://apsnyteka.org/1044-voronov_drevnosti_sochi_i_ego_okrestnostey.html" }
     ],
     _libRef: "research/pontus/nikopsis.md", _verified: "2026-06-30", _confidence: "low"
   },
@@ -787,7 +787,7 @@ const PONTUS_SITES = [
       { label: "Знание.ру — Мамай-Кале", url: "https://znanierussia.ru/articles/Мамай-Кале" }
     ],
     bibliography: [
-      { type: "modern", ref: "Воронов Ю.Н. Древности Сочи и его окрестностей. Краснодар, 1979 (отождествил с Мохорой)" }
+      { type: "modern", ref: "Воронов Ю.Н. Древности Сочи и его окрестностей. Краснодар, 1979 (отождествил с Мохорой)", url: "http://apsnyteka.org/1044-voronov_drevnosti_sochi_i_ego_okrestnostey.html" }
     ],
     _libRef: "research/pontus/mamay-kale.md", _verified: "2026-06-30", _confidence: "medium"
   },
@@ -816,7 +816,7 @@ const PONTUS_SITES = [
       { label: "arch-sochi.ru — Крепость Годлик", url: "https://arch-sochi.ru/2015/11/krepost-godlik-vsyo-chto-udalos-nayti/" }
     ],
     bibliography: [
-      { type: "modern", ref: "Воронов Ю.Н. Древности Сочи, 1979; Хрушкова Л.Г. Monuments of Architecture of the Byzantine period in the NE Black Sea Region (2020)" }
+      { type: "modern", ref: "Воронов Ю.Н. Древности Сочи, 1979; Хрушкова Л.Г. Monuments of Architecture of the Byzantine period in the NE Black Sea Region (2020)", url: "https://www.academia.edu/49764519/L_Khrushkova_The_Monuments_of_Architecture_of_the_Byzantine_period_in_the_North_Eastern_Black_Sea_Region_in_Archaeologia_Bulgarica_XXIV_3_2020_pp_65_100" }
     ],
     _libRef: "research/pontus/godlik.md", _verified: "2026-06-30", _confidence: "medium"
   },
@@ -845,7 +845,7 @@ const PONTUS_SITES = [
       { label: "Wikipedia (RU)", url: "https://ru.wikipedia.org/wiki/Ачипсинская_крепость" }
     ],
     bibliography: [
-      { type: "modern", ref: "Воронов Ю.Н. Древности Сочи, 1979; Хрушкова Л.Г. (Archaeologia Bulgarica, 2018/2020)" }
+      { type: "modern", ref: "Воронов Ю.Н. Древности Сочи, 1979; Хрушкова Л.Г. (Archaeologia Bulgarica, 2018/2020)", url: "https://www.academia.edu/49764519/L_Khrushkova_The_Monuments_of_Architecture_of_the_Byzantine_period_in_the_North_Eastern_Black_Sea_Region_in_Archaeologia_Bulgarica_XXIV_3_2020_pp_65_100" }
     ],
     _libRef: "research/pontus/achipse.md", _verified: "2026-06-30", _confidence: "medium"
   },
@@ -879,9 +879,9 @@ const PONTUS_SITES = [
       { label: "UNESCO tentative list", url: "https://whc.unesco.org/en/tentativelists/5422/" }
     ],
     bibliography: [
-      { type: "ancient", ref: "Страбон XI.2.3–4; Птолемей III.5.15; Аммиан Марцеллин XXII.8" },
+      { type: "ancient", ref: "Страбон XI.2.3–4; Птолемей III.5.15; Аммиан Марцеллин XXII.8", url: "https://topostext.org/work/144#11.2.3" },
       { type: "epigraphy", ref: "КБН 1237–1312 (фиасы Θεὸς Ὕψιστος)", url: "https://epigraphy.packhum.org/book/231" },
-      { type: "modern", ref: "Шелов Д.Б. Танаис и Нижний Дон в III–I вв. до н.э. М.: Наука, 1970" }
+      { type: "modern", ref: "Шелов Д.Б. Танаис и Нижний Дон в III–I вв. до н.э. М.: Наука, 1970", url: "https://na5ballov.pro/lib/drevmir/3266-shelov-db-tanais-i-nizhniy-don-v-iii-i-vv-do-ne.html" }
     ],
     _libRef: "research/pontus/tanais.md", _verified: "2026-06-30", _confidence: "high"
   },
@@ -916,9 +916,9 @@ const PONTUS_SITES = [
       { label: "Wikipedia (EN)", url: "https://en.wikipedia.org/wiki/Chersonesus" }
     ],
     bibliography: [
-      { type: "ancient", ref: "Страбон VII.4.2; Константин Багрянородный, DAI гл. 53" },
+      { type: "ancient", ref: "Страбон VII.4.2; Константин Багрянородный, DAI гл. 53", url: "https://topostext.org/work/144#7.4.2" },
       { type: "epigraphy", ref: "IOSPE I² 352 (декрет Диофанта); IOSPE I² 401 (гражданская присяга)", url: "https://iospe.kcl.ac.uk/corpus/index.html" },
-      { type: "modern", ref: "Латышев В.В. IOSPE I²; Херсонесский сборник" }
+      { type: "modern", ref: "Латышев В.В. IOSPE I²; Херсонесский сборник", url: "https://iospe.kcl.ac.uk/index-ru.html" }
     ],
     _libRef: "research/pontus/chersonesos.md", _verified: "2026-06-30", _confidence: "high"
   },
@@ -949,8 +949,8 @@ const PONTUS_SITES = [
       { label: "PECS — Kerkinitis (Perseus)", url: "http://www.perseus.tufts.edu/hopper/text?doc=Perseus:text:1999.04.0006:entry=kerkinitis" }
     ],
     bibliography: [
-      { type: "ancient", ref: "Страбон VII.4.2; Арриан, Перипл (600 стадий от Херсонеса)" },
-      { type: "modern", ref: "Encyclopedia of Ukraine; геоархеология побережья (Méditerranée, 2014)" }
+      { type: "ancient", ref: "Страбон VII.4.2; Арриан, Перипл (600 стадий от Херсонеса)", url: "https://topostext.org/work/144#7.4.2" },
+      { type: "modern", ref: "Encyclopedia of Ukraine; геоархеология побережья (Méditerranée, 2014)", url: "https://journals.openedition.org/mediterranee/8262" }
     ],
     _libRef: "research/pontus/kerkinitis.md", _verified: "2026-06-30", _confidence: "medium"
   },
@@ -981,8 +981,8 @@ const PONTUS_SITES = [
       { label: "Музей «Калос-Лимен»", url: "https://chersonesos.org/?l=eng&p=out_ant_kalos" }
     ],
     bibliography: [
-      { type: "ancient", ref: "Арриан, Перипл («Калос-Лимен, скифская гавань»); Страбон VII.4.2" },
-      { type: "modern", ref: "Раскопки с 1929; ToposText 455327UKLi" }
+      { type: "ancient", ref: "Арриан, Перипл («Калос-Лимен, скифская гавань»); Страбон VII.4.2", url: "https://topostext.org/work/203#30" },
+      { type: "modern", ref: "Раскопки с 1929; ToposText 455327UKLi", url: "https://topostext.org/place/455327UKLi" }
     ],
     _libRef: "research/pontus/kalos-limen.md", _verified: "2026-06-30", _confidence: "high"
   },
@@ -1012,8 +1012,8 @@ const PONTUS_SITES = [
       { label: "Wikipedia (EN)", url: "https://en.wikipedia.org/wiki/Scythian_Neapolis" }
     ],
     bibliography: [
-      { type: "ancient", ref: "Страбон VII.4.3, 7 (крепости Скилура: Неаполь, Палакий, Хабеи)" },
-      { type: "epigraphy", ref: "греч. посвящения (Посидей, сын Посидея); мавзолей Аргота/Скилура" }
+      { type: "ancient", ref: "Страбон VII.4.3, 7 (крепости Скилура: Неаполь, Палакий, Хабеи)", url: "https://topostext.org/work/144#7.4.3" },
+      { type: "epigraphy", ref: "греч. посвящения (Посидей, сын Посидея); мавзолей Аргота/Скилура", url: "https://iospe.kcl.ac.uk/3.600.html" }
     ],
     _libRef: "research/pontus/neapolis-scythica.md", _verified: "2026-06-30", _confidence: "high"
   },
@@ -1043,8 +1043,8 @@ const PONTUS_SITES = [
       { label: "Crimea in the Roman era", url: "https://en.wikipedia.org/wiki/Crimea_in_the_Roman_era" }
     ],
     bibliography: [
-      { type: "epigraphy", ref: "лат. клейма Legio I Italica / XI Claudia; военные надписи" },
-      { type: "modern", ref: "Блаватский (раскопки 1931–35); Кеппен (1837)" }
+      { type: "epigraphy", ref: "лат. клейма Legio I Italica / XI Claudia; военные надписи", url: "https://cyberleninka.ru/article/n/haraks-rimskiy-forpost-v-krymu" },
+      { type: "modern", ref: "Блаватский (раскопки 1931–35); Кеппен (1837)", url: "https://cyberleninka.ru/article/n/haraks-rimskiy-forpost-v-krymu" }
     ],
     _libRef: "research/pontus/charax.md", _verified: "2026-06-30", _confidence: "high"
   },
@@ -1076,8 +1076,8 @@ const PONTUS_SITES = [
       { label: "Pleiades", url: "https://pleiades.stoa.org/places/854696" }
     ],
     bibliography: [
-      { type: "ancient", ref: "Страбон XI.2.5 (город на перешейке, ров и вал); Птолемей; Стефан Виз." },
-      { type: "modern", ref: "Раскопки 1927, 1947–51; PECS «Kimmerikon»" }
+      { type: "ancient", ref: "Страбон XI.2.5 (город на перешейке, ров и вал); Птолемей; Стефан Виз.", url: "https://topostext.org/work/144#11.2.5" },
+      { type: "modern", ref: "Раскопки 1927, 1947–51; PECS «Kimmerikon»", url: "http://www.perseus.tufts.edu/hopper/text?doc=Perseus:text:1999.04.0006:entry%3Dkimmerikon" }
     ],
     _libRef: "research/pontus/kimmerikon.md", _verified: "2026-06-30", _confidence: "medium"
   },
@@ -1107,7 +1107,7 @@ const PONTUS_SITES = [
       { label: "Pleiades", url: "https://pleiades.stoa.org/places/854751" }
     ],
     bibliography: [
-      { type: "ancient", ref: "Псевдо-Арриан; Птолемей; Плиний NH" },
+      { type: "ancient", ref: "Псевдо-Арриан; Птолемей; Плиний NH", url: "https://topostext.org/work/209#3.6.4" },
       { type: "modern", ref: "статьи о мысе Зюк (Hyperboreus)" }
     ],
     _libRef: "research/pontus/zenon-chersonesos.md", _verified: "2026-06-30", _confidence: "medium"
@@ -1140,8 +1140,8 @@ const PONTUS_SITES = [
       { label: "Новороссийская экспедиция ИА РАН", url: "https://archaeolog.ru/expeditions/expeditions-2024/novorossiyskaya-arkheologicheskaya-ekspeditsiya-2024" }
     ],
     bibliography: [
-      { type: "ancient", ref: "возможно дворец Евмела — Диодор XX.24–25 (гипотеза)" },
-      { type: "modern", ref: "Малышев А.А. (Новороссийская экспедиция ИА РАН); Abrau Antiqua, 2009" }
+      { type: "ancient", ref: "возможно дворец Евмела — Диодор XX.24–25 (гипотеза)", url: "https://topostext.org/work/134#20.24.3" },
+      { type: "modern", ref: "Малышев А.А. (Новороссийская экспедиция ИА РАН); Abrau Antiqua, 2009", url: "https://archaeolog.ru/media/books_2009/Abrau%20Antiqua_2009.pdf" }
     ],
     _libRef: "research/pontus/raevskoe.md", _verified: "2026-06-30", _confidence: "medium"
   }
