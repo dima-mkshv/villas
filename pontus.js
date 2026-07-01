@@ -82,9 +82,9 @@ const t = () => I18N[state.lang];
 const isTour = s => TOURISTIC.has(s.access);
 // Base marker colour = the earliest era the site appears in (its founding/first horizon).
 const firstPeriodId = s => [...s.periods].sort((a, b) => PONTUS_PERIOD_INDEX[a] - PONTUS_PERIOD_INDEX[b])[0];
-// Permanent on-map name labels: candidates = significance >= 4 (decluttered by priority in JS).
-const LABEL_MIN_SIG = 4;
-const isLabelSite = s => (s.significance || 0) >= LABEL_MIN_SIG;
+// Every site is a label candidate; the declutter keeps the highest-priority ones that fit
+// (priority: selected > significance > area) and hides the rest — more appear as you zoom in.
+const isLabelSite = s => true;
 
 /* ---------- map ---------- */
 const map = L.map("map", { zoomControl: true, worldCopyJump: false });

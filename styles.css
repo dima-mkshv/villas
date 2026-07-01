@@ -1256,12 +1256,19 @@ body[data-page="timeline"] { height: auto; min-height: 100%; overflow-y: auto; }
 .leaflet-tooltip.map-label {
   background: none; border: none; box-shadow: none; padding: 0; margin: 0;
   color: #15110a; font-family: 'Inter', system-ui, sans-serif; font-weight: 700; font-size: 12.5px;
-  text-shadow: 0 1px 1.5px rgba(255,255,255,.75);
+  /* thin outline behind the glyphs (paint-order keeps it outside the letters, not thinning them) */
+  -webkit-text-stroke: 1.1px rgba(255,255,255,.95);
+  paint-order: stroke fill;
+  text-shadow: 0 1px 1.5px rgba(255,255,255,.55);
   white-space: nowrap;
 }
 .leaflet-tooltip.map-label::before { display: none; border: none; }
-/* satellite basemap is dark → white text with a soft dark lift */
-#map.map-base-sat .leaflet-tooltip.map-label { color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,.95); }
+/* satellite basemap is dark → white text with a thin dark outline */
+#map.map-base-sat .leaflet-tooltip.map-label {
+  color: #fff;
+  -webkit-text-stroke: 0.8px rgba(0,0,0,.9);
+  text-shadow: 0 1px 2px rgba(0,0,0,.9);
+}
 
 /* Pontus markers — divIcon, color by era (--c), shape by type; ★ INSIDE for must-see */
 .pmk-wrap { background: transparent; border: 0; display: flex; align-items: center; justify-content: center; }
