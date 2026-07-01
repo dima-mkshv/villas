@@ -142,7 +142,9 @@ const ARCH_LABEL_PRIO = {
   "sebastia-samaria": 3, "tel-gezer": 3, "mamshit": 3, "shivta": 3, "haluza": 3,
   "tel-arad": 3, "old-jaffa": 3, "apollonia-arsuf": 3, "ein-gedi": 3, "khirbet-qeiyafa": 3
 };
-const isLabelSite = s => (ARCH_LABEL_PRIO[s.id] || 0) > 0;
+// Every site is a label candidate; declutter keeps the top by curated priority (ARCH_LABEL_PRIO,
+// 0 for non-curated = shown only where room remains) and hides the rest — more appear on zoom-in.
+const isLabelSite = s => true;
 
 function bindTooltips() {
   for (const site of ARCH_SITES) {

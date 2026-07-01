@@ -181,8 +181,9 @@ function makeMarker(site) {
   return m;
 }
 
-// Permanent on-map labels for the best-view sites (view >= 4), decluttered by priority.
-const isLabelSite = s => (s.view || 0) >= 4;
+// Every villa is a label candidate; declutter keeps the top by view rating and hides the rest
+// (more appear as you zoom in). Priority: selected > view rating.
+const isLabelSite = s => true;
 
 function bindTooltips() {
   for (const site of SITES) {
