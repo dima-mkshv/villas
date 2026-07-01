@@ -595,7 +595,9 @@ h1 {
 }
 
 /* shaped markers: square = palace, diamond = city (color = view rating) */
-.mk-icon { background: transparent; border: none; position: relative; display: flex; align-items: center; justify-content: center; }
+/* NB: no position:relative here — Leaflet positions the icon via transform; forcing
+   relative shifts every marker out of place. Leaflet's own absolute already anchors the ★. */
+.mk-icon { background: transparent; border: none; display: flex; align-items: center; justify-content: center; }
 
 .mk-square, .mk-diamond, .mk-circle {
   width: 15px;
